@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unisa.software_engineering.project.Model;
+package com.unisa.software_engineering.project.Control;
 
-import java.util.List;
 
 /**
  *
  * @author paolo
  */
-public class Rubrica {
+public class Controller {
     
-    private List<Contatto> contatti;
+    
+    
 }
