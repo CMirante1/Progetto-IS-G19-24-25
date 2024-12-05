@@ -29,7 +29,7 @@
       <Label fx:id="email3LBL" layoutX="529.0" layoutY="494.0" text="Email3:" />
       <ImageView fx:id="imageField" fitHeight="217.0" fitWidth="253.0" layoutX="37.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Downloads/default-profile.jpg" />
+            <Image url="@../../../../../../../../Risorse/default-profile.jpg" />
          </image></ImageView>
       <Button fx:id="moficicaButton" layoutX="507.0" layoutY="91.0" mnemonicParsing="false" text="Modifica" />
       <Button fx:id="salvaButton" layoutX="656.0" layoutY="91.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="78.0" text="Salva" />
