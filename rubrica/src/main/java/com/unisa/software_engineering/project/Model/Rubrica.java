@@ -1,8 +1,9 @@
 package com.unisa.software_engineering.project.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Rubrica {
+public class Rubrica implements Serializable {
     
     private List<Contatto> contatti;
 
@@ -34,6 +35,5 @@ public class Rubrica {
 
     }
 
-    
-
+   
 }

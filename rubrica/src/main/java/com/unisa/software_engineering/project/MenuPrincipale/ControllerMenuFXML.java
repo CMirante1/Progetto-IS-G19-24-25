@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unisa.software_engineering.project.View.MenuPrincipaleView;
+package com.unisa.software_engineering.project.MenuPrincipale;
 
 import java.net.URL;
 import java.util.ResourceBundle;

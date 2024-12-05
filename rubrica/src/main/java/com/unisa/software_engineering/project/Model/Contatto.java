@@ -1,20 +1,23 @@
 package com.unisa.software_engineering.project.Model;
 
-public class Contatto implements Comparable<Contatto> {
+import java.io.Serializable;
+import javafx.scene.image.Image;
+
+public class Contatto implements Comparable<Contatto>, Serializable{
     
     private String nome;
     private String cognome;
     private String[] numeriDiTelefono;
     private String[] emails;
-    private ImmagineProfilo immagineProfilo;
+    private byte[] immagineProfiloBytes;
 
-    public Contatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, ImmagineProfilo immagineProfilo) {
+    public Contatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, Image immagineProfilo) {
         
         this.nome = nome;
         this.cognome = cognome;
         this.numeriDiTelefono = numeriDiTelefono;
         this.emails = emails;
-        this.immagineProfilo = immagineProfilo;
+        this.immagineProfiloBytes = convertiImmagine(immagineProfilo);
     }
 
     public String getNome() {
@@ -22,19 +25,9 @@ public class Contatto implements Comparable<Contatto> {
         return nome;
     }
 
-    public void setNome(String nome) {
-        
-        this.nome = nome;
-    }
-
     public String getCognome() {
         
         return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        
-        this.cognome = cognome;
     }
 
     public String[] getNumeriDiTelefono() {
@@ -42,28 +35,24 @@ public class Contatto implements Comparable<Contatto> {
         return numeriDiTelefono;
     }
 
-    public void setNumeriDiTelefono(String[] numeriDiTelefono) {
-        
-        this.numeriDiTelefono = numeriDiTelefono;
-    }
-
     public String[] getEmails() {
         
         return emails;
     }
 
-    public void setEmails(String[] emails) {
-        
-        this.emails = emails;
-    }
-
-    public ImmagineProfilo getImmagineProfilo() {
-        return immagineProfilo;
-    }
-
-    public void setImmagineProfilo(ImmagineProfilo immagineProfilo) {
-        this.immagineProfilo = immagineProfilo;
-    }
+   private byte[] convertiImmagine(Image immagineProfilo) {
+       
+   }
+   
+   public Image getImmagineProfilo() {
+       
+       
+   }
+   
+   public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails) {
+       
+       
+   }
     
     @Override
     public int compareTo(Contatto c) {
