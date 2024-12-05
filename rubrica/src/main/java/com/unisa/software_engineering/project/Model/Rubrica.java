@@ -1,17 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unisa.software_engineering.project.Model;
 
 import java.util.List;
 
-/**
- *
- * @author paolo
- */
 public class Rubrica {
     
     private List<Contatto> contatti;
+
+    public Rubrica(){
+
+    }
+
+    public void aggiungiContatto(Contatto contatto){
+
+    }
+
+    private static boolean verificaInfo(String nome, String cognome, String[] numeri, String[] email){
+
+    }
+
+    private static boolean verificaNome(String nome, String cognome){
+
+    }
+
+    private static boolean verificaNumeri(String[] numeri){
+
+    }
+
+    private static boolean verificaEmail(String[] email){
+
+    }
+
+    public void rimuoviContatto(Contatto contatto){
+
+    }
+
+    
+
 }
