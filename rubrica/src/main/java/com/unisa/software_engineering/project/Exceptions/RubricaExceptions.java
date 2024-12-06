@@ -6,7 +6,7 @@
 package com.unisa.software_engineering.project.Exceptions;
 
 /**
- *
+ * @brief L'eccezione lanciata dalla rubrica
  * @author paolo
  */
 public class RubricaExceptions {
