@@ -56,6 +56,23 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private Button immagineBtn;
     
+    
+    
+
+    
+    private  boolean verificaNome(String nome, String cognome){
+    
+    }
+    
+    private  boolean verificaNumeri(String[] numeri){
+    
+    }
+    
+    private  boolean verificaEmail(String[] email){
+    
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -76,5 +93,7 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private void aggiungiImmagine(ActionEvent event) {
     }
+    
+    
     
 }

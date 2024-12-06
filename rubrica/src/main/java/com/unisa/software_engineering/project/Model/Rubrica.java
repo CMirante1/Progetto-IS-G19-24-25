@@ -15,21 +15,6 @@ public class Rubrica implements Serializable {
 
     }
 
-    private static boolean verificaInfo(String nome, String cognome, String[] numeri, String[] email){
-
-    }
-
-    private static boolean verificaNome(String nome, String cognome){
-
-    }
-
-    private static boolean verificaNumeri(String[] numeri){
-
-    }
-
-    private static boolean verificaEmail(String[] email){
-
-    }
 
     public void rimuoviContatto(Contatto contatto){
 

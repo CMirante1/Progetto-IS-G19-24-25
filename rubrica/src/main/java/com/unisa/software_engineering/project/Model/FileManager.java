@@ -6,7 +6,7 @@ public class FileManager {
     
     private static final String FILE_BACKUP = "rubrica.dat";
     
-    public static void salvaRubrica() {
+    public static void salvaRubrica(Rubrica rubrica) {
         
       
     }
@@ -21,7 +21,7 @@ public class FileManager {
         
     }
     
-    public static void importaContatti(List<Contatto> contatti, nomeFile) {
+    public static void importaContatti(List<Contatto> contatti, String nomeFile) {
         
         
     }
