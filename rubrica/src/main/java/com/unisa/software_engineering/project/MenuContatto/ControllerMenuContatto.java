@@ -16,8 +16,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 /**
- *
+ * @class ControllerMenuContatto
+ * @brief Effettua controlli sulla GUI MenuContatto
+ * 
+ * Questa classe si occupa di gestire la GUI del menu che mostra il contatto durante la visualizzazione
+ * e modifica dei contatti. Controlla anche se il contatto è valido prima di passarlo alle strutture dati.
+ * 
+ * @ingroup Controllers
+ * @todo Verificare initialize
+ * Qualunque cosa voglia dire per Paolo
  * @author paolo
+ * @date 05/12/24
  */
 public class ControllerMenuContatto implements Initializable {
     
@@ -55,27 +64,42 @@ public class ControllerMenuContatto implements Initializable {
     private Button escBtn;
     @FXML
     private Button immagineBtn;
-    
-    
-    
 
-    
-    private  boolean verificaNome(String nome, String cognome){
+    /**
+     * @brief Verifica il nome inserito dall'utente
+     * @param nome Il nome del contatto
+     * @param cognome Il cognome del contatto
+     * @return Se il contatto è valido
+     * @ingroup Verifiche
+     */
+    private boolean verificaNome(String nome, String cognome){
     
     }
     
+    /**
+     * @brief Verifica i numeri di telefono inseriti dall'utente
+     * @param numeri L'array di numeri di telefono
+     * @return Se tutti i numeri sono validi
+     * @ingroup Verifiche
+     */
     private  boolean verificaNumeri(String[] numeri){
     
     }
     
+    /**
+     * @brief Verifica le email inserite dall'utente
+     * @param email L'array di emeil
+     * @return Se tutte le email sono valide
+     * @ingroup Verifiche
+     */
     private  boolean verificaEmail(String[] email){
     
     }
     
-    
+    //Paolo che cabbo fai
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
 
     @FXML
@@ -93,7 +117,4 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private void aggiungiImmagine(ActionEvent event) {
     }
-    
-    
-    
 }

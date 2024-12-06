@@ -12,7 +12,7 @@ package com.unisa.software_engineering.project.Exceptions;
  * Questa è l'eccezione generica, superclasse di tutte le eccezioni legate alla gestione della rubrica
  * 
  * @ingroup Exceptions
- * 
+ * @todo Creare le sottoclassi exception
  * @author paolo
  * @date 06/12/24
  */
@@ -22,5 +22,4 @@ public class RubricaExceptions extends Exception {
         
         super(msg);
     }
-    
 }
