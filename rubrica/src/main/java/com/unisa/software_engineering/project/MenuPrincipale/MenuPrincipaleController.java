@@ -16,8 +16,12 @@ import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
- *
+ * @class MenuPrincipaleController
+ * @brief Gestisce il menu principale
+ * @todo Definire initialize e come strutturare model-controller-view
  * @author andre
+ * @ingroup Controllers
+ * @date 05/12/24
  */
 public class MenuPrincipaleController implements Initializable {
 
@@ -37,11 +41,12 @@ public class MenuPrincipaleController implements Initializable {
     private Button importaBtn;
 
     /**
-     * Initializes the controller class.
+     * @brief Inizializza il controller
+     * @ingroup Construzione
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }    
 
     @FXML
