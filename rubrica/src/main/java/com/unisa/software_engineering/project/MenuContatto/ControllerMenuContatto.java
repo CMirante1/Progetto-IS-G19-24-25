@@ -87,7 +87,7 @@ public class ControllerMenuContatto implements Initializable {
     
     /**
      * @brief Verifica le email inserite dall'utente
-     * @param email L'array di emeil
+     * @param email L'array di email
      * @return Se tutte le email sono valide
      * @ingroup Verifiche
      */

@@ -16,7 +16,7 @@ import java.util.List;
  * @author andre
  * @date 05/12/24
  */
-public class FileManager {
+public abstract class FileManager {
     
     private static final String FILE_BACKUP = "rubrica.dat";
     
