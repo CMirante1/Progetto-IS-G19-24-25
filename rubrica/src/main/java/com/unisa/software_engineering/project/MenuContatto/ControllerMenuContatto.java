@@ -23,8 +23,7 @@ import javafx.scene.image.ImageView;
  * e modifica dei contatti. Controlla anche se il contatto è valido prima di passarlo alle strutture dati.
  * 
  * @ingroup Controllers
- * @todo Verificare initialize
- * Qualunque cosa voglia dire per Paolo
+ * @todo Definire initialize e come strutturare model-controller-view
  * @author paolo
  * @date 05/12/24
  */
@@ -96,7 +95,10 @@ public class ControllerMenuContatto implements Initializable {
     
     }
     
-    //Paolo che cabbo fai
+    /**
+     * @brief Inizializza il controller
+     * @ingroup Construzione
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
