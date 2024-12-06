@@ -1,7 +1,12 @@
 package com.unisa.software_engineering.project.Model;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
-import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
 
 public class Contatto implements Comparable<Contatto>, Serializable{
     
@@ -9,15 +14,19 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     private String cognome;
     private String[] numeriDiTelefono;
     private String[] emails;
-    private byte[] immagineProfiloBytes;
+    private byte[] immagineProfilo;
 
-    public Contatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, Image immagineProfilo) {
+    public Contatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineProfilo) {
         
         this.nome = nome;
         this.cognome = cognome;
         this.numeriDiTelefono = numeriDiTelefono;
         this.emails = emails;
-        this.immagineProfiloBytes = convertiImmagine(immagineProfilo);
+        try{
+            this.immagineProfilo = ImmagineAByte(immagineProfilo);
+        }catch(IOException e){
+            this.immagineProfilo = new byte[0];
+        }
     }
 
     public String getNome() {
@@ -40,13 +49,15 @@ public class Contatto implements Comparable<Contatto>, Serializable{
         return emails;
     }
 
-   private byte[] convertiImmagine(Image immagineProfilo) {
-       
+   private byte[] ImmagineAByte(BufferedImage immagineProfilo) throws IOException{
+       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+       ImageIO.write(immagineProfilo, "JPEG", baos);
+       return baos.toByteArray();
    }
    
-   public Image getImmagineProfilo() {
-       
-       
+   public BufferedImage getImmagineProfilo() throws IOException{
+       ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
+       return ImageIO.read(bais);
    }
    
    public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails) {
