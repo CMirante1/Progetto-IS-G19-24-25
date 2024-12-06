@@ -10,16 +10,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="provaguicontatto.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto">
    <children>
       <TextField fx:id="nomeTXF" layoutX="36.0" layoutY="346.0" prefHeight="31.0" prefWidth="187.0" AnchorPane.bottomAnchor="223.0" AnchorPane.topAnchor="346.0" />
       <TextField fx:id="cognomeTXF" layoutX="281.0" layoutY="346.0" AnchorPane.topAnchor="346.0" />
-      <TextField fx:id="cell2TXF" layoutX="281.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
-      <TextField fx:id="cell3TXF" layoutX="529.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
-      <TextField fx:id="cell1TXF" layoutX="36.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
-      <TextField fx:id="email1TXF" layoutX="36.0" layoutY="514.0" />
-      <TextField fx:id="email2TXF" layoutX="281.0" layoutY="514.0" />
-      <TextField fx:id="email3TXF" layoutX="529.0" layoutY="514.0" />
+      <TextField layoutX="281.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
+      <TextField layoutX="529.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
+      <TextField layoutX="36.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
+      <TextField layoutX="36.0" layoutY="514.0" />
+      <TextField layoutX="281.0" layoutY="514.0" />
+      <TextField layoutX="529.0" layoutY="514.0" />
       <Label fx:id="nomeLBL" layoutX="37.0" layoutY="320.0" text="Nome:" />
       <Label fx:id="cognomeLBL" layoutX="281.0" layoutY="320.0" text="Cognome:" />
       <Label fx:id="cell1LBL" layoutX="36.0" layoutY="401.0" text="Cell1:" />
@@ -28,11 +28,11 @@
       <Label fx:id="email1LBL" layoutX="36.0" layoutY="494.0" text="Email1:" />
       <Label fx:id="email2LBL" layoutX="281.0" layoutY="494.0" text="Email2." />
       <Label fx:id="email3LBL" layoutX="529.0" layoutY="494.0" text="Email3:" />
-      <ImageView fx:id="imageField" fitHeight="217.0" fitWidth="253.0" layoutX="262.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="immagineProfilo" fitHeight="217.0" fitWidth="253.0" layoutX="262.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../Risorse/default-profile.jpg" />
          </image></ImageView>
-      <Button fx:id="moficicaButton" layoutX="506.0" layoutY="20.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="94.0" text="Modifica">
+      <Button fx:id="modificaBtn" layoutX="506.0" layoutY="20.0" mnemonicParsing="false" onAction="#modificaContatto" prefHeight="39.0" prefWidth="94.0" text="Modifica">
          <font>
             <Font size="18.0" />
          </font></Button>
@@ -40,14 +40,19 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="BackButton" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="92.0">
+      <Button fx:id="escBtn" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#cambiaScena" prefHeight="30.0" prefWidth="92.0">
          <graphic>
-            <ImageView fx:id="backIage" fitHeight="29.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="29.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../Downloads/FrecciaIndietro.png" />
                </image>
             </ImageView>
          </graphic>
+      </Button>
+      <Button fx:id="immagineBtn" layoutX="231.0" layoutY="261.0" mnemonicParsing="false" onAction="#aggiungiImmagine" text="Aggiungi immagine profilo">
+         <font>
+            <Font size="18.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

@@ -26,17 +26,9 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private TextField cognomeTXF;
     @FXML
-    private TextField cell2TXF;
+    private TextField[] numeriTF;
     @FXML
-    private TextField cell3TXF;
-    @FXML
-    private TextField cell1TXF;
-    @FXML
-    private TextField email1TXF;
-    @FXML
-    private TextField email2TXF;
-    @FXML
-    private TextField email3TXF;
+    private TextField[] emailsTF;
     @FXML
     private Label nomeLBL;
     @FXML
@@ -54,24 +46,35 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private Label email3LBL;
     @FXML
-    private ImageView imageField;
+    private ImageView immagineProfilo;
     @FXML
-    private Button moficicaButton;
+    private Button modificaBtn;
     @FXML
-    private Button salvaButton;
+    private Button salvaBtn;
     @FXML
-    private Button BackButton;
+    private Button escBtn;
     @FXML
-    private ImageView backIage;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-       
-    }
+    private Button immagineBtn;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void modificaContatto(ActionEvent event) {
+    }
+
+    @FXML
+    private void verificaContatto(ActionEvent event) {
+    }
+
+    @FXML
+    private void cambiaScena(ActionEvent event) {
+    }
+
+    @FXML
+    private void aggiungiImmagine(ActionEvent event) {
+    }
     
 }
