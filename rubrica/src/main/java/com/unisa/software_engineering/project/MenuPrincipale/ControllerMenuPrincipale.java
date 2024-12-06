@@ -4,6 +4,7 @@
  */
 package com.unisa.software_engineering.project.MenuPrincipale;
 
+import com.unisa.software_engineering.project.Model.Rubrica;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -24,7 +25,12 @@ import javafx.scene.control.TextField;
  * @date 05/12/24
  */
 public class ControllerMenuPrincipale implements Initializable {
-
+    private final Rubrica rubrica;
+    
+    public ControllerMenuPrincipale(Rubrica rubrica){
+        this.rubrica=rubrica;
+    }
+    
     @FXML
     private MenuItem esportaBtn;
     @FXML
@@ -51,6 +57,7 @@ public class ControllerMenuPrincipale implements Initializable {
 
     @FXML
     private void esportaContatto(ActionEvent event) {
+        
     }
 
     @FXML

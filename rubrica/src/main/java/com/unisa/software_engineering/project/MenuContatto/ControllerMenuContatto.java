@@ -5,6 +5,7 @@
  */
 package com.unisa.software_engineering.project.MenuContatto;
 
+import com.unisa.software_engineering.project.Model.Contatto;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -28,7 +29,10 @@ import javafx.scene.image.ImageView;
  * @date 05/12/24
  */
 public class ControllerMenuContatto implements Initializable {
-    
+    private Contatto contatto;
+    public ControllerMenuContatto(Contatto contatto){
+        this.contatto=contatto;
+    }
     @FXML
     private TextField nomeTXF;
     @FXML
