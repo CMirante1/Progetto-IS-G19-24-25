@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
  * @ingroup Controllers
  * @date 05/12/24
  */
-public class MenuPrincipaleController implements Initializable {
+public class ControllerMenuPrincipale implements Initializable {
 
     @FXML
     private MenuItem esportaBtn;
