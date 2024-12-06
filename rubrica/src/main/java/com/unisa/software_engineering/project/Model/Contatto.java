@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
  * 
  * Questa è la struttura dati che definisce un contatto con tutte le informazioni associate
  * 
- * @ingroup Model
+ * @ingroup Models
  * @see Rubrica.java
  * @author paolo
  * @date 02/12/24
