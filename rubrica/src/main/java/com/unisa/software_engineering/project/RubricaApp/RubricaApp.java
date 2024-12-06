@@ -12,10 +12,13 @@ import javafx.stage.Stage;
  */
 public class RubricaApp extends Application {
     
+    private Rubrica rubrica;
+    
     @Override
     public void start(Stage stage) {
        
-       
+       this.rubrica = FileManager.caricaRubrica();
+        
         stage.setTitle("Rubrica");
         stage.show();
     }
