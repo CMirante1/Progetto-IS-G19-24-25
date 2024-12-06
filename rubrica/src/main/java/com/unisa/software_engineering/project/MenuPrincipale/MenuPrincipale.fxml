@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.software_engineering.project.MenuPrincipale.MenuPrincipaleController">
    <children>
       <TableView layoutY="149.0" prefHeight="352.0" prefWidth="700.0">
@@ -17,8 +16,8 @@
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem fx:id="esportaBtn" mnemonicParsing="false" onAction="#esportaContatto" text="Elimina contatto" />
-                  <MenuItem fx:id="eliminaBtn" mnemonicParsing="false" onAction="#eliminaContatto" text="Esporta contatto" />
+                <MenuItem fx:id="esportaBtn" mnemonicParsing="false" onAction="#esportaContatto" text="EsportaContatto" />
+                  <MenuItem fx:id="eliminaBtn" mnemonicParsing="false" onAction="#eliminaContatto" text="EliminaContatto" />
               </items>
             </ContextMenu>
          </contextMenu>
