@@ -1,12 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.unisa.software_engineering.project.Exceptions;
 
 /**
- *
- * @author andre
+ * @class NomeNonValidoException
+ * @brief L'eccezione lanciata dal metodo verificaNome che effettua il controllo della validità dei campi nome o cognome
+ * 
+ * Questa eccezione specializza la classe RubricaExceptions
+ * 
+ * @ingroup Exceptions
+ * @author grouppo_19
+ * @date 06/12/24
  */
 public class NomeNonValidoException extends RubricaExceptions{
     

@@ -2,6 +2,7 @@ package com.unisa.software_engineering.project.MenuPrincipale;
 
 import com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto;
 import com.unisa.software_engineering.project.Model.Contatto;
+import com.unisa.software_engineering.project.Model.FileManager;
 import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,18 +38,29 @@ public class ControllerMenuPrincipale {
     @FXML
     private Button importaBtn;
 
-    private ObservableList<Contatto> contattiList;  // Lista fisica dei contatti
-    private ObservableList<Contatto> filteredContattiList;  // Lista filtrata dei contatti
+    private Rubrica rubrica;
+    private ObservableList<Contatto> listaContatti;  // Lista fisica dei contatti
+    private ObservableList<Contatto> listaContattiFiltrati;  // Lista filtrata dei contatti
 
+    /**
+     * @brief
+     * @param rubrica Riferimento alla rubrica salvata in memoria
+     */
 
     // Metodo che viene chiamato per passare la rubrica al controller
     public void setRubrica(Rubrica rubrica) {
         // Trasforma la lista fisica della rubrica in una ObservableList
-        contattiList = FXCollections.observableArrayList(rubrica.getContatti());
-        filteredContattiList = FXCollections.observableArrayList(contattiList);
+        this.rubrica = rubrica;
+        inizializzaComponenti();
+    }
+
+    private void inizializzaComponenti() {
+
+        listaContatti = FXCollections.observableArrayList(rubrica.getContatti());
+        listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
 
         // Collega la ObservableList alla TableView
-        tableViewContatti.setItems(filteredContattiList);
+        tableViewContatti.setItems(listaContattiFiltrati);
 
         // Imposta le colonne della TableView
         nomeCln.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -77,35 +89,18 @@ public class ControllerMenuPrincipale {
 
     // Metodo di ricerca che filtra la lista dei contatti
     private void filtraContatti(String query) {
-        filteredContattiList.clear();
+        listaContattiFiltrati.clear();
         if (query.isEmpty()) {
-            filteredContattiList.addAll(contattiList);
+            listaContattiFiltrati.addAll(listaContatti);
         } else {
-            for (Contatto contatto : contattiList) {
+            for (Contatto contatto : listaContatti) {
                 // Confronta il nome e cognome del contatto con la query (ignorando maiuscole/minuscole)
                 if (contatto.getNome().toLowerCase().contains(query.toLowerCase()) ||
                     contatto.getCognome().toLowerCase().contains(query.toLowerCase())) {
-                    filteredContattiList.add(contatto);
+                    listaContattiFiltrati.add(contatto);
                 }
             }
         }
-    }
-
-    // Metodo per esportare i contatti selezionati
-    private void esportaContatti() {
-        List<Contatto> contattiSelezionati = tableViewContatti.getSelectionModel().getSelectedItems();
-        // Logica di esportazione (ad esempio, scrivere su un file CSV, JSON, ecc.)
-        System.out.println("Esporta contatti: " + contattiSelezionati);
-        // Esportazione dei contatti
-    }
-
-    // Metodo per eliminare i contatti selezionati
-    private void eliminaContatti() {
-        List<Contatto> contattiSelezionati = tableViewContatti.getSelectionModel().getSelectedItems();
-        contattiList.removeAll(contattiSelezionati);
-        filteredContattiList.removeAll(contattiSelezionati);
-        // Logica di eliminazione (ad esempio, eliminare anche dal file)
-        System.out.println("Elimina contatti: " + contattiSelezionati);
     }
 
     // Metodo per aprire la schermata di aggiunta di un nuovo contatto
@@ -115,8 +110,10 @@ public class ControllerMenuPrincipale {
         Parent root = loader.load();
 
         // Passa la rubrica al controller della schermata contatto
-        ControllerMenuContatto controller = loader.getController();
-        controller.setContatto(null);         // Modalità "Aggiungi" (senza contatto selezionato)
+        ControllerMenuContatto controllerMenuContatto = loader.getController();
+
+        controllerMenuContatto.setRubrica(rubrica);
+        controllerMenuContatto.setContatto(null);         // Modalità "Aggiungi" (senza contatto selezionato)
 
         // Carica la nuova scena
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -126,7 +123,7 @@ public class ControllerMenuPrincipale {
     }
 
     // Metodo per gestire il doppio clic su un contatto per visualizzarlo
-    private void onTableViewItemDoubleClick(MouseEvent event) throws IOException {
+    private void visualizzaContatto(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Contatto contattoSelezionato = tableViewContatti.getSelectionModel().getSelectedItem();
 
@@ -134,9 +131,10 @@ public class ControllerMenuPrincipale {
             Parent root = loader.load();
 
             // Passa la rubrica e il contatto selezionato al controller della schermata contatto
-            ControllerMenuContatto controller = loader.getController();
-            controller.setRubrica(contattiList);  // Passa la lista dei contatti
-            controller.setContatto(contattoSelezionato);  // Modalità "Visualizza" con i dati pre-compilati
+            ControllerMenuContatto controllerMenuContatto = loader.getController();
+
+            controllerMenuContatto.setRubrica(rubrica);  // Passa la lista dei contatti
+            controllerMenuContatto.setContatto(contattoSelezionato);  // Modalità "Visualizza" con i dati pre-compilati
 
             // Carica la scena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -148,6 +146,8 @@ public class ControllerMenuPrincipale {
 
     @FXML
     private void esportaContatto(ActionEvent event) {
+
+
     }
 
     @FXML

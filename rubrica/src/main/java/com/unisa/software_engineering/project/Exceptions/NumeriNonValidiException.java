@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.unisa.software_engineering.project.Exceptions;
 
+package com.unisa.software_engineering.project.Exceptions;
 /**
- *
- * @author paolo
+ * @class NumeriNonValidiException
+ * @brief L'eccezione lanciata dal metodo verificaNumeri che effettua il controllo della validità dei numeri di cellulare
+ * 
+ * Questa eccezione specializza la classe RubricaExceptions
+ * 
+ * @ingroup Exceptions
+ * @author grouppo_19
+ * @date 06/12/24
  */
 public class NumeriNonValidiException extends RubricaExceptions{
     

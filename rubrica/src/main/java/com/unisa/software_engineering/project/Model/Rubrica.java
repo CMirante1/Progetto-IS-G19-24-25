@@ -16,5 +16,8 @@ public class Rubrica {
 
     }
 
+    public List<Contatto> getContatti() {
 
+        return this.contatti;
+    }
 }
