@@ -6,6 +6,7 @@ package com.unisa.software_engineering.project.MenuContatto;
 
 import com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale;
 import com.unisa.software_engineering.project.Model.Contatto;
+import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,14 +25,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 
-public class ControllerMenuContatto implements Initializable {
+public class ControllerMenuContatto {
 
     @FXML
     private TextField nomeTXF;
     @FXML
     private TextField cognomeTXF;
-    private TextField[] numeriTF;
-    private TextField[] emailsTF;
     @FXML
     private ImageView immagineProfilo;
     @FXML
@@ -40,8 +39,6 @@ public class ControllerMenuContatto implements Initializable {
     private Button salvaBtn;
     @FXML
     private Button escBtn;
-
-    private Contatto contattoSelezionato;
     @FXML
     private Label nomeLBL;
     @FXML
@@ -61,10 +58,14 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private Button immagineBtn;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // Inizializzazione della schermata, inizialmente i campi sono disabilitati
-        disabilitaCampi();
+    private Rubrica rubrica;
+    private TextField[] numeriTF;
+    private TextField[] emailsTF;
+    private Contatto contattoSelezionato;
+
+    public void setRubrica(Rubrica rubrica) {
+
+        this.rubrica = rubrica;
     }
 
     // Metodo per settare il contatto e popolare i campi
@@ -78,7 +79,7 @@ public class ControllerMenuContatto implements Initializable {
             cognomeTXF.setText("");
             for (TextField numTF : numeriTF) numTF.setText("");
             for (TextField emailTF : emailsTF) emailTF.setText("");
-            immagineProfilo.setImage(new Image("file:path_to_default_image.jpg"));
+            immagineProfilo.setImage(new Image("res/default-profile.jpg"));
         } else {
             // Modalità Visualizza - Disabilita i campi
             disabilitaCampi();
@@ -154,18 +155,19 @@ public class ControllerMenuContatto implements Initializable {
         // Salva il contatto (se non esiste già, creane uno nuovo, altrimenti aggiorna quello esistente)
         if (contattoSelezionato == null) {
             contattoSelezionato = new Contatto(nome, cognome, Arrays.asList(numeri), Arrays.asList(emails), null);
+            rubrica.aggiungiContatto(contattoSelezionato);
         } else {
             contattoSelezionato.setNome(nome);
             contattoSelezionato.setCognome(cognome);
             contattoSelezionato.setNumeri(Arrays.asList(numeri));
             contattoSelezionato.setEmails(Arrays.asList(emails));
         }
-
         // Esegui il salvataggio dei dati
         // Salva nel database, file o nella struttura dati che stai utilizzando
 
         // Dopo aver salvato, disabilita i campi e riabilita il pulsante Modifica
         disabilitaCampi();
+
     }
 
     // Metodo per il tasto "Indietro" (torna alla schermata principale)
@@ -175,7 +177,7 @@ public class ControllerMenuContatto implements Initializable {
         Parent root = loader.load();
 
         // Ottieni il controller della schermata principale (se necessario)
-        ControllerMenuPrincipale controller = loader.getController();
+        ControllerMenuPrincipale controllerMenuPrincipale = loader.getController();
 
         // Crea la nuova scena
         Scene scene = new Scene(root);

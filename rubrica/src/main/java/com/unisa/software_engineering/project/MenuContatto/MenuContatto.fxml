@@ -12,8 +12,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto">
    <children>
-      <TextField fx:id="nomeTXF" layoutX="36.0" layoutY="346.0" prefHeight="31.0" prefWidth="187.0" AnchorPane.bottomAnchor="223.0" AnchorPane.topAnchor="346.0" />
-      <TextField fx:id="cognomeTXF" layoutX="281.0" layoutY="346.0" AnchorPane.topAnchor="346.0" />
+      <TextField fx:id="nomeTF" layoutX="36.0" layoutY="346.0" prefHeight="31.0" prefWidth="187.0" AnchorPane.bottomAnchor="223.0" AnchorPane.topAnchor="346.0" />
+      <TextField fx:id="cognomeTF" layoutX="281.0" layoutY="346.0" AnchorPane.topAnchor="346.0" />
       <TextField layoutX="281.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
       <TextField layoutX="529.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
       <TextField layoutX="36.0" layoutY="429.0" AnchorPane.topAnchor="429.0" />
@@ -30,7 +30,7 @@
       <Label fx:id="email3LBL" layoutX="529.0" layoutY="494.0" text="Email3:" />
       <ImageView fx:id="immagineProfilo" fitHeight="217.0" fitWidth="253.0" layoutX="262.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Risorse/default-profile.jpg" />
+            <Image url="@../../../../../../../../res/default-profile.jpg" />
          </image></ImageView>
       <Button fx:id="modificaBtn" layoutX="506.0" layoutY="20.0" mnemonicParsing="false" onAction="#modificaContatto" prefHeight="39.0" prefWidth="94.0" text="Modifica">
          <font>
