@@ -33,6 +33,7 @@ public abstract class FileManager {
     }
     
     /**
+     * @return 
      * @brief Carica la rubrica dalla memoria di massa
      * 
      * Deserializza la rubrica e i contatti al suo interno e inizializza la rubrica
@@ -61,6 +62,8 @@ public abstract class FileManager {
     }
     
     /**
+     * @param contatti
+     * @param nomeFile
      * @brief Importa i contatti selezionati
      * 
      * Importa la rubrica dei contatti selezionata dall'utente e aggiunge quelli semanticamente corretti,

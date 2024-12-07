@@ -93,6 +93,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     * chiamano la get
     *
     * @author carmine
+     * @return 
     * @date 06/12/24
     * @throws IOException
     */
@@ -103,8 +104,12 @@ public class Contatto implements Comparable<Contatto>, Serializable{
    
    /**
     * 
-    * Qualcuno spieghi a che serve sta robba
+    * 
     *
+     * @param nome
+     * @param cognome
+     * @param numeriDiTelefono
+     * @param emails
     */
    public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails) {
        
@@ -115,6 +120,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     * 
     * Confronta i contatti per nome
     *
+     * @param c
     * @todo Aggiungere anche il cognome al confronto
     */
     @Override
