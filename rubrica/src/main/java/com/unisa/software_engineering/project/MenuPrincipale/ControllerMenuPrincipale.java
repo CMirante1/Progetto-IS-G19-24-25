@@ -4,9 +4,7 @@
  */
 package com.unisa.software_engineering.project.MenuPrincipale;
 
-import com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto;
 import com.unisa.software_engineering.project.Model.Contatto;
-import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,14 +23,13 @@ import java.util.List;
 
 public class ControllerMenuPrincipale {
 
-    @FXML
     private TableView<Contatto> tableViewContatti;
     @FXML
     private TableColumn<Contatto, String> nomeCln;
     @FXML
     private TableColumn<Contatto, String> cognomeCln;
     @FXML
-    private TextField barraRicerca;// Barra di ricerca
+    private TextField barraRicerca;  // Barra di ricerca
     @FXML
     private MenuItem esportaBtn;
     @FXML
@@ -44,6 +41,7 @@ public class ControllerMenuPrincipale {
 
     private ObservableList<Contatto> contattiList;  // Lista fisica dei contatti
     private ObservableList<Contatto> filteredContattiList;  // Lista filtrata dei contatti
+
 
     // Metodo che viene chiamato per passare la rubrica al controller
     public void setRubrica(Rubrica rubrica) {
@@ -130,7 +128,6 @@ public class ControllerMenuPrincipale {
     }
 
     // Metodo per gestire il doppio clic su un contatto per visualizzarlo
-    @FXML
     private void onTableViewItemDoubleClick(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Contatto contattoSelezionato = tableViewContatti.getSelectionModel().getSelectedItem();
@@ -149,5 +146,17 @@ public class ControllerMenuPrincipale {
             stage.setScene(scene);
             stage.show();
         }
+    }
+
+    @FXML
+    private void esportaContatto(ActionEvent event) {
+    }
+
+    @FXML
+    private void eliminaContatto(ActionEvent event) {
+    }
+
+    @FXML
+    private void importaContatto(ActionEvent event) {
     }
 }
