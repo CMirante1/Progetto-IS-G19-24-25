@@ -19,10 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class ControllerMenuContatto implements Initializable {
+public class ControllerMenuContatto {
 
     @FXML
     private TextField nomeTXF;
@@ -37,17 +35,13 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private Button modificaBtn;
     @FXML
+    private Button immagineBtn;
+    @FXML
     private Button salvaBtn;
     @FXML
     private Button escBtn;
 
     private Contatto contattoSelezionato;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // Inizializzazione della schermata, inizialmente i campi sono disabilitati
-        disabilitaCampi();
-    }
 
     // Metodo per settare il contatto e popolare i campi
     public void setContatto(Contatto contatto) {

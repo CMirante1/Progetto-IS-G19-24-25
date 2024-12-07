@@ -4,6 +4,9 @@
  */
 package com.unisa.software_engineering.project.MenuPrincipale;
 
+import com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto;
+import com.unisa.software_engineering.project.Model.Contatto;
+import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,11 +32,15 @@ public class ControllerMenuPrincipale {
     @FXML
     private TableColumn<Contatto, String> cognomeCln;
     @FXML
-    private TextField barraRicerca;  // Barra di ricerca
+    private TextField barraRicerca;// Barra di ricerca
     @FXML
     private MenuItem esportaBtn;
     @FXML
     private MenuItem eliminaBtn;
+    @FXML
+    private Button aggiungiBtn;
+    @FXML
+    private Button importaBtn;
 
     private ObservableList<Contatto> contattiList;  // Lista fisica dei contatti
     private ObservableList<Contatto> filteredContattiList;  // Lista filtrata dei contatti
