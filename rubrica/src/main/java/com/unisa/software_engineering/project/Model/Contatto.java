@@ -10,15 +10,13 @@ import javax.imageio.ImageIO;
 
 /**
  * @class Contatto
- * @brief La struttura Contatto nella rubrica
+ * @brief definisce un contatto
  * 
- * Questa è la struttura dati che definisce un contatto con tutte le informazioni associate
- * 
+ * Rappresenta ciò che verrà inserito all'interno della struttura dati rubrica
  * @ingroup Models
  * @see Rubrica.java
- * @author paolo
+ * @author gruppo_19
  * @date 02/12/24
- * @todo Decidere una volta e per tutte dove bisogna verificare i dati
  */
 public class Contatto implements Comparable<Contatto>, Serializable{
     
@@ -29,6 +27,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     private byte[] immagineProfilo;
 
     /**
+     * 
      * @constructor
      * @param nome Nome del contatto
      * @param cognome Cognome del contatto
@@ -77,7 +76,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
      * 
      * @param immagineProfilo Immagine del profilo
      * @return byte[] dell'immagine
-     * @author carmine
+     * @author gruppo_19
      * @date 06/12/24
      * @throws IOException
      */
@@ -89,10 +88,10 @@ public class Contatto implements Comparable<Contatto>, Serializable{
    
    /**
     *  
-    * Converte il byte[] in una BufferedImage che può essere gestita più facilmente dai metodi che
+    * @brief Converte il byte[] in una BufferedImage che può essere gestita più facilmente dai metodi che
     * chiamano la get
     *
-    * @author carmine
+    * @author gruppo_19
      * @return 
     * @date 06/12/24
     * @throws IOException
@@ -103,29 +102,27 @@ public class Contatto implements Comparable<Contatto>, Serializable{
    }
    
    /**
-    * 
-    * 
-    *
-     * @param nome
-     * @param cognome
-     * @param numeriDiTelefono
-     * @param emails
+    * @brief prende in input i nuovi dati del contatto e li sostituisce a quelli precedentemente inseriti
+    * @author gruppo_19
+    * @param nome
+    * @param cognome
+    * @param numeriDiTelefono
+    * @param emails
     */
    public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails) {
        
        
    }
     
-   /**
-    * 
-    * Confronta i contatti per nome
-    *
-     * @param c
-    * @todo Aggiungere anche il cognome al confronto
+   /* 
+    * @brief Confronta i contatti per nome
+    * Permette di confrontare i contatti secondo un loro attributo, in questo caso il nome al fine di ordinarli all'interno della struttura dati Rubrica
+    * @param c
     */
     @Override
     public int compareTo(Contatto c) {
-        
+        if(this.nome.compareTo(c.nome) == 0)
+            return this.cognome.compareTo(c.cognome);
         return this.nome.compareTo(c.nome);
     }
 }
