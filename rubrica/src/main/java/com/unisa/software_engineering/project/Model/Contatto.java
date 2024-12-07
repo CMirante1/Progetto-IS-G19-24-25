@@ -117,11 +117,12 @@ public class Contatto implements Comparable<Contatto>, Serializable{
    /* 
     * @brief Confronta i contatti per nome
     * Permette di confrontare i contatti secondo un loro attributo, in questo caso il nome al fine di ordinarli all'interno della struttura dati Rubrica
+    * Se i nomi di due contatti dovessero risultare uguali questi andranno ordinati secondo il cognome
     * @param c
     */
     @Override
     public int compareTo(Contatto c) {
-        if(this.nome.compareTo(c.nome) == 0)
+         if(this.nome.compareTo(c.nome) == 0)
             return this.cognome.compareTo(c.cognome);
         return this.nome.compareTo(c.nome);
     }
