@@ -10,7 +10,7 @@
 
 # Configurazioni IDE
 *.iml
-.idea/
+.idea/*
 /.vscode/
 /*.project
 /*.classpath
