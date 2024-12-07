@@ -4,6 +4,7 @@
  */
 package com.unisa.software_engineering.project.MenuContatto;
 
+import com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale;
 import com.unisa.software_engineering.project.Model.Contatto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

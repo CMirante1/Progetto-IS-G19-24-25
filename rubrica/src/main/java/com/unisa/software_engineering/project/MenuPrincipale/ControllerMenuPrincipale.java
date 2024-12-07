@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
- */
 package com.unisa.software_engineering.project.MenuPrincipale;
 
+import com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto;
 import com.unisa.software_engineering.project.Model.Contatto;
+import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

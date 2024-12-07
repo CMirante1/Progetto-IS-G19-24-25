@@ -1,20 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.unisa.software_engineering.project.RubricaApp;
 
 /**
  *
  * @author andre
  */
+import com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale;
+import com.unisa.software_engineering.project.Model.FileManager;
+import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.event.ActionEvent;
 
 public class RubricaApp extends Application {
 
