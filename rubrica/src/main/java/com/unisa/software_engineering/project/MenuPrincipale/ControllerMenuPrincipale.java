@@ -145,16 +145,16 @@ public class ControllerMenuPrincipale {
     }
 
     @FXML
-    private void esportaContatto(ActionEvent event) {
+    private void esportaContatti(ActionEvent event) {
 
 
     }
 
     @FXML
-    private void eliminaContatto(ActionEvent event) {
+    private void eliminaContatti(ActionEvent event) {
     }
 
     @FXML
-    private void importaContatto(ActionEvent event) {
+    private void importaContatti(ActionEvent event) {
     }
 }
