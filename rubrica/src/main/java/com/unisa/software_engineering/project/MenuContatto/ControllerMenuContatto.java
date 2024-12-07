@@ -87,8 +87,8 @@ public class ControllerMenuContatto implements Initializable {
             nomeTXF.setText(contatto.getNome());
             cognomeTXF.setText(contatto.getCognome());
             for (int i = 0; i < numeriTF.length; i++) {
-                if (i < contatto.getNumeri().size()) {
-                    numeriTF[i].setText(contatto.getNumeri().get(i));
+                if (i < contatto.getNumeriDiTelefono().size()) {
+                    numeriTF[i].setText(contatto.getNumeriDiTelefono().get(i));
                 } else {
                     numeriTF[i].setText("");
                 }
