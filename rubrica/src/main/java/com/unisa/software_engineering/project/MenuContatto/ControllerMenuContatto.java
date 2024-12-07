@@ -186,27 +186,6 @@ public class ControllerMenuContatto {
         stage.show();
     }
 
-    // Metodo di verifica (come negli esempi precedenti)
-    private boolean verificaNome(String nome, String cognome) {
-        return !(nome == null || nome.trim().isEmpty() || cognome == null || cognome.trim().isEmpty());
-    }
-
-    private boolean verificaNumeri(String[] numeri) {
-        for (String numero : numeri) {
-            if (numero == null || numero.trim().isEmpty()) return false;
-        }
-        return true;
-    }
-
-    private boolean verificaEmail(String[] emails) {
-        for (String email : emails) {
-            if (email == null || email.trim().isEmpty() || !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     @FXML
     private void verificaContatto(ActionEvent event) {
     }

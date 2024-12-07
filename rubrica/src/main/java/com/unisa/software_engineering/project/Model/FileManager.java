@@ -75,7 +75,7 @@ public abstract class FileManager {
      * Ma poi non può importare un intera rubrica .vcf?
      * 
      */
-    public static void importaContatti(List<Contatto> contatti, String nomeFile) {
+    public static List<Contatto> importaContatti(String nomeFile) {
         
         
     }
