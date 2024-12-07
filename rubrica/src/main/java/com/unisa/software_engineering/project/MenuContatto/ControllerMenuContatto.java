@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.Label;
 
 public class ControllerMenuContatto implements Initializable {
 
@@ -28,9 +29,7 @@ public class ControllerMenuContatto implements Initializable {
     private TextField nomeTXF;
     @FXML
     private TextField cognomeTXF;
-    @FXML
     private TextField[] numeriTF;
-    @FXML
     private TextField[] emailsTF;
     @FXML
     private ImageView immagineProfilo;
@@ -42,6 +41,24 @@ public class ControllerMenuContatto implements Initializable {
     private Button escBtn;
 
     private Contatto contattoSelezionato;
+    @FXML
+    private Label nomeLBL;
+    @FXML
+    private Label cognomeLBL;
+    @FXML
+    private Label cell1LBL;
+    @FXML
+    private Label cell2LBL;
+    @FXML
+    private Label cell3LBL;
+    @FXML
+    private Label email1LBL;
+    @FXML
+    private Label email2LBL;
+    @FXML
+    private Label email3LBL;
+    @FXML
+    private Button immagineBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -120,7 +137,6 @@ public class ControllerMenuContatto implements Initializable {
     }
 
     // Gestore del tasto Salva
-    @FXML
     private void salvaContatto(ActionEvent event) {
         // Recupera i dati modificati
         String nome = nomeTXF.getText();
@@ -152,7 +168,6 @@ public class ControllerMenuContatto implements Initializable {
     }
 
     // Metodo per il tasto "Indietro" (torna alla schermata principale)
-    @FXML
     private void tornaIndietro(ActionEvent event) throws IOException {
         // Carica la schermata principale
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipale.fxml"));
@@ -187,5 +202,17 @@ public class ControllerMenuContatto implements Initializable {
             }
         }
         return true;
+    }
+
+    @FXML
+    private void verificaContatto(ActionEvent event) {
+    }
+
+    @FXML
+    private void cambiaScena(ActionEvent event) {
+    }
+
+    @FXML
+    private void aggiungiImmagine(ActionEvent event) {
     }
 }
