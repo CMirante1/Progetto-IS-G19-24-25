@@ -102,7 +102,8 @@ public class Contatto implements Comparable<Contatto>, Serializable{
    }
    
    /**
-    * @brief prende in input i nuovi dati del contatto e li sostituisce a quelli precedentemente inseriti
+    * @brief Modifica un contatto
+    * prende in input i nuovi dati del contatto e li sostituisce a quelli precedentemente inseriti
     * @author gruppo_19
     * @param nome
     * @param cognome
