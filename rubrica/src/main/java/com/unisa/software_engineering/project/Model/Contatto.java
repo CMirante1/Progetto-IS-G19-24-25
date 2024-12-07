@@ -109,7 +109,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     * @param numeriDiTelefono
     * @param emails
     */
-   public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails) {
+   public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineDiProfilo) {
        
        
    }
