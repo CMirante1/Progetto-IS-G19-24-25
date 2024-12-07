@@ -1,75 +1,146 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
  */
 package com.unisa.software_engineering.project.MenuPrincipale;
 
-import com.unisa.software_engineering.project.Model.Rubrica;
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Node;
 
-/**
- * FXML Controller class
- * @class MenuPrincipaleController
- * @brief Gestisce il menu principale
- * @todo Definire initialize e come strutturare model-controller-view
- * @author andre
- * @ingroup Controllers
- * @date 05/12/24
- */
-public class ControllerMenuPrincipale implements Initializable {
-    private final Rubrica rubrica;
-    
-    public ControllerMenuPrincipale(Rubrica rubrica){
-        this.rubrica=rubrica;
-    }
-    
+import java.io.IOException;
+import java.util.List;
+
+public class ControllerMenuPrincipale {
+
+    @FXML
+    private TableView<Contatto> tableViewContatti;
+    @FXML
+    private TableColumn<Contatto, String> nomeCln;
+    @FXML
+    private TableColumn<Contatto, String> cognomeCln;
+    @FXML
+    private TextField barraRicerca;  // Barra di ricerca
     @FXML
     private MenuItem esportaBtn;
     @FXML
     private MenuItem eliminaBtn;
-    @FXML
-    private TableColumn<?, ?> nomeCln;
-    @FXML
-    private TableColumn<?, ?> cognomeCln;
-    @FXML
-    private TextField barraRicerca;
-    @FXML
-    private Button aggiungiBtn;
-    @FXML
-    private Button importaBtn;
 
-    /**
-     * @brief Inizializza il controller
-     * @ingroup Construzione
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    private ObservableList<Contatto> contattiList;  // Lista fisica dei contatti
+    private ObservableList<Contatto> filteredContattiList;  // Lista filtrata dei contatti
 
-    }    
+    // Metodo che viene chiamato per passare la rubrica al controller
+    public void setRubrica(Rubrica rubrica) {
+        // Trasforma la lista fisica della rubrica in una ObservableList
+        contattiList = FXCollections.observableArrayList(rubrica.getContatti());
+        filteredContattiList = FXCollections.observableArrayList(contattiList);
 
-    @FXML
-    private void esportaContatto(ActionEvent event) {
-        
+        // Collega la ObservableList alla TableView
+        tableViewContatti.setItems(filteredContattiList);
+
+        // Imposta le colonne della TableView
+        nomeCln.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        cognomeCln.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+
+        // Abilita la selezione multipla nella TableView
+        tableViewContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // Aggiungi listener per la barra di ricerca
+        barraRicerca.textProperty().addListener((observable, oldValue, newValue) -> {
+            filtraContatti(newValue);
+        });
+
+        // Menu contestuale per selezione multipla
+        MenuItem esportaItem = new MenuItem("Esporta contatti");
+        MenuItem eliminaItem = new MenuItem("Elimina contatti");
+
+        // Aggiungi le azioni del menu contestuale
+        esportaItem.setOnAction(e -> esportaContatti());
+        eliminaItem.setOnAction(e -> eliminaContatti());
+
+        // Crea un menu contestuale
+        ContextMenu contextMenu = new ContextMenu(esportaItem, eliminaItem);
+        tableViewContatti.setContextMenu(contextMenu);
     }
 
-    @FXML
-    private void eliminaContatto(ActionEvent event) {
+    // Metodo di ricerca che filtra la lista dei contatti
+    private void filtraContatti(String query) {
+        filteredContattiList.clear();
+        if (query.isEmpty()) {
+            filteredContattiList.addAll(contattiList);
+        } else {
+            for (Contatto contatto : contattiList) {
+                // Confronta il nome e cognome del contatto con la query (ignorando maiuscole/minuscole)
+                if (contatto.getNome().toLowerCase().contains(query.toLowerCase()) ||
+                    contatto.getCognome().toLowerCase().contains(query.toLowerCase())) {
+                    filteredContattiList.add(contatto);
+                }
+            }
+        }
     }
 
-    @FXML
-    private void aggiungiContatto(ActionEvent event) {
+    // Metodo per esportare i contatti selezionati
+    private void esportaContatti() {
+        List<Contatto> contattiSelezionati = tableViewContatti.getSelectionModel().getSelectedItems();
+        // Logica di esportazione (ad esempio, scrivere su un file CSV, JSON, ecc.)
+        System.out.println("Esporta contatti: " + contattiSelezionati);
+        // Esportazione dei contatti
     }
 
-    @FXML
-    private void importaContatto(ActionEvent event) {
+    // Metodo per eliminare i contatti selezionati
+    private void eliminaContatti() {
+        List<Contatto> contattiSelezionati = tableViewContatti.getSelectionModel().getSelectedItems();
+        contattiList.removeAll(contattiSelezionati);
+        filteredContattiList.removeAll(contattiSelezionati);
+        // Logica di eliminazione (ad esempio, eliminare anche dal file)
+        System.out.println("Elimina contatti: " + contattiSelezionati);
     }
-    
+
+    // Metodo per aprire la schermata di aggiunta di un nuovo contatto
+    @FXML
+    private void aggiungiContatto(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
+        Parent root = loader.load();
+
+        // Passa la rubrica al controller della schermata contatto
+        ControllerMenuContatto controller = loader.getController();
+        controller.setContatto(null);         // Modalità "Aggiungi" (senza contatto selezionato)
+
+        // Carica la nuova scena
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    // Metodo per gestire il doppio clic su un contatto per visualizzarlo
+    @FXML
+    private void onTableViewItemDoubleClick(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 2) {
+            Contatto contattoSelezionato = tableViewContatti.getSelectionModel().getSelectedItem();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
+            Parent root = loader.load();
+
+            // Passa la rubrica e il contatto selezionato al controller della schermata contatto
+            ControllerMenuContatto controller = loader.getController();
+            controller.setRubrica(contattiList);  // Passa la lista dei contatti
+            controller.setContatto(contattoSelezionato);  // Modalità "Visualizza" con i dati pre-compilati
+
+            // Carica la scena
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
 }
