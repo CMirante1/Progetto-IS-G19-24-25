@@ -16,9 +16,9 @@ package com.unisa.software_engineering.project.Exceptions;
  * @author paolo
  * @date 06/12/24
  */
-public class RubricaExceptions extends Exception {
+public class RubricaException extends Exception {
 
-    public RubricaExceptions(String msg) {
+    public RubricaException(String msg) {
 
         super(msg);
     }
