@@ -1,4 +1,14 @@
 package com.unisa.software_engineering.project.MenuPrincipale;
+/**
+ * @class ControllerPrincipale
+ * @brief Gestisce la finestra di visualizzazione del menu principale
+ * 
+ * Quando l'utente lancerà il software sarà la prima finestra a visualizzare
+ * 
+ * @ingroup MenuPrincipale
+ * @author grouppo_19
+ * @date 06/12/24
+ */
 
 import com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto;
 import com.unisa.software_engineering.project.Model.Contatto;
@@ -43,17 +53,16 @@ public class ControllerMenuPrincipale {
     private ObservableList<Contatto> listaContattiFiltrati;  // Lista filtrata dei contatti
 
     /**
-     * @brief Metodo che passa alla rubrica 
+     * @brief Metodo che passa al controller la Rubrica
+     * Quando si lancia il software al controller verrà passata la rubrica salvata in memoria
      * @param rubrica Riferimento alla rubrica salvata in memoria
      */
-
-    // Metodo che viene chiamato per passare la rubrica al controller
     public void setRubrica(Rubrica rubrica) {
         // Trasforma la lista fisica della rubrica in una ObservableList
         this.rubrica = rubrica;
         inizializzaComponenti();
     }
-
+   /// Metodo per inizializzare tutti i componenti della finestra menu Principale
     private void inizializzaComponenti() {
 
         listaContatti = FXCollections.observableArrayList(rubrica.getContatti());
@@ -87,7 +96,7 @@ public class ControllerMenuPrincipale {
         tableViewContatti.setContextMenu(contextMenu);
     }
 
-    // Metodo di ricerca che filtra la lista dei contatti
+    /// Metodo di ricerca che filtra la lista dei contatti
     private void filtraContatti(String query) {
         listaContattiFiltrati.clear();
         if (query.isEmpty()) {
@@ -103,7 +112,7 @@ public class ControllerMenuPrincipale {
         }
     }
 
-    // Metodo per aprire la schermata di aggiunta di un nuovo contatto
+    /// Metodo per aprire la schermata di aggiunta di un nuovo contatto
     @FXML
     private void aggiungiContatto(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
@@ -122,7 +131,7 @@ public class ControllerMenuPrincipale {
         stage.show();
     }
 
-    // Metodo per gestire il doppio clic su un contatto per visualizzarlo
+    /// Metodo per gestire il doppio clic su un contatto per visualizzarlo
     private void visualizzaContatto(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Contatto contattoSelezionato = tableViewContatti.getSelectionModel().getSelectedItem();

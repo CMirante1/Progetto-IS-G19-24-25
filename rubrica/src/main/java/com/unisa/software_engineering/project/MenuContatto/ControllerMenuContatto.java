@@ -168,25 +168,15 @@ public class ControllerMenuContatto {
         salvaBtn.setDisable(false); // abilita il pulsante Salva
         modificaBtn.setDisable(true);  // Disabilita il tasto Modifica (non può essere premuto durante la modifica)
     }
- /**
- * @brief Gestore del tasto "Modifica"
- * 
- * Richiama il metodo di attivazione dei campi textField per le modifiche
- * 
- */
-    
-    @FXML
+
+       /// Gestore del tasto Modifica
+    @FXML 
     private void modificaContatto(ActionEvent event) {
         // Abilita i campi di testo per la modifica
         abilitaCampi();
     }
- /**
- * @brief Gestore del tasto "Salva"
- * 
- * Quando l'utente clicca il tasto Salva i dati inseriti nei textField abilitati alla modifica del contatto verranno salvati nella rubrica e visualizzati nella finestra del contatto.
- * 
- */
-    // Gestore del tasto Salva
+
+    /// Gestore del tasto Salva
     private void salvaContatto(ActionEvent event) {
         // Recupera i dati modificati
         String nome = nomeTXF.getText();
@@ -217,13 +207,8 @@ public class ControllerMenuContatto {
         disabilitaCampi();
 
     }
-     /**
- * @brief Gestore del tasto "Indietro"
- * 
- * Quando l'utente si trova all'interno della finestra di visualizzazione del contatto potrà ritornare al menù principale cliccando il tasto "Indietro"
- * 
- */
-  
+
+   /// Gestore del tasto Indietro  
     private void tornaIndietro(ActionEvent event) throws IOException {
         // Carica la schermata principale
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipale.fxml"));
