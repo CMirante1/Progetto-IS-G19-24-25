@@ -10,9 +10,9 @@ package com.unisa.software_engineering.project.Exceptions;
  * @author grouppo_19
  * @date 06/12/24
  */
-public class NumeriNonValidiException extends RubricaExceptions{
+public class NumeroNonValidoException extends ContattoException{
     
-    public NumeriNonValidiException(String msg) {
+    public NumeroNonValidoException(String msg) {
         super(msg);
     }
     

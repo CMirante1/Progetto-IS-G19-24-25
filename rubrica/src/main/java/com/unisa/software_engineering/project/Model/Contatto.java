@@ -68,6 +68,27 @@ public class Contatto implements Comparable<Contatto>, Serializable{
         return emails;
     }
 
+    // Metodo di verifica (come negli esempi precedenti)
+    public static boolean verificaNome(String nome, String cognome) {
+        return !(nome == null || nome.trim().isEmpty() || cognome == null || cognome.trim().isEmpty());
+    }
+
+    public static boolean verificaNumeri(String[] numeri) {
+        for (String numero : numeri) {
+            if (numero == null || numero.trim().isEmpty()) return false;
+        }
+        return true;
+    }
+
+    public static boolean verificaEmail(String[] emails) {
+        for (String email : emails) {
+            if (email == null || email.trim().isEmpty() || !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * @brief Converte la BufferedImage a byte[]
      * 
@@ -110,7 +131,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     * @param numeriDiTelefono
     * @param emails
     */
-   public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails) {
+   public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineDiProfilo) {
        
        
    }

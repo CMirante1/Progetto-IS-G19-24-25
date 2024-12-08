@@ -4,8 +4,20 @@
  */
 package com.unisa.software_engineering.project.MenuContatto;
 
+/**
+ * @class ControllerMenuContatto
+ * @brief Gestisce la finestra di visualizzazione di un contatto e le operazioni effettuabili al suo interno dall'utente
+ * 
+ * Quando l'utente seleziona un contatto dal menu principale di cui visualizzare i dati viene mostrata la finestra con le informazioni presenti in rubrica.
+ * 
+ * @ingroup MenuContatto
+ * @author grouppo_19
+ * @date 06/12/24
+ */
+
 import com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale;
 import com.unisa.software_engineering.project.Model.Contatto;
+import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,14 +36,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 
-public class ControllerMenuContatto implements Initializable {
+public class ControllerMenuContatto {
 
     @FXML
     private TextField nomeTXF;
     @FXML
     private TextField cognomeTXF;
-    private TextField[] numeriTF;
-    private TextField[] emailsTF;
     @FXML
     private ImageView immagineProfilo;
     @FXML
@@ -40,8 +50,6 @@ public class ControllerMenuContatto implements Initializable {
     private Button salvaBtn;
     @FXML
     private Button escBtn;
-
-    private Contatto contattoSelezionato;
     @FXML
     private Label nomeLBL;
     @FXML
@@ -61,13 +69,32 @@ public class ControllerMenuContatto implements Initializable {
     @FXML
     private Button immagineBtn;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // Inizializzazione della schermata, inizialmente i campi sono disabilitati
-        disabilitaCampi();
-    }
+    private Rubrica rubrica;
+    private TextField[] numeriTF;
+    private TextField[] emailsTF;
+    private Contatto contattoSelezionato;
+ 
+ /**
+ *
+ * @brief metodo per settare la rubrica all'interno del controller del menu contatto
+ * 
+ * Quando viene aperta la finestra di visualizzazione di un contatto viene passato al controller il riferimento della rubrica da cui proviene il contatto
+ * @param rubrica Rappresenta la struttura dati da cui proviene il contatto
+ */
+    
+    public void setRubrica(Rubrica rubrica) {
 
-    // Metodo per settare il contatto e popolare i campi
+        this.rubrica = rubrica;
+    }
+    
+ /**
+ * @brief metodo per settare il contatto da visualizzare all'interno del controller del menu contatto
+ * 
+ * Quando viene aperta la finestra di visualizzazione di un contatto viene passato al controller il riferimento del contatto da cui vengono prelevati gli attributi e visualizzati nei textField della finestra di visualizzazione
+ * @param contatto
+ * 
+ */
+
     public void setContatto(Contatto contatto) {
         this.contattoSelezionato = contatto;
 
@@ -78,7 +105,7 @@ public class ControllerMenuContatto implements Initializable {
             cognomeTXF.setText("");
             for (TextField numTF : numeriTF) numTF.setText("");
             for (TextField emailTF : emailsTF) emailTF.setText("");
-            immagineProfilo.setImage(new Image("file:path_to_default_image.jpg"));
+            immagineProfilo.setImage(new Image("res/default-profile.jpg"));
         } else {
             // Modalità Visualizza - Disabilita i campi
             disabilitaCampi();
@@ -87,8 +114,8 @@ public class ControllerMenuContatto implements Initializable {
             nomeTXF.setText(contatto.getNome());
             cognomeTXF.setText(contatto.getCognome());
             for (int i = 0; i < numeriTF.length; i++) {
-                if (i < contatto.getNumeri().size()) {
-                    numeriTF[i].setText(contatto.getNumeri().get(i));
+                if (i < contatto.getNumeriDiTelefono().size()) {
+                    numeriTF[i].setText(contatto.getNumeriDiTelefono().get(i));
                 } else {
                     numeriTF[i].setText("");
                 }
@@ -107,8 +134,15 @@ public class ControllerMenuContatto implements Initializable {
             }
         }
     }
-
-    // Metodo per disabilitare i campi di testo
+ 
+ /**
+ *
+ * @brief Metodo per disabilitare i campi di testo
+ * 
+ * Quando viene aperta la finestra di visualizzazione di un contatto i campi textField in cui appaiono i dati vengono disabilitati per le modifiche.
+ * 
+ */
+    
     private void disabilitaCampi() {
         nomeTXF.setDisable(true);
         cognomeTXF.setDisable(true);
@@ -119,7 +153,12 @@ public class ControllerMenuContatto implements Initializable {
         modificaBtn.setDisable(false);  // Abilita il tasto Modifica
     }
 
-    // Metodo per abilitare i campi di testo per la modifica
+ /**
+ * @brief Metodo per abilitare i campi di testo per la modifica
+ * 
+ * Quando viene cliccato il tasto "Modifica" all'interno della finestra di visualizzazione di un contatto vengono attivati i campi textField per le modifiche.
+ */
+    
     private void abilitaCampi() {
         nomeTXF.setDisable(false);
         cognomeTXF.setDisable(false);
@@ -129,14 +168,24 @@ public class ControllerMenuContatto implements Initializable {
         salvaBtn.setDisable(false); // abilita il pulsante Salva
         modificaBtn.setDisable(true);  // Disabilita il tasto Modifica (non può essere premuto durante la modifica)
     }
-
-    // Gestore del tasto Modifica
+ /**
+ * @brief Gestore del tasto "Modifica"
+ * 
+ * Richiama il metodo di attivazione dei campi textField per le modifiche
+ * 
+ */
+    
     @FXML
     private void modificaContatto(ActionEvent event) {
         // Abilita i campi di testo per la modifica
         abilitaCampi();
     }
-
+ /**
+ * @brief Gestore del tasto "Salva"
+ * 
+ * Quando l'utente clicca il tasto Salva i dati inseriti nei textField abilitati alla modifica del contatto verranno salvati nella rubrica e visualizzati nella finestra del contatto.
+ * 
+ */
     // Gestore del tasto Salva
     private void salvaContatto(ActionEvent event) {
         // Recupera i dati modificati
@@ -154,55 +203,40 @@ public class ControllerMenuContatto implements Initializable {
         // Salva il contatto (se non esiste già, creane uno nuovo, altrimenti aggiorna quello esistente)
         if (contattoSelezionato == null) {
             contattoSelezionato = new Contatto(nome, cognome, Arrays.asList(numeri), Arrays.asList(emails), null);
+            rubrica.aggiungiContatto(contattoSelezionato);
         } else {
             contattoSelezionato.setNome(nome);
             contattoSelezionato.setCognome(cognome);
             contattoSelezionato.setNumeri(Arrays.asList(numeri));
             contattoSelezionato.setEmails(Arrays.asList(emails));
         }
-
         // Esegui il salvataggio dei dati
         // Salva nel database, file o nella struttura dati che stai utilizzando
 
         // Dopo aver salvato, disabilita i campi e riabilita il pulsante Modifica
         disabilitaCampi();
-    }
 
-    // Metodo per il tasto "Indietro" (torna alla schermata principale)
+    }
+     /**
+ * @brief Gestore del tasto "Indietro"
+ * 
+ * Quando l'utente si trova all'interno della finestra di visualizzazione del contatto potrà ritornare al menù principale cliccando il tasto "Indietro"
+ * 
+ */
+  
     private void tornaIndietro(ActionEvent event) throws IOException {
         // Carica la schermata principale
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipale.fxml"));
         Parent root = loader.load();
 
         // Ottieni il controller della schermata principale (se necessario)
-        ControllerMenuPrincipale controller = loader.getController();
+        ControllerMenuPrincipale controllerMenuPrincipale = loader.getController();
 
         // Crea la nuova scena
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    // Metodo di verifica (come negli esempi precedenti)
-    private boolean verificaNome(String nome, String cognome) {
-        return !(nome == null || nome.trim().isEmpty() || cognome == null || cognome.trim().isEmpty());
-    }
-
-    private boolean verificaNumeri(String[] numeri) {
-        for (String numero : numeri) {
-            if (numero == null || numero.trim().isEmpty()) return false;
-        }
-        return true;
-    }
-
-    private boolean verificaEmail(String[] emails) {
-        for (String email : emails) {
-            if (email == null || email.trim().isEmpty() || !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @FXML
