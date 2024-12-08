@@ -11,7 +11,7 @@ package com.unisa.software_engineering.project.Exceptions;
  * @author grouppo_19
  * @date 06/12/24
  */
-public class NomeNonValidoException extends RubricaExceptions{
+public class NomeNonValidoException extends RubricaException{
     
     public NomeNonValidoException(String msg) {
         super(msg);
