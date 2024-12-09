@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Email extends InfoContatto implements Serializable{
 
+    public Email(String info) { super(info); }
+
     @Override
     public boolean verifica(){
         return !(info == null ||
