@@ -2,6 +2,7 @@ package com.unisa.software_engineering.project.Model;
 
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.List;
@@ -24,6 +25,7 @@ public abstract class FileManager {
 
     private static final String FILE_BACKUP = "rubrica.dat";
     private static Alert alert;
+    private static Stage stage;
     /**
      * @brief Salva la rubrica sulla memoria di massa
      *
@@ -78,7 +80,10 @@ public abstract class FileManager {
      */
     public static void esportaContatti(List<Contatto> contatti, String nomeFile) {
 
-        FileChooser fileChooser = new FileChooser()
+        FileChooser fileChooser = new FileChooser();
+
+        File file = fileChooser.showSaveDialog(stage);
+
 
     }
 
@@ -98,5 +103,10 @@ public abstract class FileManager {
      */
     public static List<Contatto> importaContatti(String nomeFile) {
 
+    }
+
+    public static void setStage(Stage stagePrincipale) {
+
+        stage = stagePrincipale;
     }
 }
