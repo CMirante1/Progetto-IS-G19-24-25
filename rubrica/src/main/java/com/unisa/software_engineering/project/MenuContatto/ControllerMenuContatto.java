@@ -7,9 +7,9 @@ package com.unisa.software_engineering.project.MenuContatto;
 /**
  * @class ControllerMenuContatto
  * @brief Gestisce la finestra di visualizzazione di un contatto e le operazioni effettuabili al suo interno dall'utente
- * 
+ *
  * Quando l'utente seleziona un contatto dal menu principale di cui visualizzare i dati viene mostrata la finestra con le informazioni presenti in rubrica.
- * 
+ *
  * @ingroup MenuContatto
  * @author grouppo_19
  * @date 06/12/24
@@ -73,26 +73,26 @@ public class ControllerMenuContatto {
     private TextField[] numeriTF;
     private TextField[] emailsTF;
     private Contatto contattoSelezionato;
- 
+
  /**
  *
  * @brief metodo per settare la rubrica all'interno del controller del menu contatto
- * 
+ *
  * Quando viene aperta la finestra di visualizzazione di un contatto viene passato al controller il riferimento della rubrica da cui proviene il contatto
  * @param rubrica Rappresenta la struttura dati da cui proviene il contatto
  */
-    
+
     public void setRubrica(Rubrica rubrica) {
 
         this.rubrica = rubrica;
     }
-    
+
  /**
  * @brief metodo per settare il contatto da visualizzare all'interno del controller del menu contatto
- * 
+ *
  * Quando viene aperta la finestra di visualizzazione di un contatto viene passato al controller il riferimento del contatto da cui vengono prelevati gli attributi e visualizzati nei textField della finestra di visualizzazione
  * @param contatto
- * 
+ *
  */
 
     public void setContatto(Contatto contatto) {
@@ -105,7 +105,7 @@ public class ControllerMenuContatto {
             cognomeTXF.setText("");
             for (TextField numTF : numeriTF) numTF.setText("");
             for (TextField emailTF : emailsTF) emailTF.setText("");
-            immagineProfilo.setImage(new Image("res/default-profile.jpg"));
+            immagineProfilo.setImage(new Image("res/immagine-profilo-default.jpg"));
         } else {
             // Modalità Visualizza - Disabilita i campi
             disabilitaCampi();
@@ -134,15 +134,15 @@ public class ControllerMenuContatto {
             }
         }
     }
- 
+
  /**
  *
  * @brief Metodo per disabilitare i campi di testo
- * 
+ *
  * Quando viene aperta la finestra di visualizzazione di un contatto i campi textField in cui appaiono i dati vengono disabilitati per le modifiche.
- * 
+ *
  */
-    
+
     private void disabilitaCampi() {
         nomeTXF.setDisable(true);
         cognomeTXF.setDisable(true);
@@ -155,10 +155,10 @@ public class ControllerMenuContatto {
 
  /**
  * @brief Metodo per abilitare i campi di testo per la modifica
- * 
+ *
  * Quando viene cliccato il tasto "Modifica" all'interno della finestra di visualizzazione di un contatto vengono attivati i campi textField per le modifiche.
  */
-    
+
     private void abilitaCampi() {
         nomeTXF.setDisable(false);
         cognomeTXF.setDisable(false);
@@ -170,7 +170,7 @@ public class ControllerMenuContatto {
     }
 
        /// Gestore del tasto Modifica
-    @FXML 
+    @FXML
     private void modificaContatto(ActionEvent event) {
         // Abilita i campi di testo per la modifica
         abilitaCampi();
@@ -208,7 +208,7 @@ public class ControllerMenuContatto {
 
     }
 
-   /// Gestore del tasto Indietro  
+   /// Gestore del tasto Indietro
     private void tornaIndietro(ActionEvent event) throws IOException {
         // Carica la schermata principale
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipale.fxml"));

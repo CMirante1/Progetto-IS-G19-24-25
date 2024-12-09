@@ -30,7 +30,7 @@
       <Label fx:id="email3LBL" layoutX="529.0" layoutY="494.0" text="Email3:" />
       <ImageView fx:id="immagineProfilo" fitHeight="217.0" fitWidth="253.0" layoutX="262.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../res/default-profile.jpg" />
+            <Image url="@../../../../../../../../res/immagine-profilo-default.jpg" />
          </image></ImageView>
       <Button fx:id="modificaBtn" layoutX="506.0" layoutY="20.0" mnemonicParsing="false" onAction="#modificaContatto" prefHeight="39.0" prefWidth="94.0" text="Modifica">
          <font>

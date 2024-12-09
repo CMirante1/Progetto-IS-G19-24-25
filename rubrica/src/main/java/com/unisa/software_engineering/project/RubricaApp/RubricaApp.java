@@ -18,9 +18,10 @@ public class RubricaApp extends Application {
     private Rubrica rubrica;  // La lista fisica dei contatti
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        // 1. Carica la rubrica dalla memoria usando il FileManager
-        rubrica = FileManager.caricaRubrica();  // Metodo che carica i dati dalla memoria/file
+    public void start(Stage stage) throws Exception {
+
+        FileManager.set
+        rubrica = FileManager.caricaRubrica();
 
         // 2. Crea il loader per il menu principale
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipale.fxml"));
@@ -34,9 +35,9 @@ public class RubricaApp extends Application {
 
         // 5. Crea la scena e mostra la finestra principale
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Rubrica");
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.setTitle("Rubrica");
+        stage.show();
     }
 
     // Metodo che avvia l'applicazione

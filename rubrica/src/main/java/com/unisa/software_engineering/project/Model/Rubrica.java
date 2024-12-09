@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * @class Rubrica
  * @brief La struttura dati Rubrica
- * 
+ *
  * Questa è la struttura dati della rubrica che contiene i contatti dell'utente.
- * 
+ *
  * @ingroup Models
  * @see Contatto.java
  * @see FileManager.java
@@ -18,9 +18,8 @@ import java.util.List;
  * @todo Tutto, manca tutto
  */
 public class Rubrica implements Serializable {
-    
+
     private List<Contatto> contatti;
-    public List<Contatto> getList(){ return contatti; }
 
     /**
      * @constructor
@@ -47,4 +46,7 @@ public class Rubrica implements Serializable {
     public void rimuoviContatto(Contatto contatto){
         if(contatti.contains(contatto)) contatti.remove(contatto);
     }
+
+    public List<Contatto> getContatti(){
+        return contatti; }
  }

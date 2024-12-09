@@ -97,27 +97,15 @@ public class ControllerMenuPrincipale {
     }
 
     /// Metodo di ricerca che filtra la lista dei contatti
-    private void filtraContatti(String query) {
-        listaContattiFiltrati.clear();
-        if (query.isEmpty()) {
-            listaContattiFiltrati.addAll(listaContatti);
-        } else {
-            for (Contatto contatto : listaContatti) {
-                // Confronta il nome e cognome del contatto con la query (ignorando maiuscole/minuscole)
-                if (contatto.getNome().toLowerCase().contains(query.toLowerCase()) ||
-                    contatto.getCognome().toLowerCase().contains(query.toLowerCase())) {
-                    listaContattiFiltrati.add(contatto);
-                }
-            }
-        }
-    }
+    private void filtraContatti(String query)
 
     /// Metodo per aprire la schermata di aggiunta di un nuovo contatto
     @FXML
     private void aggiungiContatto(ActionEvent event) throws IOException {
 
         Contatto contatto = null;
-        cambuaSchermata(contatto);
+        rubrica.aggiungiContatto(menucontatto.);
+        cambiaSchermata(contatto);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
         Parent root = loader.load();
 
