@@ -16,8 +16,8 @@
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem fx:id="esportaBtn" mnemonicParsing="false" onAction="#esportaContatto" text="EsportaContatto" />
-                  <MenuItem fx:id="eliminaBtn" mnemonicParsing="false" onAction="#eliminaContatto" text="EliminaContatto" />
+                <MenuItem fx:id="esportaBtn" mnemonicParsing="false" onAction="#esportaContatti" text="EsportaContatto" />
+                  <MenuItem fx:id="eliminaBtn" mnemonicParsing="false" onAction="#eliminaContatti" text="EliminaContatto" />
               </items>
             </ContextMenu>
          </contextMenu>
@@ -32,7 +32,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="importaBtn" layoutX="391.0" layoutY="85.0" mnemonicParsing="false" onAction="#importaContatto" text="Importa contatti">
+      <Button fx:id="importaBtn" layoutX="391.0" layoutY="85.0" mnemonicParsing="false" onAction="#importaContatti" text="Importa contatti">
          <font>
             <Font size="18.0" />
          </font>

@@ -20,7 +20,7 @@ public class RubricaApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FileManager.set
+        FileManager.setStage(stage);
         rubrica = FileManager.caricaRubrica();
 
         // 2. Crea il loader per il menu principale

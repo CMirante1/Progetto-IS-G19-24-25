@@ -104,43 +104,43 @@ public class ControllerMenuPrincipale {
     private void aggiungiContatto(ActionEvent event) throws IOException {
 
         Contatto contatto = null;
-        rubrica.aggiungiContatto(menucontatto.);
-        cambiaSchermata(contatto);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
-        Parent root = loader.load();
-
-        // Passa la rubrica al controller della schermata contatto
-        ControllerMenuContatto controllerMenuContatto = loader.getController();
-
-        controllerMenuContatto.setRubrica(rubrica);
-        controllerMenuContatto.setContatto(contatto);         // Modalità "Aggiungi" (senza contatto selezionato)
-
-        // Carica la nuova scena
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+       // rubrica.aggiungiContatto(menucontatto.);
+        cambiaSchermata(event, contatto);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
+//        Parent root = loader.load();
+//
+//        // Passa la rubrica al controller della schermata contatto
+//        ControllerMenuContatto controllerMenuContatto = loader.getController();
+//
+//        controllerMenuContatto.setRubrica(rubrica);
+//        controllerMenuContatto.setContatto(contatto);         // Modalità "Aggiungi" (senza contatto selezionato)
+//
+//        // Carica la nuova scena
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
         }
 
     /// Metodo per gestire il doppio clic su un contatto per visualizzarlo
     private void visualizzaContatto(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Contatto contattoSelezionato = tableViewContatti.getSelectionModel().getSelectedItem();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
-            Parent root = loader.load();
-
-            // Passa la rubrica e il contatto selezionato al controller della schermata contatto
-            ControllerMenuContatto controllerMenuContatto = loader.getController();
-
-            controllerMenuContatto.setRubrica(rubrica);  // Passa la lista dei contatti
-            controllerMenuContatto.setContatto(contattoSelezionato);  // Modalità "Visualizza" con i dati pre-compilati
-
-            // Carica la scena
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+//
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
+//            Parent root = loader.load();
+//
+//            // Passa la rubrica e il contatto selezionato al controller della schermata contatto
+//            ControllerMenuContatto controllerMenuContatto = loader.getController();
+//
+//            controllerMenuContatto.setRubrica(rubrica);  // Passa la lista dei contatti
+//            controllerMenuContatto.setContatto(contattoSelezionato);  // Modalità "Visualizza" con i dati pre-compilati
+//
+//            // Carica la scena
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.show();
 
             int index = listaContatti.indexOf(contatto);
 
@@ -152,7 +152,7 @@ public class ControllerMenuPrincipale {
         }
     }
 
-    private void cambiaSchermata(Rubrica rubrica,Contatto contatto) {
+    private void cambiaSchermata(ActionEvent event, Contatto contatto) {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
         Parent root = loader.load();
@@ -161,7 +161,7 @@ public class ControllerMenuPrincipale {
         ControllerMenuContatto controllerMenuContatto = loader.getController();
 
         // Passa la rubrica al controller del contatto (se lo desideri, o se usi il Singleton, non è necessario)
-        controllerMenuContatto.setRubrica(rubrica);
+        controllerMenuContatto.setContatto(contatto);
 
         // Carica la nuova scena
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -182,5 +182,8 @@ public class ControllerMenuPrincipale {
 
     @FXML
     private void importaContatti(ActionEvent event) {
+
+        listaContatti.clear();
+        listaContatti.addAll(rubrica.getContatti());
     }
   }
