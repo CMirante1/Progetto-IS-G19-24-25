@@ -20,9 +20,9 @@ import javax.imageio.ImageIO;
  */
 public class Contatto implements Comparable<Contatto>, Serializable{
     
-    private InfoContatto nomeCompleto;
-    private InfoContatto[] numeriDiTelefono;
-    private InfoContatto[] emails;
+    private NomeCompleto nomeCompleto;
+    private NumeroDiTelefono[] numeriDiTelefono;
+    private Email[] emails;
     private byte[] immagineProfilo;
 
     /**
