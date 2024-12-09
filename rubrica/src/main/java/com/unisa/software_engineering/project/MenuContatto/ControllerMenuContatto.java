@@ -193,7 +193,7 @@ public class ControllerMenuContatto {
         // Salva il contatto (se non esiste già, creane uno nuovo, altrimenti aggiorna quello esistente)
         if (contattoSelezionato == null) {
             contattoSelezionato = new Contatto(nome, cognome, Arrays.asList(numeri), Arrays.asList(emails), null);
-            rubrica.aggiungiContatto(contattoSelezionato);
+
         } else {
             contattoSelezionato.setNomi(nome);
             contattoSelezionato.setCognomi(cognome);
@@ -222,10 +222,6 @@ public class ControllerMenuContatto {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    private void verificaContatto(ActionEvent event) {
     }
 
     @FXML

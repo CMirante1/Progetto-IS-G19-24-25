@@ -5,6 +5,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.Buffer;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ import java.util.List;
 public abstract class FileManager {
 
     private static final String FILE_BACKUP = "rubrica.dat";
-    private static Alert alert;
+    private static Alert alert = new Alert(Alert.AlertType.ERROR);
     private static Stage stage;
     /**
      * @brief Salva la rubrica sulla memoria di massa
@@ -40,9 +41,8 @@ public abstract class FileManager {
             oos.writeObject(rubrica);
         } catch(IOException e) {
 
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Errore nel salvataggio del file");
-            alert.show();
+            alert.setContentText("Errore nel salvataggio della rubrica");
+            alert.showAndWait();
         }
     }
 
@@ -61,9 +61,8 @@ public abstract class FileManager {
                 return rubrica;
             } catch(IOException | ClassNotFoundException e) {
 
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Errore nell'apertura del file");
-                alert.show();
+                alert.setContentText("Errore nell'apertura della rubrica");
+                alert.showAndWait();
             }
         }
 
@@ -76,18 +75,60 @@ public abstract class FileManager {
      * Esporta la lista di contatti selezionati dall'utente e li serializza in un file .vcf
      *
      * @param contatti I contatti da esportare
-     * @param nomeFile Il nome del file da esportare
+     *
      */
-    public static void esportaContatti(List<Contatto> contatti, String nomeFile) {
+    public static void esportaContatti(List<Contatto> contatti) {
 
         FileChooser fileChooser = new FileChooser();
 
         File file = fileChooser.showSaveDialog(stage);
 
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
+        fileChooser.getExtensionFilters().add(filtro);
+
+        if(!file.getName().endsWith(".vcf"))
+            file = new File(file.getAbsolutePath() + ".vcf");
+
+        try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())))) {
+
+            String[] numeriDiTelefono;
+            String[] emails;
+
+            for(Contatto contatto : contatti) {
+
+                numeriDiTelefono = contatto.getNumeriDiTelefono();
+                emails = contatto.getEmails();
+
+                pw.println("BEGIN:VCARD");
+                pw.println("VERSION:4.0");
+                pw.println("N:" + contatto.getCognomi() + ";" + contatto.getNomi() + ";");
+                for(int i = 0; i < numeriDiTelefono.length; i++) {
+
+                    if(numeriDiTelefono[i] == null) break;
+
+                    pw.println("TEL:" + numeriDiTelefono[i]);
+                }
+                for(int i = 0; i < emails.length; i++) {
+
+                    if(emails[i] == null) break;
+
+                    pw.println("EMAIL:" + emails[i]);
+                }
+                pw.println("END:VCARD");
+            }
+        } catch (IOException e) {
+
+            alert.setContentText("Errore nell'esportazione dei contatti");
+            alert.showAndWait();
+        }
 
     }
 
     /**
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> a4bfe4d14dab1d207cfa026526ca5d24d04d1063
      * @param nomeFile
      * @brief Importa i contatti selezionati
      *
@@ -100,8 +141,25 @@ public abstract class FileManager {
      * Ma poi non può importare un intera rubrica .vcf?
      *
      */
-    public static List<Contatto> importaContatti(String nomeFile) {
+    public static void importaContatti(String nomeFile) {
 
+        FileChooser fileChooser = new FileChooser();
+
+        File fileSelezionato = fileChooser.showOpenDialog(stage);
+
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
+        fileChooser.getExtensionFilters().add(filtro);
+
+        if(fileSelezionato == null) return;
+
+        try(BufferedReader br = new BufferedReader(new FileReader(fileSelezionato))) {
+
+
+        } catch (IOException e) {
+
+            alert.setContentText("Errore nell'importazione dei contatti");
+            alert.showAndWait();
+        }
     }
 
     public static void setStage(Stage stagePrincipale) {

@@ -13,7 +13,7 @@ import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
 /**
  * @class Contatto
  * @brief definisce un contatto
- * 
+ *
  * Rappresenta ciò che verrà inserito all'interno della struttura dati rubrica
  * @ingroup Models
  * @see Rubrica.java
@@ -21,7 +21,7 @@ import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
  * @date 02/12/24
  */
 public class Contatto implements Comparable<Contatto>, Serializable{
-    
+
     private NomeCompleto nomeCompleto;
     private NumeroDiTelefono[] numeriDiTelefono;
     private Email[] emails;
@@ -29,14 +29,14 @@ public class Contatto implements Comparable<Contatto>, Serializable{
 
     /**
      * @constructor
-     * @param nome Nome del contatto
-     * @param cognome Cognome del contatto
+     * @param nomi Nomi del contatto
+     * @param cognomi Cognomi del contatto
      * @param numeriDiTelefono Tutti i numeri di telefono
      * @param emails Tutte le email
      * @param immagineProfilo L'immagine del contatto
      */
     public Contatto(String nomi, String cognomi, String[] numeriDiTelefono, String[] emails, BufferedImage immagineProfilo) throws InfoContattoException {
-        
+
         nomeCompleto = new NomeCompleto(nomi, cognomi);
 
         for(int index = 0; index < this.numeriDiTelefono.length; index++)
@@ -57,11 +57,11 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     }
 
     public String getNomi() { return nomeCompleto.getNomi(); }
-    
+
     public String getCognomi() { return nomeCompleto.getCognomi(); }
 
     public String[] getNumeriDiTelefono() {
-        
+
         String[] numeriDiTelefono = new String[this.numeriDiTelefono.length];
         for(int index = 0; index < this.numeriDiTelefono.length; index++)
         numeriDiTelefono[index] = this.numeriDiTelefono[index].getInfo();
@@ -69,7 +69,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     }
 
     public String[] getEmails() {
-        
+
         String[] emails = new String[this.emails.length];
         for(int index = 0; index < this.emails.length; index++)
             emails[index] = this.emails[index].getInfo();
@@ -92,10 +92,10 @@ public class Contatto implements Comparable<Contatto>, Serializable{
 
     /**
      * @brief Converte la BufferedImage a byte[]
-     * 
+     *
      * Convertendo la BufferedImage a byte[] permette la serializzazione e quindi il salvataggio delle immagini
      * di profilo
-     * 
+     *
      * @param immagineProfilo Immagine del profilo
      * @return byte[] dell'immagine
      * @author gruppo_19
@@ -107,14 +107,14 @@ public class Contatto implements Comparable<Contatto>, Serializable{
        ImageIO.write(immagineProfilo, "JPEG", baos);
        return baos.toByteArray();
    }
-   
+
    /**
-    *  
+    *
     * @brief Converte il byte[] in una BufferedImage che può essere gestita più facilmente dai metodi che
     * chiamano la get
     *
     * @author gruppo_19
-     * @return 
+     * @return
     * @date 06/12/24
     * @throws IOException
     */
@@ -122,7 +122,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
        ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
        return ImageIO.read(bais);
    }
-   
+
    /**
     * @brief Modifica un contatto
     * prende in input i nuovi dati del contatto e li sostituisce a quelli precedentemente inseriti
@@ -148,10 +148,10 @@ public class Contatto implements Comparable<Contatto>, Serializable{
         }catch(IOException e){
             this.immagineProfilo = new byte[0];
         }
-       
+
    }
-    
-   /* 
+
+   /*
     * @brief Confronta i contatti per nome
     * Permette di confrontare i contatti secondo un loro attributo, in questo caso il nome al fine di ordinarli all'interno della struttura dati Rubrica
     * Se i nomi di due contatti dovessero risultare uguali questi andranno ordinati secondo il cognome

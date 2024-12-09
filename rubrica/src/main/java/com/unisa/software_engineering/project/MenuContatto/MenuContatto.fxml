@@ -40,7 +40,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="escBtn" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#cambiaScena" prefHeight="30.0" prefWidth="92.0">
+      <Button fx:id="escBtn" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#tornaIndietro" prefHeight="30.0" prefWidth="92.0">
          <graphic>
             <ImageView fitHeight="29.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
                <image>
