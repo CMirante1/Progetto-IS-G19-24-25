@@ -62,6 +62,14 @@ public class ControllerMenuPrincipale {
         this.rubrica = rubrica;
         inizializzaComponenti();
     }
+
+    public void setContatto(Contatto contatto) {
+
+        if(contatto != null)
+            rubrica.getContatti().add(contatto);
+    }
+
+
    /// Metodo per inizializzare tutti i componenti della finestra menu Principale
     private void inizializzaComponenti() {
 
@@ -77,28 +85,28 @@ public class ControllerMenuPrincipale {
 
         // Abilita la selezione multipla nella TableView
         tableViewContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        // Aggiungi listener per la barra di ricerca
-        barraRicerca.textProperty().addListener((observable, oldValue, newValue) -> {
-            filtraContatti(newValue);
-        });
+//
+//        // Aggiungi listener per la barra di ricerca
+//        barraRicerca.textProperty().addListener((observable, oldValue, newValue) -> {
+//            filtraContatti(newValue);
+//        });
 
         // Menu contestuale per selezione multipla
         MenuItem esportaItem = new MenuItem("Esporta contatti");
         MenuItem eliminaItem = new MenuItem("Elimina contatti");
-
-        // Aggiungi le azioni del menu contestuale
-        esportaItem.setOnAction(e -> esportaContatti());
-        eliminaItem.setOnAction(e -> eliminaContatti());
+//
+//        // Aggiungi le azioni del menu contestuale
+//        esportaItem.setOnAction(e -> esportaContatti());
+//        eliminaItem.setOnAction(e -> eliminaContatti());
 
         // Crea un menu contestuale
         ContextMenu contextMenu = new ContextMenu(esportaItem, eliminaItem);
         tableViewContatti.setContextMenu(contextMenu);
     }
 
-    /// Metodo di ricerca che filtra la lista dei contatti
-    private void filtraContatti(String query)
-
+   /* /// Metodo di ricerca che filtra la lista dei contatti
+    private void filtraContatti(String query);
+*/
     /// Metodo per aprire la schermata di aggiunta di un nuovo contatto
     @FXML
     private void aggiungiContatto(ActionEvent event) throws IOException {
@@ -121,7 +129,7 @@ public class ControllerMenuPrincipale {
 //        stage.setScene(scene);
 //        stage.show();
         }
-
+/*
     /// Metodo per gestire il doppio clic su un contatto per visualizzarlo
     private void visualizzaContatto(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
@@ -151,23 +159,30 @@ public class ControllerMenuPrincipale {
             }
         }
     }
-
+*/
     private void cambiaSchermata(ActionEvent event, Contatto contatto) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
-        Parent root = loader.load();
+        try {
 
-        // Ottieni il controller della pagina del contatto
-        ControllerMenuContatto controllerMenuContatto = loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
+            Parent root = loader.load();
 
-        // Passa la rubrica al controller del contatto (se lo desideri, o se usi il Singleton, non è necessario)
-        controllerMenuContatto.setContatto(contatto);
+            // Ottieni il controller della pagina del contatto
+            ControllerMenuContatto controllerMenuContatto = loader.getController();
 
-        // Carica la nuova scena
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            // Passa la rubrica al controller del contatto (se lo desideri, o se usi il Singleton, non è necessario)
+            controllerMenuContatto.setContatto(contatto);
+
+            // Carica la nuova scena
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+
+            System.err.println("Errore durante il cambio schermata");
+        }
+
     }
 
     @FXML
@@ -183,7 +198,10 @@ public class ControllerMenuPrincipale {
     @FXML
     private void importaContatti(ActionEvent event) {
 
-        listaContatti.clear();
-        listaContatti.addAll(rubrica.getContatti());
+
+//        List<Contatto> contattiSelezionati = tableViewContatti.getSelectionModel().getSelectedItems();
+//        FileManager.importaContatti(contattiSelezionati);
+//        listaContatti.clear();
+//        listaContatti.addAll(rubrica.getContatti());
     }
   }

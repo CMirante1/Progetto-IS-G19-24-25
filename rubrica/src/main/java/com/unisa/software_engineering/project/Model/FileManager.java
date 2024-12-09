@@ -1,6 +1,5 @@
 package com.unisa.software_engineering.project.Model;
 
-import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -8,8 +7,6 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.nio.Buffer;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @class FileManager
@@ -49,27 +46,28 @@ public abstract class FileManager {
         }
     }
 
-    
+
     public static Rubrica caricaRubrica() {
 
         File file = new File("res/" + FILE_BACKUP);
-        Rubrica rubrica;
+        Rubrica rubrica = null;
 
-        if(file != null) {
+        if(file.exists()) {
 
-            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
 
                 rubrica = (Rubrica) ois.readObject();
 
                 return rubrica;
             } catch(IOException | ClassNotFoundException e) {
 
+                rubrica = new Rubrica();
                 alert.setContentText("Errore nell'apertura della rubrica");
                 alert.showAndWait();
             }
         }
 
-        return new Rubrica();
+        return rubrica;
     }
 
     /**
@@ -132,7 +130,7 @@ public abstract class FileManager {
 =======
      *
 >>>>>>> a4bfe4d14dab1d207cfa026526ca5d24d04d1063
-     * @param contatti
+     * @param nomeFile
      * @brief Importa i contatti selezionati
      *
      * Importa la rubrica dei contatti selezionata dall'utente e aggiunge quelli semanticamente corretti,
@@ -144,7 +142,7 @@ public abstract class FileManager {
      * Ma poi non può importare un intera rubrica .vcf?
      *
      */
-    public static void importaContatti(List<Contatto> contatti) {
+    public static void importaContatti(String nomeFile) {
 
         FileChooser fileChooser = new FileChooser();
 
@@ -156,48 +154,14 @@ public abstract class FileManager {
         if(fileSelezionato == null) return;
 
         try(BufferedReader br = new BufferedReader(new FileReader(fileSelezionato))) {
-                
-            String riga;
-            String nome;
-            String cognome;
-            String[] numeri = new String[3];
-            String[] email = new String[3];
-            while((riga = br.readLine()) != null) {
-                nome=null;
-                cognome=null;
-                for(int i =0;i<3;i++){
-                    numeri[i]=null;
-                    email[i]=null;
-                 }
-                int i=0;
-                if(riga.startsWith("N:")) {
-                    // Dividi il nome usando gli spazi, ma prendi il primo come nome e il resto come cognome
-                    String[] partiNome = riga.substring(2).split(";");
-                    cognome = partiNome[0];
-                    nome = partiNome[1];
-                }
-                else if(riga.startsWith("TEL:")) {
-                    numeri[i++] = riga.substring(4);
-                }
-                else if(riga.startsWith("EMAIL:")) {
-                    email[i++] = riga.substring(7);
-                }
-                else if(riga.startsWith("END")) {
-                    if (nome != null || cognome != null) {
-                        contatti.add(new Contatto(nome,cognome,numeri,email,null));
-                    }
-                }  
-            }
 
-           } catch (IOException e) {
 
-             alert.setContentText("Errore nell'importazione dei contatti");
-             alert.showAndWait();
-            } catch (InfoContattoException ex) {
-            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+
+            alert.setContentText("Errore nell'importazione dei contatti");
+            alert.showAndWait();
         }
-        }
-    
+    }
 
     public static void setStage(Stage stagePrincipale) {
 

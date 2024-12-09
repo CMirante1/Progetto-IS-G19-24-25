@@ -15,6 +15,7 @@ package com.unisa.software_engineering.project.MenuContatto;
  * @date 06/12/24
  */
 
+import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
 import com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale;
 import com.unisa.software_engineering.project.Model.Contatto;
 import com.unisa.software_engineering.project.Model.Rubrica;
@@ -36,7 +37,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 
-public class ControllerMenuContatto {
+public class ControllerMenuContatto implements Initializable{
 
     @FXML
     private TextField nomeTXF;
@@ -73,8 +74,16 @@ public class ControllerMenuContatto {
     private TextField[] numeriTF;
     private TextField[] emailsTF;
     private Contatto contattoSelezionato;
+    private boolean contattoAggiunto;
 
- /**
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        for(int i = 0; i < numeriTF.length; i++) numeriTF[i] = new TextField();
+        for(int i = 0; i < emailsTF.length; i++) emailsTF[i] = new TextField();
+    }
+
+    /**
  *
  * @brief metodo per settare la rubrica all'interno del controller del menu contatto
  *
@@ -111,27 +120,34 @@ public class ControllerMenuContatto {
             disabilitaCampi();
 
             // Popola i campi con i dati del contatto esistente
-            nomeTXF.setText(contatto.getNome());
-            cognomeTXF.setText(contatto.getCognome());
+            nomeTXF.setText(contatto.getNomi());
+            cognomeTXF.setText(contatto.getCognomi());
             for (int i = 0; i < numeriTF.length; i++) {
-                if (i < contatto.getNumeriDiTelefono().size()) {
-                    numeriTF[i].setText(contatto.getNumeriDiTelefono().get(i));
+                if (i < contatto.getNumeriDiTelefono().length) {
+                    numeriTF[i].setText(contatto.getNumeriDiTelefono()[i]);
                 } else {
                     numeriTF[i].setText("");
                 }
             }
             for (int i = 0; i < emailsTF.length; i++) {
-                if (i < contatto.getEmails().size()) {
-                    emailsTF[i].setText(contatto.getEmails().get(i));
+                if (i < contatto.getEmails().length) {
+                    emailsTF[i].setText(contatto.getEmails()[i]);
                 } else {
                     emailsTF[i].setText("");
                 }
             }
-            if (contatto.getImmagine() != null) {
-                immagineProfilo.setImage(new Image(contatto.getImmagine().toURI().toString()));
-            } else {
-                immagineProfilo.setImage(new Image("file:path_to_default_image.jpg"));
-            }
+
+//            try {
+//
+//                if (contatto.getImmagineProfilo() != null) {
+//                    immagineProfilo.setImage(new Image(contatto.getImmagineProfilo().toURI().toString()));
+//                } else {
+//                    immagineProfilo.setImage(new Image("file:path_to_default_image.jpg"));
+//                }
+//            } catch (IOException e) {
+//
+//                System.err.println("Errore getImmagineProfilo");
+//            }
         }
     }
 
@@ -177,29 +193,30 @@ public class ControllerMenuContatto {
     }
 
     /// Gestore del tasto Salva
-    private void salvaContatto(ActionEvent event) {
+    private void salvaContatto(ActionEvent event) throws InfoContattoException {
         // Recupera i dati modificati
         String nome = nomeTXF.getText();
         String cognome = cognomeTXF.getText();
-        String[] numeri = Arrays.stream(numeriTF).map(TextField::getText).toArray(String[]::new);
-        String[] emails = Arrays.stream(emailsTF).map(TextField::getText).toArray(String[]::new);
-
+        String[] numeriDiTelefono = new String[numeriTF.length];
+        for(int i = 0; i < numeriTF.length; i++) numeriDiTelefono[i] = numeriTF[i].getText();
+        String[] emails = new String[emailsTF.length];
+        for(int i = 0; i < emailsTF.length; i++) emails[i] = emailsTF[i].getText();
         // Esegui la validazione dei dati (come in precedenza)
-        if (!verificaNome(nome, cognome) || !verificaNumeri(numeri) || !verificaEmail(emails)) {
-            // Mostra messaggio di errore se i dati non sono validi
-            return;
-        }
 
         // Salva il contatto (se non esiste già, creane uno nuovo, altrimenti aggiorna quello esistente)
         if (contattoSelezionato == null) {
-            contattoSelezionato = new Contatto(nome, cognome, Arrays.asList(numeri), Arrays.asList(emails), null);
 
-        } else {
-            contattoSelezionato.setNomi(nome);
-            contattoSelezionato.setCognomi(cognome);
-            contattoSelezionato.setNumeri(Arrays.asList(numeri));
-            contattoSelezionato.setEmails(Arrays.asList(emails));
+            contattoSelezionato = new Contatto(nome, cognome, numeriDiTelefono, emails, null);
+            contattoAggiunto = true;
         }
+        else contattoAggiunto = false;
+
+//        } else {
+//            contattoSelezionato.getNomi.s(nome);
+//            contattoSelezionato.setCognomi(cognome);
+//            contattoSelezionato.setNumeri(Arrays.asList(numeri));
+//            contattoSelezionato.setEmails(Arrays.asList(emails));
+//        }
         // Esegui il salvataggio dei dati
         // Salva nel database, file o nella struttura dati che stai utilizzando
 
@@ -217,15 +234,16 @@ public class ControllerMenuContatto {
         // Ottieni il controller della schermata principale (se necessario)
         ControllerMenuPrincipale controllerMenuPrincipale = loader.getController();
 
+
+        if(contattoAggiunto == true)
+            controllerMenuPrincipale.setContatto(contattoSelezionato);
+        else
+            controllerMenuPrincipale.setContatto(null);
         // Crea la nuova scena
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    private void cambiaScena(ActionEvent event) {
     }
 
     @FXML

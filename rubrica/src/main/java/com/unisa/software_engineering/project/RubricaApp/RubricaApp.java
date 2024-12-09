@@ -11,33 +11,26 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 
 public class RubricaApp extends Application {
 
     private Rubrica rubrica;  // La lista fisica dei contatti
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
 
-        FileManager.setStage(stage);
+        FileManager.setStage(primaryStage);
         rubrica = FileManager.caricaRubrica();
 
-        // 2. Crea il loader per il menu principale
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipale.fxml"));
-        Parent root = loader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerMenuPrincipale.class.getResource("MenuPrincipale.fxml"));
 
-        // 3. Ottieni il controller del menu principale
-        ControllerMenuPrincipale controller = loader.getController();
+        Scene scene = new Scene(fxmlLoader.load());
 
-        // 4. Passa la rubrica (come ObservableList) al controller
-        controller.setRubrica(rubrica);
+        ControllerMenuPrincipale controller = fxmlLoader.getController();
 
-        // 5. Crea la scena e mostra la finestra principale
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Rubrica");
-        stage.show();
+        primaryStage.setTitle("Rubrica");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     // Metodo che avvia l'applicazione

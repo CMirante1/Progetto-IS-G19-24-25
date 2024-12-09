@@ -16,7 +16,7 @@ import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
  *
  * Rappresenta ciò che verrà inserito all'interno della struttura dati rubrica
  * @ingroup Models
- * @see Rubrica.java
+ * @see Rubrica
  * @author gruppo_19
  * @date 02/12/24
  */
