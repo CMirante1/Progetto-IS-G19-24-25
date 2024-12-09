@@ -1,5 +1,9 @@
 package com.unisa.software_engineering.project.Model;
 
+import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+
+import java.io.*;
 import java.util.List;
 
 /**
@@ -19,7 +23,7 @@ import java.util.List;
 public abstract class FileManager {
 
     private static final String FILE_BACKUP = "rubrica.dat";
-
+    private static Alert alert;
     /**
      * @brief Salva la rubrica sulla memoria di massa
      *
@@ -29,12 +33,39 @@ public abstract class FileManager {
      */
     public static void salvaRubrica(Rubrica rubrica) {
 
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("res/" + FILE_BACKUP))) {
 
+            oos.writeObject(rubrica);
+        } catch(IOException e) {
+
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Errore nel salvataggio del file");
+            alert.show();
+        }
     }
 
 
     public static Rubrica caricaRubrica() {
 
+        File file = new File("res/" + FILE_BACKUP);
+        Rubrica rubrica;
+
+        if(file != null) {
+
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+
+                rubrica = (Rubrica) ois.readObject();
+
+                return rubrica;
+            } catch(IOException | ClassNotFoundException e) {
+
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Errore nell'apertura del file");
+                alert.show();
+            }
+        }
+
+        return new Rubrica();
     }
 
     /**
@@ -47,6 +78,7 @@ public abstract class FileManager {
      */
     public static void esportaContatti(List<Contatto> contatti, String nomeFile) {
 
+        FileChooser fileChooser = new FileChooser()
 
     }
 
@@ -65,7 +97,6 @@ public abstract class FileManager {
      *
      */
     public static List<Contatto> importaContatti(String nomeFile) {
-
 
     }
 }
