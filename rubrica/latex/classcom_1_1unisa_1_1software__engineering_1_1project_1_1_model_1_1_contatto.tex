@@ -1,0 +1,143 @@
+\doxysection{com.\+unisa.\+software\+\_\+engineering.\+project.\+Model.\+Contatto Class Reference}
+\hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto}{}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto}\index{com.unisa.software\_engineering.project.Model.Contatto@{com.unisa.software\_engineering.project.Model.Contatto}}
+
+
+definisce un contatto  
+
+
+Inheritance diagram for com.\+unisa.\+software\+\_\+engineering.\+project.\+Model.\+Contatto\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.671642cm]{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac07bead7e323de02b62e3f51be276944}{Contatto}} (String nome, String cognome, String\mbox{[}$\,$\mbox{]} numeri\+Di\+Telefono, String\mbox{[}$\,$\mbox{]} emails, Buffered\+Image immagine\+Profilo)
+\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a03c32fde158dab9f8661efac4f1805cd}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a03c32fde158dab9f8661efac4f1805cd} 
+String {\bfseries get\+Nome} ()
+\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_aafc0c532581d8323aa75720dc7f72b26}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_aafc0c532581d8323aa75720dc7f72b26} 
+String {\bfseries get\+Cognome} ()
+\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a3e1783d1184d1cd3154b8806c39b95b1}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a3e1783d1184d1cd3154b8806c39b95b1} 
+String\mbox{[}$\,$\mbox{]} {\bfseries get\+Numeri\+Di\+Telefono} ()
+\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a5f986f0c4bff54f15b07103da77d0716}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a5f986f0c4bff54f15b07103da77d0716} 
+String\mbox{[}$\,$\mbox{]} {\bfseries get\+Emails} ()
+\item 
+Buffered\+Image \mbox{\hyperlink{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ad2b5d92fba973b331098a7017eb6f8e2}{get\+Immagine\+Profilo}} ()  throws IOException
+\begin{DoxyCompactList}\small\item\em Converte il byte\mbox{[}\mbox{]} in una Buffered\+Image che può essere gestita più facilmente dai metodi che chiamano la get. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac38b7689754a9a52d82a0ffe365789d3}{modifica\+Contatto}} (String nome, String cognome, String\mbox{[}$\,$\mbox{]} numeri\+Di\+Telefono, String\mbox{[}$\,$\mbox{]} emails, Buffered\+Image immagine\+Di\+Profilo)
+\begin{DoxyCompactList}\small\item\em Modifica un contatto prende in input i nuovi dati del contatto e li sostituisce a quelli precedentemente inseriti. \end{DoxyCompactList}\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a930fbb738a68bd83d1cffb9d0a1e4cb5}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a930fbb738a68bd83d1cffb9d0a1e4cb5} 
+int {\bfseries compare\+To} (\mbox{\hyperlink{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto}{Contatto}} c)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_af2f3b4d5ee97a5d29fafc92f26c8463f}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_af2f3b4d5ee97a5d29fafc92f26c8463f} 
+static boolean {\bfseries verifica\+Nome} (String nome, String cognome)
+\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac4d0b0ff778f7e5c5338f408ac3f937f}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac4d0b0ff778f7e5c5338f408ac3f937f} 
+static boolean {\bfseries verifica\+Numeri} (String\mbox{[}$\,$\mbox{]} numeri)
+\item 
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a251db697d74fd2363ebba3cc766ea52c}\label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_a251db697d74fd2363ebba3cc766ea52c} 
+static boolean {\bfseries verifica\+Email} (String\mbox{[}$\,$\mbox{]} emails)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+definisce un contatto 
+
+Rappresenta ciò che verrà inserito all\textquotesingle{}interno della struttura dati rubrica
+
+\begin{DoxySeeAlso}{See also}
+Rubrica.\+java 
+\end{DoxySeeAlso}
+\begin{DoxyAuthor}{Author}
+gruppo\+\_\+19 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+02/12/24 
+\end{DoxyDate}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac07bead7e323de02b62e3f51be276944}\index{com.unisa.software\_engineering.project.Model.Contatto@{com.unisa.software\_engineering.project.Model.Contatto}!Contatto@{Contatto}}
+\index{Contatto@{Contatto}!com.unisa.software\_engineering.project.Model.Contatto@{com.unisa.software\_engineering.project.Model.Contatto}}
+\doxysubsubsection{\texorpdfstring{Contatto()}{Contatto()}}
+{\footnotesize\ttfamily \label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac07bead7e323de02b62e3f51be276944} 
+com.\+unisa.\+software\+\_\+engineering.\+project.\+Model.\+Contatto.\+Contatto (\begin{DoxyParamCaption}\item[{String}]{nome}{, }\item[{String}]{cognome}{, }\item[{String\mbox{[}$\,$\mbox{]}}]{numeri\+Di\+Telefono}{, }\item[{String\mbox{[}$\,$\mbox{]}}]{emails}{, }\item[{Buffered\+Image}]{immagine\+Profilo}{}\end{DoxyParamCaption})}
+
+@constructor 
+\begin{DoxyParams}{Parameters}
+{\em nome} & Nome del contatto \\
+\hline
+{\em cognome} & Cognome del contatto \\
+\hline
+{\em numeri\+Di\+Telefono} & Tutti i numeri di telefono \\
+\hline
+{\em emails} & Tutte le email \\
+\hline
+{\em immagine\+Profilo} & L\textquotesingle{}immagine del contatto \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ad2b5d92fba973b331098a7017eb6f8e2}\index{com.unisa.software\_engineering.project.Model.Contatto@{com.unisa.software\_engineering.project.Model.Contatto}!getImmagineProfilo@{getImmagineProfilo}}
+\index{getImmagineProfilo@{getImmagineProfilo}!com.unisa.software\_engineering.project.Model.Contatto@{com.unisa.software\_engineering.project.Model.Contatto}}
+\doxysubsubsection{\texorpdfstring{getImmagineProfilo()}{getImmagineProfilo()}}
+{\footnotesize\ttfamily \label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ad2b5d92fba973b331098a7017eb6f8e2} 
+Buffered\+Image com.\+unisa.\+software\+\_\+engineering.\+project.\+Model.\+Contatto.\+get\+Immagine\+Profilo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) throws IOException}
+
+
+
+Converte il byte\mbox{[}\mbox{]} in una Buffered\+Image che può essere gestita più facilmente dai metodi che chiamano la get. 
+
+\begin{DoxyAuthor}{Author}
+gruppo\+\_\+19 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+06/12/24 
+\end{DoxyDate}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac38b7689754a9a52d82a0ffe365789d3}\index{com.unisa.software\_engineering.project.Model.Contatto@{com.unisa.software\_engineering.project.Model.Contatto}!modificaContatto@{modificaContatto}}
+\index{modificaContatto@{modificaContatto}!com.unisa.software\_engineering.project.Model.Contatto@{com.unisa.software\_engineering.project.Model.Contatto}}
+\doxysubsubsection{\texorpdfstring{modificaContatto()}{modificaContatto()}}
+{\footnotesize\ttfamily \label{classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_contatto_ac38b7689754a9a52d82a0ffe365789d3} 
+void com.\+unisa.\+software\+\_\+engineering.\+project.\+Model.\+Contatto.\+modifica\+Contatto (\begin{DoxyParamCaption}\item[{String}]{nome}{, }\item[{String}]{cognome}{, }\item[{String\mbox{[}$\,$\mbox{]}}]{numeri\+Di\+Telefono}{, }\item[{String\mbox{[}$\,$\mbox{]}}]{emails}{, }\item[{Buffered\+Image}]{immagine\+Di\+Profilo}{}\end{DoxyParamCaption})}
+
+
+
+Modifica un contatto prende in input i nuovi dati del contatto e li sostituisce a quelli precedentemente inseriti. 
+
+\begin{DoxyAuthor}{Author}
+gruppo\+\_\+19 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em nome} & \\
+\hline
+{\em cognome} & \\
+\hline
+{\em numeri\+Di\+Telefono} & \\
+\hline
+{\em emails} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/unisa/software\+\_\+engineering/project/\+Model/Contatto.\+java\end{DoxyCompactItemize}

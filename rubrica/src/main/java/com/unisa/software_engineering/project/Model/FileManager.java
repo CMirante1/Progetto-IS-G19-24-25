@@ -46,7 +46,7 @@ public abstract class FileManager {
         }
     }
 
-
+    
     public static Rubrica caricaRubrica() {
 
         File file = new File("res/" + FILE_BACKUP);
@@ -88,7 +88,6 @@ public abstract class FileManager {
     }
 
     /**
-     * @param contatti
      * @param nomeFile
      * @brief Importa i contatti selezionati
      *
