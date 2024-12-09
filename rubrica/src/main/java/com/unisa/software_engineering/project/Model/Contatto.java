@@ -22,8 +22,7 @@ import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
  */
 public class Contatto implements Comparable<Contatto>, Serializable{
     
-    private NomePersona Nomi;
-    private NomePersona Cognomi;
+    private NomeCompleto nomeCompleto;
     private NumeroDiTelefono[] numeriDiTelefono;
     private Email[] emails;
     private byte[] immagineProfilo;
@@ -36,10 +35,9 @@ public class Contatto implements Comparable<Contatto>, Serializable{
      * @param emails Tutte le email
      * @param immagineProfilo L'immagine del contatto
      */
-    public Contatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineProfilo) {
+    public Contatto(String nomi, String cognomi, String[] numeriDiTelefono, String[] emails, BufferedImage immagineProfilo) throws InfoContattoException {
         
-        Nomi = new NomePersona(nome);
-        Cognomi = new NomePersona(cognome);
+        nomeCompleto = new NomeCompleto(nomi, cognomi);
 
         for(int index = 0; index < this.numeriDiTelefono.length; index++)
             this.numeriDiTelefono[index] = new NumeroDiTelefono(numeriDiTelefono[index]);
@@ -55,12 +53,12 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     }
 
     public String getNomeCompleto(){
-        return Nomi.getInfo() + " " + Cognomi.getInfo();
+        return nomeCompleto.getNomi() + " " + nomeCompleto.getCognomi();
     }
 
-    public String getNomi() { return Nomi.getInfo(); }
+    public String getNomi() { return nomeCompleto.getNomi(); }
     
-    public String getCognomi() { return Cognomi.getInfo(); }
+    public String getCognomi() { return nomeCompleto.getCognomi(); }
 
     public String[] getNumeriDiTelefono() {
         
@@ -136,8 +134,8 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     */
    public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineDiProfilo) throws InfoContattoException {
 
-        Nomi.setInfo(nome);
-        Cognomi.setInfo(cognome);
+        nomeCompleto.setNomi(nome);
+        nomeCompleto.setCognomi(cognome);
 
         for(int index = 0; index < this.numeriDiTelefono.length; index++)
             this.numeriDiTelefono[index].setInfo(numeriDiTelefono[index]);
@@ -161,9 +159,9 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     */
     @Override
     public int compareTo(Contatto c) {
-        if(Cognomi.getInfo().compareTo(c.getCognomi()) == 0){
-            return Nomi.getInfo().compareTo(c.getNomi());
+        if(nomeCompleto.getCognomi().compareTo(c.getCognomi()) == 0){
+            return nomeCompleto.getNomi().compareTo(c.getNomi());
         }
-        return Cognomi.getInfo().compareTo(c.getCognomi());
+        return nomeCompleto.getCognomi().compareTo(c.getCognomi());
     }
 }

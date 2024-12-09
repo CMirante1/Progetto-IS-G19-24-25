@@ -195,8 +195,8 @@ public class ControllerMenuContatto {
             contattoSelezionato = new Contatto(nome, cognome, Arrays.asList(numeri), Arrays.asList(emails), null);
             rubrica.aggiungiContatto(contattoSelezionato);
         } else {
-            contattoSelezionato.setNome(nome);
-            contattoSelezionato.setCognome(cognome);
+            contattoSelezionato.setNomi(nome);
+            contattoSelezionato.setCognomi(cognome);
             contattoSelezionato.setNumeri(Arrays.asList(numeri));
             contattoSelezionato.setEmails(Arrays.asList(emails));
         }

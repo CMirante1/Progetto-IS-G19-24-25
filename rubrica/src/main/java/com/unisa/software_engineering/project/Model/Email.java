@@ -3,13 +3,14 @@ package com.unisa.software_engineering.project.Model;
 import java.io.Serializable;
 
 import com.unisa.software_engineering.project.Exceptions.EmailNonValidaException;
+import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
 
 public class Email extends InfoContatto implements Serializable{
 
-    public Email(String info) { super(info); }
+    public Email(String info) throws InfoContattoException{ super(info); }
 
     @Override
-    public void verifica() throws EmailNonValidaException{
+    public void verifica(String info) throws EmailNonValidaException{
         if (!(info == null ||
         info.trim().isEmpty() ||
         !info.matches(
