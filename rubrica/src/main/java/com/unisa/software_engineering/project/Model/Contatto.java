@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
+import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
+
 /**
  * @class Contatto
  * @brief definisce un contatto
@@ -76,6 +78,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
         return emails;
     }
 
+    /* //La verifica avviene in automatico quando si chiama setInfo();
     public boolean verificaNome(){ return Nomi.verifica() && Cognomi.verifica(); }
 
     public boolean verificaNumeri() {
@@ -87,6 +90,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
         for(InfoContatto info : emails) if(!info.verifica()) return false;
         return true;
     }
+    */
 
     /**
      * @brief Converte la BufferedImage a byte[]
@@ -130,8 +134,8 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     * @param numeriDiTelefono
     * @param emails
     */
-   public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineDiProfilo) {
-        
+   public void modificaContatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineDiProfilo) throws InfoContattoException {
+
         Nomi.setInfo(nome);
         Cognomi.setInfo(cognome);
 
