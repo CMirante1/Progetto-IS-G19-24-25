@@ -16,9 +16,9 @@ package com.unisa.software_engineering.project.Exceptions;
  * @author paolo
  * @date 06/12/24
  */
-public class ContattoException extends Exception {
+public class InfoContattoException extends Exception {
 
-    public ContattoException(String msg) {
+    public InfoContattoException(String msg) {
 
         super(msg);
     }
