@@ -12,12 +12,14 @@ public class NomeCompleto extends InfoContatto implements Serializable{
     }
 
     public void setNomi(String nome) throws NomeNonValidoException{
-        verifica(info.split(",")[0] + "," + nome);
+        if(nome.matches("[^a-zA-Z0-9\\s]"))
+            throw new NomeNonValidoException("Nome con caratteri speciali");
         info = info.split(",")[0] + "," + nome;
     }
 
     public void setCognomi(String cognome) throws NomeNonValidoException {
-        verifica(cognome + "," + info.split(",")[1]);
+        if(cognome.matches("[^a-zA-Z0-9\\s]"))
+            throw new NomeNonValidoException("Nome con caratteri speciali");
         info = cognome + "," + info.split(",")[1];
     }
 
