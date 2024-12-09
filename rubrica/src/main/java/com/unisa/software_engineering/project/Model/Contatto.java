@@ -20,14 +20,12 @@ import javax.imageio.ImageIO;
  */
 public class Contatto implements Comparable<Contatto>, Serializable{
     
-    private String nome;
-    private String cognome;
-    private String[] numeriDiTelefono;
-    private String[] emails;
+    private InfoContatto nomeCompleto;
+    private InfoContatto[] numeriDiTelefono;
+    private InfoContatto[] emails;
     private byte[] immagineProfilo;
 
     /**
-     * 
      * @constructor
      * @param nome Nome del contatto
      * @param cognome Cognome del contatto
@@ -37,10 +35,14 @@ public class Contatto implements Comparable<Contatto>, Serializable{
      */
     public Contatto(String nome, String cognome, String[] numeriDiTelefono, String[] emails, BufferedImage immagineProfilo) {
         
-        this.nome = nome;
-        this.cognome = cognome;
-        this.numeriDiTelefono = numeriDiTelefono;
-        this.emails = emails;
+        nomeCompleto.setInfo(cognome + " " + nome);
+
+        for(int index = 0; index < this.numeriDiTelefono.length; index++)
+            this.numeriDiTelefono[index].setInfo(numeriDiTelefono[index]);
+
+        for(int index = 0; index < this.emails.length; index++)
+            this.emails[index].setInfo(emails[index]);
+
         try{
             this.immagineProfilo = ImmagineAByte(immagineProfilo);
         }catch(IOException e){
@@ -48,44 +50,35 @@ public class Contatto implements Comparable<Contatto>, Serializable{
         }
     }
 
-    public String getNome() {
-        
-        return nome;
-    }
-
-    public String getCognome() {
-        
-        return cognome;
-    }
+    public String getNomeCompleto() { return nomeCompleto.getInfo(); }
 
     public String[] getNumeriDiTelefono() {
         
+        String[] numeriDiTelefono = new String[this.numeriDiTelefono.length];
+        for(int index = 0; index < this.numeriDiTelefono.length; index++)
+        numeriDiTelefono[index] = this.numeriDiTelefono[index].getInfo();
         return numeriDiTelefono;
     }
 
     public String[] getEmails() {
         
+        String[] emails = new String[this.emails.length];
+        for(int index = 0; index < this.emails.length; index++)
+            emails[index] = this.emails[index].getInfo();
         return emails;
     }
 
-    // Metodo di verifica (come negli esempi precedenti)
-    public static boolean verificaNome(String nome, String cognome) {
-        return !(nome == null || nome.trim().isEmpty() || cognome == null || cognome.trim().isEmpty());
+    public boolean verificaNomi() {
+        return nomeCompleto.verifica();
     }
 
-    public static boolean verificaNumeri(String[] numeri) {
-        for (String numero : numeri) {
-            if (numero == null || numero.trim().isEmpty()) return false;
-        }
+    public boolean verificaNumeri() {
+        for(InfoContatto info : numeriDiTelefono) if(!info.verifica()) return false;
         return true;
     }
 
-    public static boolean verificaEmail(String[] emails) {
-        for (String email : emails) {
-            if (email == null || email.trim().isEmpty() || !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
-                return false;
-            }
-        }
+    public boolean verificaEmail() {
+        for(InfoContatto info : emails) if(!info.verifica()) return false;
         return true;
     }
 
@@ -144,8 +137,6 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     */
     @Override
     public int compareTo(Contatto c) {
-         if(this.nome.compareTo(c.nome) == 0)
-            return this.cognome.compareTo(c.cognome);
-        return this.nome.compareTo(c.nome);
+        return nomeCompleto.getInfo().compareTo(c.getNomeCompleto());
     }
 }
