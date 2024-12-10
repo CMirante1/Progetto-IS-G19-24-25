@@ -1,5 +1,6 @@
 package com.unisa.software_engineering.project.Model;
 
+import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -7,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.nio.Buffer;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @class FileManager
@@ -152,15 +155,51 @@ public abstract class FileManager {
         fileChooser.getExtensionFilters().add(filtro);
 
         if(fileSelezionato == null) return;
-
+        String riga;
+        String nome;
+        String cognome;
+        String[] numeri = new String[3];
+        String[] emails = new String[3];
+        int index;
         try(BufferedReader br = new BufferedReader(new FileReader(fileSelezionato))) {
+            nome=null;
+            cognome=null;
+            index = 0;
+            for(int i = 0; i<3; i++){
+                numeri[i]=null;
+                emails[i]=null;
+            }
+            while((riga = br.readLine()) != null) {
 
+                if(riga.startsWith("N:")) {
+                    // Dividi il nome usando gli spazi, ma prendi il primo come nome e il resto come cognome
+                    String[] partiNome = riga.substring(2).split(";");
+                    cognome = partiNome[0];
+                    nome = partiNome[1];
+                }
+                else if(riga.startsWith("TEL:")) {
+                    numeri[index++] = riga.substring(4);
+                }
+                else if(riga.startsWith("EMAIL:")) {
+                    emails[index++] = riga.substring(7);
+                }
+                else if(riga.startsWith("END")) {
+                    if (nome != null || cognome != null) {
+                        Contatto contatto = new Contatto(nome, cognome, numeri, emails,null);
+                        System.out.println(contatto);
+                    } else {
+                        System.out.println("Dati incompleti per un contatto");
+                    }
+                }
 
-        } catch (IOException e) {
+            }
+        } catch (IOException   e) {
 
-            alert.setContentText("Errore nell'importazione dei contatti");
-            alert.showAndWait();
+            System.out.println("Errore nella lettura del file");
+        } catch (InfoContattoException ex) {
+            System.out.println("Errore nel formato dati del contatto");
         }
+   
     }
 
     public static void setStage(Stage stagePrincipale) {
