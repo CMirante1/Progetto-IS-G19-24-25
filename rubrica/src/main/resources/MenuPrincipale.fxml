@@ -9,9 +9,8 @@
    <children>
       <TableView layoutY="149.0" prefHeight="352.0" prefWidth="700.0">
          <columns>
-            <TableColumn minWidth="100.0" prefWidth="75.0" />
-            <TableColumn fx:id="nomeCln" minWidth="300.0" prefWidth="75.0" text="Nome" />
-            <TableColumn fx:id="cognomeCln" minWidth="300.0" prefWidth="75.0" text="Cognome" />
+            <TableColumn fx:id="cognomeCln" minWidth="300.0" prefWidth="350.0" text="Cognome" />
+            <TableColumn fx:id="nomeCln" minWidth="300.0" prefWidth="350.0" text="Nome" />
          </columns>
          <contextMenu>
             <ContextMenu>
