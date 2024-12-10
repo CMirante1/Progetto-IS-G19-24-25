@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author paolo
  */
-public class ContattoV2 implements Comparable<Contatto>, Serializable {
+public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
     private String nome;
     private String cognome;
     private final int nDati;
@@ -33,10 +33,27 @@ public class ContattoV2 implements Comparable<Contatto>, Serializable {
             System.out.println("Errore nell'aggiunta del contatto.\n" + ex.getMessage());
         }
     }
-    @Override
-    public int compareTo(Contatto o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public String getNome() {
+        return nome;
     }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public int getnDati() {
+        return nDati;
+    }
+
+    public String[] getNumeri() {
+        return numeri;
+    }
+
+    public String[] getEmails() {
+        return emails;
+    }
+   
     private void verificaDati(String nome, String cognome, String[] numeri, String[] emails)throws InfoContattoException{
         if(nome == null && cognome == null) throw new InfoContattoException("Il campo nome o cognome non possono essere vuoti");
         
@@ -47,4 +64,10 @@ public class ContattoV2 implements Comparable<Contatto>, Serializable {
             if (!(emails[i] != null && emails[i].matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"))) throw new InfoContattoException("Gli indirizzi email devono contenere una @ e un dominio.");
         }
     }
+   @Override
+    public int compareTo(ContattoV2 c) {
+        if((this.cognome.compareTo(c.getCognome()) == 0)){ return this.nome.compareTo(c.getNome());}
+        return this.cognome.compareTo(c.getCognome());
+    }
+    
 }
