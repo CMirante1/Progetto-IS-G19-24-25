@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.unisa.software_engineering.project.MenuContatto;
 
 /**
@@ -18,7 +14,9 @@ package com.unisa.software_engineering.project.MenuContatto;
 import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
 import com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale;
 import com.unisa.software_engineering.project.Model.Contatto;
+import com.unisa.software_engineering.project.Model.ContattoV2;
 import com.unisa.software_engineering.project.Model.Rubrica;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.awt.print.Paper;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,9 +39,9 @@ import javafx.scene.control.Label;
 public class ControllerMenuContatto implements Initializable{
 
     @FXML
-    private TextField nomeTXF;
+    private TextField nomeTF;
     @FXML
-    private TextField cognomeTXF;
+    private TextField cognomeTF;
     @FXML
     private ImageView immagineProfilo;
     @FXML
@@ -70,18 +69,12 @@ public class ControllerMenuContatto implements Initializable{
     @FXML
     private Button immagineBtn;
 
-    private Rubrica rubrica;
     private TextField[] numeriTF;
     private TextField[] emailsTF;
-    private Contatto contattoSelezionato;
+    private ContattoV2 contattoSelezionato;
+    private ContattoV2 nuovoContatto;
     private boolean contattoAggiunto;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        for(int i = 0; i < numeriTF.length; i++) numeriTF[i] = new TextField();
-        for(int i = 0; i < emailsTF.length; i++) emailsTF[i] = new TextField();
-    }
 
     /**
  *
@@ -91,10 +84,10 @@ public class ControllerMenuContatto implements Initializable{
  * @param rubrica Rappresenta la struttura dati da cui proviene il contatto
  */
 
-    public void setRubrica(Rubrica rubrica) {
-
-        this.rubrica = rubrica;
-    }
+//    public void setRubrica(Rubrica rubrica) {
+//
+//        this.rubrica = rubrica;
+//    }
 
  /**
  * @brief metodo per settare il contatto da visualizzare all'interno del controller del menu contatto
@@ -104,51 +97,42 @@ public class ControllerMenuContatto implements Initializable{
  *
  */
 
-    public void setContatto(Contatto contatto) {
-        this.contattoSelezionato = contatto;
+    public void setContatto(ContattoV2 contatto) {
 
-        if (contatto == null) {
-            // Modalità Aggiungi - I campi sono già attivi
-            abilitaCampi();
-            nomeTXF.setText("");
-            cognomeTXF.setText("");
-            for (TextField numTF : numeriTF) numTF.setText("");
-            for (TextField emailTF : emailsTF) emailTF.setText("");
-            immagineProfilo.setImage(new Image("res/immagine-profilo-default.jpg"));
-        } else {
-            // Modalità Visualizza - Disabilita i campi
-            disabilitaCampi();
+            this.contattoSelezionato = contatto;
 
-            // Popola i campi con i dati del contatto esistente
-            nomeTXF.setText(contatto.getNomi());
-            cognomeTXF.setText(contatto.getCognomi());
-            for (int i = 0; i < numeriTF.length; i++) {
-                if (i < contatto.getNumeriDiTelefono().length) {
-                    numeriTF[i].setText(contatto.getNumeriDiTelefono()[i]);
-                } else {
-                    numeriTF[i].setText("");
-                }
-            }
-            for (int i = 0; i < emailsTF.length; i++) {
-                if (i < contatto.getEmails().length) {
-                    emailsTF[i].setText(contatto.getEmails()[i]);
-                } else {
-                    emailsTF[i].setText("");
-                }
+            if (contatto == null) {
+                // Modalità Aggiungi - Svuto i campi e li abilito
+                System.out.println("sto aggiungendo");
+                // pulisciCampi();
+                // abilitaCampi();
+            } else {
+                // Modalità Visualizza - Riempio i campi e li disabilito
+                riempiCampi();
+                disabilitaCampi();
+
             }
 
-//            try {
-//
-//                if (contatto.getImmagineProfilo() != null) {
-//                    immagineProfilo.setImage(new Image(contatto.getImmagineProfilo().toURI().toString()));
-//                } else {
-//                    immagineProfilo.setImage(new Image("file:path_to_default_image.jpg"));
-//                }
-//            } catch (IOException e) {
-//
-//                System.err.println("Errore getImmagineProfilo");
-//            }
-        }
+
+
+    }
+
+    private void pulisciCampi() {
+
+        nomeTF.setText("");
+        cognomeTF.setText("");
+        for (TextField numTF : numeriTF) numTF.setText("");
+        for (TextField emailTF : emailsTF) emailTF.setText("");
+       // immagineProfilo.setImage(new Image("res/immagine-profilo-default.jpg"));
+    }
+
+    private void riempiCampi() {
+
+        nomeTF.setText(contattoSelezionato.getNome());
+        cognomeTF.setText(contattoSelezionato.getCognome());
+        for (int i = 0; i < numeriTF.length; i++) numeriTF[i].setText(contattoSelezionato.getNumeri()[i]);
+        for (int i = 0; i < emailsTF.length; i++)  emailsTF[i].setText(contattoSelezionato.getEmails()[i]);
+        //immagineProfilo.setImage(contatto.get);
     }
 
  /**
@@ -160,13 +144,13 @@ public class ControllerMenuContatto implements Initializable{
  */
 
     private void disabilitaCampi() {
-        nomeTXF.setDisable(true);
-        cognomeTXF.setDisable(true);
+
+        nomeTF.setDisable(true);
+        cognomeTF.setDisable(true);
         for (TextField numTF : numeriTF) numTF.setDisable(true);
         for (TextField emailTF : emailsTF) emailTF.setDisable(true);
-        immagineProfilo.setDisable(true); // Se l'immagine non è modificabile
-        salvaBtn.setDisable(true); // disabilita il pulsante Salva
-        modificaBtn.setDisable(false);  // Abilita il tasto Modifica
+        salvaBtn.setVisible(false);
+        salvaBtn.setDisable(true);
     }
 
  /**
@@ -176,13 +160,15 @@ public class ControllerMenuContatto implements Initializable{
  */
 
     private void abilitaCampi() {
-        nomeTXF.setDisable(false);
-        cognomeTXF.setDisable(false);
+
+        nomeTF.setDisable(false);
+        cognomeTF.setDisable(false);
         for (TextField numTF : numeriTF) numTF.setDisable(false);
         for (TextField emailTF : emailsTF) emailTF.setDisable(false);
         immagineProfilo.setDisable(false);  // Abilita anche l'immagine (se modificabile)
         salvaBtn.setDisable(false); // abilita il pulsante Salva
-        modificaBtn.setDisable(true);  // Disabilita il tasto Modifica (non può essere premuto durante la modifica)
+        modificaBtn.setVisible(false);
+        modificaBtn.setDisable(true);
     }
 
        /// Gestore del tasto Modifica
@@ -194,10 +180,12 @@ public class ControllerMenuContatto implements Initializable{
 
     /// Gestore del tasto Salva
     @FXML
-    private void salvaContatto(ActionEvent event) throws InfoContattoException {
+    private void salvaContatto(ActionEvent event) {
         // Recupera i dati modificati
-        String nome = nomeTXF.getText();
-        String cognome = cognomeTXF.getText();
+        String nome = nomeTF.getText();
+        System.out.println("Nome: " + nome);
+        System.out.println("TF: " + nomeTF.getText());
+        String cognome = cognomeTF.getText();
         String[] numeriDiTelefono = new String[numeriTF.length];
         for(int i = 0; i < numeriTF.length; i++) numeriDiTelefono[i] = numeriTF[i].getText();
         String[] emails = new String[emailsTF.length];
@@ -206,23 +194,20 @@ public class ControllerMenuContatto implements Initializable{
 
         // Salva il contatto (se non esiste già, creane uno nuovo, altrimenti aggiorna quello esistente)
         if (contattoSelezionato == null) {
+            try {
 
-            contattoSelezionato = new Contatto(nome, cognome, numeriDiTelefono, emails, null);
-            contattoAggiunto = true;
+                this.nuovoContatto = new ContattoV2(nome, cognome, numeriDiTelefono, emails);
+                contattoAggiunto = true;
+            } catch (InfoContattoException ex) {
+
+                System.out.println("Errore nell'aggiunta del contatto.\n" + ex.getMessage());
+            }
         }
-        else contattoAggiunto = false;
 
-//        } else {
-//            contattoSelezionato.getNomi.s(nome);
-//            contattoSelezionato.setCognomi(cognome);
-//            contattoSelezionato.setNumeri(Arrays.asList(numeri));
-//            contattoSelezionato.setEmails(Arrays.asList(emails));
-//        }
-        // Esegui il salvataggio dei dati
-        // Salva nel database, file o nella struttura dati che stai utilizzando
 
-        // Dopo aver salvato, disabilita i campi e riabilita il pulsante Modifica
         disabilitaCampi();
+        modificaBtn.setVisible(true);
+        modificaBtn.setDisable(false);
 
     }
 
@@ -230,17 +215,18 @@ public class ControllerMenuContatto implements Initializable{
     @FXML
     private void tornaIndietro(ActionEvent event) throws IOException {
         // Carica la schermata principale
-        FXMLLoader loader = new FXMLLoader(ControllerMenuPrincipale.class.getResource("MenuPrincipale.fxml"));
-        Parent root = loader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerMenuPrincipale.class.getResource("MenuPrincipale.fxml"));
 
         // Ottieni il controller della schermata principale (se necessario)
-        ControllerMenuPrincipale controllerMenuPrincipale = loader.getController();
 
+        Parent root = fxmlLoader.load();
+        ControllerMenuPrincipale controllerMenuPrincipale = fxmlLoader.getController();
 
-        if(contattoAggiunto == true)
-            controllerMenuPrincipale.setContatto(contattoSelezionato);
-        else
-            controllerMenuPrincipale.setContatto(null);
+        if(contattoAggiunto == true) {
+
+            controllerMenuPrincipale.setContatto(nuovoContatto);
+        }
+
         // Crea la nuova scena
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -250,5 +236,16 @@ public class ControllerMenuContatto implements Initializable{
 
     @FXML
     private void aggiungiImmagine(ActionEvent event) {
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+            numeriTF = new TextField[ContattoV2.getnDati()];
+            emailsTF = new TextField[ContattoV2.getnDati()];
+
+            for(int i = 0; i < numeriTF.length; i++) numeriTF[i] = new TextField();
+            for(int i = 0; i < emailsTF.length; i++) emailsTF[i] = new TextField();
+
     }
 }

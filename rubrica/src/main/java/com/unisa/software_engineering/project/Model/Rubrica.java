@@ -11,15 +11,15 @@ import java.util.List;
  * Questa è la struttura dati della rubrica che contiene i contatti dell'utente.
  *
  * @ingroup Models
- * @see Contatto.java
- * @see FileManager.java
+ * @see Contatto
+ * @see FileManager
  * @author paolo
  * @date 02/12/24
  * @todo Tutto, manca tutto
  */
 public class Rubrica implements Serializable {
 
-    private List<Contatto> contatti;
+    private List<ContattoV2> contatti;
 
     /**
      * @constructor
@@ -34,7 +34,7 @@ public class Rubrica implements Serializable {
      * @deprecated
      * @param contatto Il contatto già verificato
      */
-    public void aggiungiContatto(Contatto contatto){
+    public void aggiungiContatto(ContattoV2 contatto){
         contatti.add(contatto);
     }
 
@@ -43,10 +43,10 @@ public class Rubrica implements Serializable {
      * @deprecated
      * @param contatto Il contatto da rimuovere
      */
-    public void rimuoviContatto(Contatto contatto){
+    public void rimuoviContatto(ContattoV2 contatto){
         if(contatti.contains(contatto)) contatti.remove(contatto);
     }
 
-    public List<Contatto> getContatti(){
+    public List<ContattoV2> getContatti(){
         return contatti; }
  }

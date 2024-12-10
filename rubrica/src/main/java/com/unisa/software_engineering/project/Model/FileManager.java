@@ -64,11 +64,11 @@ public abstract class FileManager {
                 return rubrica;
             } catch(IOException | ClassNotFoundException e) {
 
-                rubrica = new Rubrica();
                 alert.setContentText("Errore nell'apertura della rubrica");
                 alert.showAndWait();
             }
         }
+        else rubrica = new Rubrica();
 
         return rubrica;
     }
@@ -199,7 +199,7 @@ public abstract class FileManager {
         } catch (InfoContattoException ex) {
             System.out.println("Errore nel formato dati del contatto");
         }
-   
+
     }
 
     public static void setStage(Stage stagePrincipale) {

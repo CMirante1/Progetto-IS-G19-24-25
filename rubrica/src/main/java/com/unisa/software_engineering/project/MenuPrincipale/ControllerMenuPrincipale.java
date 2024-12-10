@@ -10,8 +10,10 @@ package com.unisa.software_engineering.project.MenuPrincipale;
  * @date 06/12/24
  */
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto;
 import com.unisa.software_engineering.project.Model.Contatto;
+import com.unisa.software_engineering.project.Model.ContattoV2;
 import com.unisa.software_engineering.project.Model.FileManager;
 import com.unisa.software_engineering.project.Model.Rubrica;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,15 +31,18 @@ import javafx.scene.Parent;
 import javafx.scene.Node;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ControllerMenuPrincipale {
+public class ControllerMenuPrincipale implements Initializable{
 
-    private TableView<Contatto> tableViewContatti;
     @FXML
-    private TableColumn<Contatto, String> nomeCln;
+    private TableView<ContattoV2> tabellaContatti;
     @FXML
-    private TableColumn<Contatto, String> cognomeCln;
+    private TableColumn<ContattoV2, String> cognomeCln;
+    @FXML
+    private TableColumn<ContattoV2, String> nomeCln;
     @FXML
     private TextField barraRicerca;  // Barra di ricerca
     @FXML
@@ -48,44 +54,44 @@ public class ControllerMenuPrincipale {
     @FXML
     private Button importaBtn;
 
-    private Rubrica rubrica;
-    private ObservableList<Contatto> listaContatti;  // Lista fisica dei contatti
-    private ObservableList<Contatto> listaContattiFiltrati;  // Lista filtrata dei contatti
-
-    /**
-     * @brief Metodo che passa al controller la Rubrica
-     * Quando si lancia il software al controller verrà passata la rubrica salvata in memoria
-     * @param rubrica Riferimento alla rubrica salvata in memoria
-     */
-    public void setRubrica(Rubrica rubrica) {
-        // Trasforma la lista fisica della rubrica in una ObservableList
-        this.rubrica = rubrica;
-        inizializzaComponenti();
-    }
-
-    public void setContatto(Contatto contatto) {
-
-        if(contatto != null)
-            rubrica.getContatti().add(contatto);
-    }
+    private static Rubrica rubrica;
+    private  ObservableList<ContattoV2> listaContatti;  // Lista fisica dei contatti
+    private  ObservableList<ContattoV2> listaContattiFiltrati;  // Lista filtrata dei contatti
 
 
-   /// Metodo per inizializzare tutti i componenti della finestra menu Principale
-    private void inizializzaComponenti() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-        listaContatti = FXCollections.observableArrayList(rubrica.getContatti());
+        System.out.println("Sono in initialize");
+
+        listaContatti = FXCollections.observableArrayList();
+
         listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
-
         // Collega la ObservableList alla TableView
-        tableViewContatti.setItems(listaContattiFiltrati);
 
         // Imposta le colonne della TableView
-        nomeCln.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        //cognomeCln = new TableColumn<>();
+
+        if(cognomeCln == null) System.out.println("cognCln null");
+        else {
+            System.out.println("colonna cognome ok");
         cognomeCln.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        }
+        // nomeCln = new TableColumn<>();
+        if(nomeCln == null) System.out.println("nome null");
+        else {
+            System.out.println("colonna nome ok");
+            nomeCln.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        }
+
+        if(tabellaContatti == null) System.out.println("tabella null");
+        else System.out.println("tabella ok");
+
+        tabellaContatti.setItems(listaContattiFiltrati);
 
         // Abilita la selezione multipla nella TableView
-        tableViewContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-//
+        tabellaContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //  tabellaContatti.setOnMouseClicked(event -> visualizzaContatto(event));
 //        // Aggiungi listener per la barra di ricerca
 //        barraRicerca.textProperty().addListener((observable, oldValue, newValue) -> {
 //            filtraContatti(newValue);
@@ -101,7 +107,28 @@ public class ControllerMenuPrincipale {
 
         // Crea un menu contestuale
         ContextMenu contextMenu = new ContextMenu(esportaItem, eliminaItem);
-        tableViewContatti.setContextMenu(contextMenu);
+        tabellaContatti.setContextMenu(contextMenu);
+    }
+
+    /**
+     * @brief Metodo che passa al controller la Rubrica
+     * Quando si lancia il software al controller verrà passata la rubrica salvata in memoria
+     * @param rubrica Riferimento alla rubrica salvata in memoria
+     */
+    public void setRubrica(Rubrica rubrica) {
+
+        this.rubrica = rubrica;
+
+        listaContatti.addAll(rubrica.getContatti());
+        tabellaContatti.setItems(listaContatti);
+    }
+
+    public void setContatto(ContattoV2 contatto) {
+
+        if(contatto != null) {
+
+            listaContatti.add(contatto);
+        }
     }
 
    /* /// Metodo di ricerca che filtra la lista dei contatti
@@ -111,29 +138,15 @@ public class ControllerMenuPrincipale {
     @FXML
     private void aggiungiContatto(ActionEvent event) throws IOException {
 
-        Contatto nuovoContatto = null;
-       // rubrica.aggiungiContatto(menucontatto.);
+        ContattoV2 nuovoContatto = null;
+
         cambiaSchermata(event, nuovoContatto);
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
-//        Parent root = loader.load();
-//
-//        // Passa la rubrica al controller della schermata contatto
-//        ControllerMenuContatto controllerMenuContatto = loader.getController();
-//
-//        controllerMenuContatto.setRubrica(rubrica);
-//        controllerMenuContatto.setContatto(contatto);         // Modalità "Aggiungi" (senza contatto selezionato)
-//
-//        // Carica la nuova scena
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-        }
-/*
+    }
+
     /// Metodo per gestire il doppio clic su un contatto per visualizzarlo
-    private void visualizzaContatto(MouseEvent event) throws IOException {
-        if (event.getClickCount() == 2) {
-            Contatto contattoSelezionato = tableViewContatti.getSelectionModel().getSelectedItem();
+    private void visualizzaContatto(MouseEvent event) {
+        if (event.getClickCount() == 2) System.out.println("doppio click");//{
+ /*           Contatto contattoSelezionato = tableViewContatti.getSelectionModel().getSelectedItem();
 //
 //            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
 //            Parent root = loader.load();
@@ -157,64 +170,34 @@ public class ControllerMenuPrincipale {
                 listaContatti.add(contatto);
                 rubrica.aggiungiContatto(contatto);
             }
+        }*/
+    }
+
+    private void cambiaSchermata(ActionEvent event, ContattoV2 contatto) {
+
+        try {
+            // Carica il file FXML
+            FXMLLoader fxmlLoader = new FXMLLoader(ControllerMenuContatto.class.getResource("MenuContatto.fxml"));
+
+            Parent root = fxmlLoader.load();
+
+            ControllerMenuContatto controllerMenuContatto = fxmlLoader.getController();
+
+            controllerMenuContatto.setContatto(contatto);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Crea e setta la scena
+            Scene scena = new Scene(root);
+
+            // Setta la scena al palco e mostralo
+            stage.setScene(scena);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Errore durante il caricamento del file FXML: " + e.getMessage());
+            System.out.println("Causa: " + e.getCause());
         }
     }
-*/
-    private void cambiaSchermata(ActionEvent event, Contatto contatto) {
-
-            try {
-                // Carica il file FXML
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
-
-                if (fxmlLoader == null) {
-                    System.out.println("Errore: FXMLLoader non è stato creato correttamente.");
-                } else {
-                    System.out.println("FXMLLoader creato correttamente.");
-                }
-
-                // Carica la vista dalla risorsa FXML
-                Parent root = fxmlLoader.load();
-                if (root == null) {
-                    System.out.println("Errore: root è null, il file FXML potrebbe non essere stato caricato correttamente.");
-                } else {
-                    System.out.println("root caricato correttamente.");
-                }
-
-                // Ottieni il controller del file FXML
-                ControllerMenuContatto controllerMenuContatto = fxmlLoader.getController();
-                if (controllerMenuContatto == null) {
-                    System.out.println("Errore: il controller non è stato caricato correttamente.");
-                } else {
-                    System.out.println("Controller caricato correttamente.");
-                }
-
-                // Passa il contatto al controller (se necessario)
-                controllerMenuContatto.setContatto(contatto);
-
-                // Crea la scena con il root caricato
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                if (stage == null) {
-                    System.out.println("Errore: Stage è null.");
-                } else {
-                    System.out.println("Stage trovato correttamente.");
-                }
-
-                // Crea e setta la scena
-                Scene scena = new Scene(root);
-                if (scena == null) {
-                    System.out.println("Errore: la scena è null.");
-                } else {
-                    System.out.println("Scena creata correttamente.");
-                }
-
-                // Setta la scena al palco e mostralo
-                stage.setScene(scena);
-                stage.show();
-            } catch (IOException e) {
-                System.out.println("Errore durante il caricamento del file FXML: " + e.getMessage());
-                System.out.println("Causa: " + e.getCause());
-            }
-        }
 
 
     @FXML
@@ -236,4 +219,4 @@ public class ControllerMenuPrincipale {
 //        listaContatti.clear();
 //        listaContatti.addAll(rubrica.getContatti());
     }
-  }
+}

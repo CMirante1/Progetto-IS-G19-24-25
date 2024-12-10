@@ -27,6 +27,8 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     private Email[] emails;
     private byte[] immagineProfilo;
 
+    private final int MAX_NUMERI = 3;
+
     /**
      * @constructor
      * @param nomi Nomi del contatto
