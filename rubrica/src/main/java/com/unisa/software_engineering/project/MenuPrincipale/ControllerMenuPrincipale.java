@@ -111,9 +111,9 @@ public class ControllerMenuPrincipale {
     @FXML
     private void aggiungiContatto(ActionEvent event) throws IOException {
 
-        Contatto contatto = null;
+        Contatto nuovoContatto = null;
        // rubrica.aggiungiContatto(menucontatto.);
-        cambiaSchermata(event, contatto);
+        cambiaSchermata(event, nuovoContatto);
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
 //        Parent root = loader.load();
 //
@@ -162,28 +162,60 @@ public class ControllerMenuPrincipale {
 */
     private void cambiaSchermata(ActionEvent event, Contatto contatto) {
 
-        try {
+            try {
+                // Carica il file FXML
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuContatto.fxml"));
-            Parent root = loader.load();
+                if (fxmlLoader == null) {
+                    System.out.println("Errore: FXMLLoader non è stato creato correttamente.");
+                } else {
+                    System.out.println("FXMLLoader creato correttamente.");
+                }
 
-            // Ottieni il controller della pagina del contatto
-            ControllerMenuContatto controllerMenuContatto = loader.getController();
+                // Carica la vista dalla risorsa FXML
+                Parent root = fxmlLoader.load();
+                if (root == null) {
+                    System.out.println("Errore: root è null, il file FXML potrebbe non essere stato caricato correttamente.");
+                } else {
+                    System.out.println("root caricato correttamente.");
+                }
 
-            // Passa la rubrica al controller del contatto (se lo desideri, o se usi il Singleton, non è necessario)
-            controllerMenuContatto.setContatto(contatto);
+                // Ottieni il controller del file FXML
+                ControllerMenuContatto controllerMenuContatto = fxmlLoader.getController();
+                if (controllerMenuContatto == null) {
+                    System.out.println("Errore: il controller non è stato caricato correttamente.");
+                } else {
+                    System.out.println("Controller caricato correttamente.");
+                }
 
-            // Carica la nuova scena
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
+                // Passa il contatto al controller (se necessario)
+                controllerMenuContatto.setContatto(contatto);
 
-            System.err.println("Errore durante il cambio schermata");
+                // Crea la scena con il root caricato
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                if (stage == null) {
+                    System.out.println("Errore: Stage è null.");
+                } else {
+                    System.out.println("Stage trovato correttamente.");
+                }
+
+                // Crea e setta la scena
+                Scene scena = new Scene(root);
+                if (scena == null) {
+                    System.out.println("Errore: la scena è null.");
+                } else {
+                    System.out.println("Scena creata correttamente.");
+                }
+
+                // Setta la scena al palco e mostralo
+                stage.setScene(scena);
+                stage.show();
+            } catch (IOException e) {
+                System.out.println("Errore durante il caricamento del file FXML: " + e.getMessage());
+                System.out.println("Causa: " + e.getCause());
+            }
         }
 
-    }
 
     @FXML
     private void esportaContatti(ActionEvent event) {

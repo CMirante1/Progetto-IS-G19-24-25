@@ -193,6 +193,7 @@ public class ControllerMenuContatto implements Initializable{
     }
 
     /// Gestore del tasto Salva
+    @FXML
     private void salvaContatto(ActionEvent event) throws InfoContattoException {
         // Recupera i dati modificati
         String nome = nomeTXF.getText();
@@ -226,9 +227,10 @@ public class ControllerMenuContatto implements Initializable{
     }
 
    /// Gestore del tasto Indietro
+    @FXML
     private void tornaIndietro(ActionEvent event) throws IOException {
         // Carica la schermata principale
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipale.fxml"));
+        FXMLLoader loader = new FXMLLoader(ControllerMenuPrincipale.class.getResource("MenuPrincipale.fxml"));
         Parent root = loader.load();
 
         // Ottieni il controller della schermata principale (se necessario)

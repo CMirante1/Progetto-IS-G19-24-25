@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -30,23 +26,19 @@
       <Label fx:id="email3LBL" layoutX="529.0" layoutY="494.0" text="Email3:" />
       <ImageView fx:id="immagineProfilo" fitHeight="217.0" fitWidth="253.0" layoutX="262.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../res/immagine-profilo-default.jpg" />
+            <Image url="@../../../res/immagine-profilo-default.jpg" />
          </image></ImageView>
       <Button fx:id="modificaBtn" layoutX="506.0" layoutY="20.0" mnemonicParsing="false" onAction="#modificaContatto" prefHeight="39.0" prefWidth="94.0" text="Modifica">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="salvaBtn" layoutX="632.0" layoutY="20.0" mnemonicParsing="false" onAction="#verificaContatto" prefHeight="39.0" prefWidth="93.0" text="Salva">
+      <Button fx:id="salvaBtn" layoutX="632.0" layoutY="20.0" mnemonicParsing="false" onAction="#salvaContatto" prefHeight="39.0" prefWidth="93.0" text="Salva">
          <font>
             <Font size="18.0" />
          </font></Button>
       <Button fx:id="escBtn" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#tornaIndietro" prefHeight="30.0" prefWidth="92.0">
          <graphic>
-            <ImageView fitHeight="29.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../Downloads/FrecciaIndietro.png" />
-               </image>
-            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Button fx:id="immagineBtn" layoutX="231.0" layoutY="261.0" mnemonicParsing="false" onAction="#aggiungiImmagine" text="Aggiungi immagine profilo">
