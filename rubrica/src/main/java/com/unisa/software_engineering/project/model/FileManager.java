@@ -46,7 +46,13 @@ public abstract class FileManager {
         }
     }
 
-
+    /**
+     * @brief Carica la rubrica srializzata salvata in memoria
+     *
+     * Legge i dati serializzati all'interno di un file e li converte in Rubrica 
+     * 
+     * @return rubrica restituisce la rubrica letta dal file.
+     */
     public static Rubrica caricaRubrica() {
 
         File file = new File("res/" + FILE_BACKUP);
@@ -73,9 +79,9 @@ public abstract class FileManager {
     /**
      * @brief Esporta i contatti selezionati
      *
-     * Esporta la lista di contatti selezionati dall'utente e li serializza in un file .vcf
+     * Esporta la lista di contatti selezionati dall'utente formattati in formato .vcf
      *
-     * @param contatti I contatti da esportare
+     * @param contatti riceve in input i contatti da esportare
      *
      */
     public static void esportaContatti(List<Contatto> contatti) {
@@ -126,21 +132,12 @@ public abstract class FileManager {
     }
 
     /**
-<<<<<<< HEAD
-=======
-     *
->>>>>>> a4bfe4d14dab1d207cfa026526ca5d24d04d1063
-     * @param nomeFile
+     * 
      * @brief Importa i contatti selezionati
-     *
-     * Importa la rubrica dei contatti selezionata dall'utente e aggiunge quelli semanticamente corretti,
-     * per quelli incorretti appare un pop up riassuntivo di errore.
-     *
-     * Al momento non ha alcun senso la scelta di questi parametri
-     * Se gli elemnti selezionati dall'utente sono contatti significa che l'utente sta già
-     * scegliendo da un file, a che serve nomeFile?
-     * Ma poi non può importare un intera rubrica .vcf?
-     *
+     * 
+     * Riceve in inngresso i file selezioanti dall'utente e ne legge i contatti contenuti importandoli nella rubtrica
+     * 
+     * @param nomeFile
      */
     public static void importaContatti(String nomeFile) {
 
