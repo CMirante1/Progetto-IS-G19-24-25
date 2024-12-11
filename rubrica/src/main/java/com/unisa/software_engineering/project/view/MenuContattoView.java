@@ -63,9 +63,9 @@ public class MenuContattoView extends AnchorPane {
         escBtn.setGraphic(escImmagine);
 
         escBtn.setPrefHeight(40);
-        escBtn.setPrefWidth(170);
-        escBtn.setLayoutX(170);
-        escBtn.setLayoutY(110);
+        escBtn.setPrefWidth(95);
+        escBtn.setLayoutX(10);
+        escBtn.setLayoutY(10);
     }
 
 
