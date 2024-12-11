@@ -22,12 +22,15 @@ public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
 
     public ContattoV2(String nome, String cognome, String[] numeri, String[] emails) throws InfoContattoException {
 
-            //verificaDati(nome,cognome,numeri,emails);
+            try{
+                verificaDati(nome,cognome,numeri,emails);
             this.nome=nome;
             this.cognome=cognome;
             this.numeri=numeri;
             this.emails=emails;
-
+            }catch(InfoContattoException ex){
+                System.err.println(ex.getMessage());
+            }
     }
 
     public String getNome() {
@@ -49,14 +52,7 @@ public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
     public String[] getEmails() {
         return emails;
     }
-    /**
-     * 
-     * @brief Verifica la validità dei dati
-     * 
-     * Riceve in inngresso i dati del contatto che si cerca di creare e lancia delle exception nel caso in cui non dovessero presentarsi nel giusto fomrmato
-     * 
-     * @param nomeFile
-     */
+
     private void verificaDati(String nome, String cognome, String[] numeri, String[] emails)throws InfoContattoException{
         if(nome == null && cognome == null) throw new InfoContattoException("Il campo nome o cognome non possono essere vuoti");
 
