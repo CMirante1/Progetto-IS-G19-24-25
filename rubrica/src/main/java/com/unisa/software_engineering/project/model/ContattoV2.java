@@ -22,12 +22,15 @@ public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
 
     public ContattoV2(String nome, String cognome, String[] numeri, String[] emails) throws InfoContattoException {
 
-            //verificaDati(nome,cognome,numeri,emails);
+            try{
+                verificaDati(nome,cognome,numeri,emails);
             this.nome=nome;
             this.cognome=cognome;
             this.numeri=numeri;
             this.emails=emails;
-
+            }catch(InfoContattoException ex){
+                System.err.println(ex.getMessage());
+            }
     }
 
     public String getNome() {

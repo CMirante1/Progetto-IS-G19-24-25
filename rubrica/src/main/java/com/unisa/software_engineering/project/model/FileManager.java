@@ -196,6 +196,7 @@ public abstract class FileManager {
 
     }
 
+    
     public static void setStage(Stage stagePrincipale) {
 
         stage = stagePrincipale;
