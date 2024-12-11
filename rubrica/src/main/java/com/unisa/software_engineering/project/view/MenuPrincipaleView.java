@@ -31,11 +31,11 @@ public class MenuPrincipaleView extends AnchorPane {
     private void inizializzaTabella() {
 
         tabellaContatti = new TableView<>();
-        tabellaContatti.setEditable(true);
+        tabellaContatti.setPrefWidth(750);
+        tabellaContatti.setPrefHeight(400);
         tabellaContatti.setLayoutX(0);
         tabellaContatti.setLayoutY(200);
-        tabellaContatti.setPrefHeight(400);
-        tabellaContatti.setPrefWidth(750);
+        tabellaContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tabellaContatti.setFocusTraversable(true);
 
         cognomeCln = new TableColumn<>("Cognome");
@@ -54,18 +54,18 @@ public class MenuPrincipaleView extends AnchorPane {
     private void inizializzaPulsanti() {
 
         aggiungiBtn = new Button("Aggiungi contatto");
+        aggiungiBtn.setPrefWidth(170);
+        aggiungiBtn.setPrefHeight(40);
         aggiungiBtn.setLayoutX(170);
         aggiungiBtn.setLayoutY(110);
-        aggiungiBtn.setPrefHeight(40);
-        aggiungiBtn.setPrefWidth(170);
         aggiungiBtn.setFont(new javafx.scene.text.Font(18));
         aggiungiBtn.setFocusTraversable(false);
 
         importaBtn = new Button("Importa contatti");
+        importaBtn.setPrefWidth(155);
+        importaBtn.setPrefHeight(40);
         importaBtn.setLayoutX(425);
         importaBtn.setLayoutY(110);
-        importaBtn.setPrefHeight(40);
-        importaBtn.setPrefWidth(155);
         importaBtn.setFont(new javafx.scene.text.Font(18));
         importaBtn.setFocusTraversable(false);
     }
@@ -73,10 +73,10 @@ public class MenuPrincipaleView extends AnchorPane {
     private void inizializzaBarraRicerca() {
 
         barraRicerca = new TextField();
+        barraRicerca.setPrefWidth(460);
+        barraRicerca.setPrefHeight(40);
         barraRicerca.setLayoutX(145);
         barraRicerca.setLayoutY(25);
-        barraRicerca.setPrefHeight(40);
-        barraRicerca.setPrefWidth(460);
         barraRicerca.setPromptText("Cerca contatti");
         barraRicerca.setAlignment(Pos.CENTER);
         barraRicerca.setFocusTraversable(false);

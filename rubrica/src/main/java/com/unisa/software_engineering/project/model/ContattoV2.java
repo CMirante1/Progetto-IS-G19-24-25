@@ -20,7 +20,7 @@ public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
     private String[] numeri;
     private String[] emails;
 
-    public ContattoV2(String nome, String cognome, String[] numeri, String[] emails) throws InfoContattoException {
+    public ContattoV2(String nome, String cognome, String[] numeri, String[] emails)  {
 
             //verificaDati(nome,cognome,numeri,emails);
             this.nome=nome;

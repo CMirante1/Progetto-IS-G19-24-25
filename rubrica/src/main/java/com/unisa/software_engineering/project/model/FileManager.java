@@ -78,31 +78,22 @@ public abstract class FileManager {
      * @param contatti I contatti da esportare
      *
      */
-    public static void esportaContatti(List<Contatto> contatti) {
+    public static void esportaContatti(List<ContattoV2> contatti, File file) {
 
-        FileChooser fileChooser = new FileChooser();
-
-        File file = fileChooser.showSaveDialog(stage);
-
-        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
-        fileChooser.getExtensionFilters().add(filtro);
-
-        if(!file.getName().endsWith(".vcf"))
-            file = new File(file.getAbsolutePath() + ".vcf");
 
         try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())))) {
 
             String[] numeriDiTelefono;
             String[] emails;
 
-            for(Contatto contatto : contatti) {
+            for(ContattoV2 contatto : contatti) {
 
-                numeriDiTelefono = contatto.getNumeriDiTelefono();
+                numeriDiTelefono = contatto.getNumeri();
                 emails = contatto.getEmails();
 
                 pw.println("BEGIN:VCARD");
                 pw.println("VERSION:4.0");
-                pw.println("N:" + contatto.getCognomi() + ";" + contatto.getNomi() + ";");
+                pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";");
                 for(int i = 0; i < numeriDiTelefono.length; i++) {
 
                     if(numeriDiTelefono[i] == null) break;
@@ -130,7 +121,7 @@ public abstract class FileManager {
 =======
      *
 >>>>>>> a4bfe4d14dab1d207cfa026526ca5d24d04d1063
-     * @param nomeFile
+     *
      * @brief Importa i contatti selezionati
      *
      * Importa la rubrica dei contatti selezionata dall'utente e aggiunge quelli semanticamente corretti,
@@ -142,16 +133,8 @@ public abstract class FileManager {
      * Ma poi non può importare un intera rubrica .vcf?
      *
      */
-    public static void importaContatti(String nomeFile) {
+    public static void importaContatti(File fileSelezionato) {
 
-        FileChooser fileChooser = new FileChooser();
-
-        File fileSelezionato = fileChooser.showOpenDialog(stage);
-
-        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
-        fileChooser.getExtensionFilters().add(filtro);
-
-        if(fileSelezionato == null) return;
         String riga;
         String nome;
         String cognome;

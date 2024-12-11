@@ -4,6 +4,9 @@ package com.unisa.software_engineering.project.rubricaapp;
  *
  * @author andre
  */
+import com.unisa.software_engineering.project.controller.MenuContattoController;
+import com.unisa.software_engineering.project.controller.MenuPrincipaleController;
+import com.unisa.software_engineering.project.view.MenuContattoView;
 import com.unisa.software_engineering.project.view.MenuPrincipaleView;
 import com.unisa.software_engineering.project.model.FileManager;
 import com.unisa.software_engineering.project.model.Rubrica;
@@ -23,14 +26,12 @@ public class RubricaApp extends Application {
 
         MenuPrincipaleView mpView = new MenuPrincipaleView();
 
-        Scene menuPrincpale = new Scene(mpView, 750, 600);
+        Scene menuPrincipale = new Scene(mpView, 750, 600);
 
-//        MenuContattoView mcView = new MenuContattoView();
-//
-//        Scene mc = new Scene(mcView, 750, 600);
+        MenuPrincipaleController mpController = new MenuPrincipaleController(rubrica, mpView, menuPrincipale);
 
         primaryStage.setTitle("Rubrica");
-        primaryStage.setScene(menuPrincpale);
+        primaryStage.setScene(menuPrincipale);
         primaryStage.show();
 
     }

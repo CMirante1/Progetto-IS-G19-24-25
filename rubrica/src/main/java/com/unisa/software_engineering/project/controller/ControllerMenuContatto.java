@@ -172,7 +172,7 @@ public class ControllerMenuContatto implements Initializable{
         abilitaCampi();
     }
 
-    /// Gestore del tasto Salva
+  /*  /// Gestore del tasto Salva
     @FXML
     private void salvaContatto(ActionEvent event) {
         // Recupera i dati modificati
@@ -204,7 +204,7 @@ public class ControllerMenuContatto implements Initializable{
         modificaBtn.setDisable(false);
 
     }
-
+*/
    /// Gestore del tasto Indietro
     @FXML
     private void tornaIndietro(ActionEvent event) throws IOException {
