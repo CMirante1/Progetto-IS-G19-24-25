@@ -41,6 +41,8 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     public Contatto(String nomi, String cognomi, String[] numeriDiTelefono, String[] emails, BufferedImage immagineProfilo) throws InfoContattoException {
 
         nomeCompleto = new NomeCompleto(nomi, cognomi);
+        this.numeriDiTelefono = new NumeroDiTelefono[MAX_NUMERI];
+        this.emails = new Email[MAX_EMAIL];
 
         for(int index = 0; index < this.numeriDiTelefono.length; index++)
             this.numeriDiTelefono[index] = new NumeroDiTelefono(numeriDiTelefono[index]);

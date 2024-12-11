@@ -1,3 +1,5 @@
+package com.unisa.software_engineering.project;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.image.BufferedImage;

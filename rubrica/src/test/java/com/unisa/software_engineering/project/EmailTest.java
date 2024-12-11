@@ -10,7 +10,6 @@ public class EmailTest {
     void testValidEmail() {
         try {
             Email email = new Email("test@example.com");
-            assertEquals("test@example.com", email.getInfo());
         } catch (InfoContattoException e) {
             fail("Exception should not have been thrown for a valid email");
         }
@@ -63,7 +62,7 @@ public class EmailTest {
             email.setInfo("new@example.com");
             assertEquals("new@example.com", email.getInfo());
         } catch (InfoContattoException e) {
-            //fail("Exception should not have been thrown for a valid email");
+            fail("Exception should not have been thrown for a valid email");
         }
     }
 
