@@ -10,10 +10,9 @@ public class Email extends InfoContatto implements Serializable{
     
     @Override
     public void verifica(String info) throws InfoContattoException{
-        if (!(info == null ||
-            info.trim().isEmpty() ||
-            !info.matches(
-            "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")))
-            throw new InfoContattoException("Email non valida");
+        if (info == null) throw new InfoContattoException("Email null");
+        if (info.isEmpty()) throw new InfoContattoException("Email vuota");
+        if (!info.contains("@")) throw new InfoContattoException("Email senza @");
+        
     }
 }
