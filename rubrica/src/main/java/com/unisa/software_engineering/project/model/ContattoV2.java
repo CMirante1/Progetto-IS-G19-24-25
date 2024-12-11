@@ -19,7 +19,12 @@ public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
     private final static int nDati=3;;
     private String[] numeri;
     private String[] emails;
-
+    /*
+    * @Constructor
+    *  Al momento della creazione di un contatto viene richiamato il metodo verificaDati che verifica il formato dei dati.
+    *  Nel caso in cui il metodo verificaDati dovesse dare esito negativo il contatto non sarà creato.
+    *
+    */
     public ContattoV2(String nome, String cognome, String[] numeri, String[] emails) throws InfoContattoException {
 
             try{
@@ -63,6 +68,14 @@ public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
             if ((emails[i] != null && !emails[i].matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"))) throw new InfoContattoException("Gli indirizzi email devono contenere una @ e un dominio.");
         }
     }
+        /**
+     * 
+     * @brief Confronta i contatti in base al cognome
+     * 
+     * Confronta i contatti ordinandoli in base al cognome, i contatti con stesso cognome vengono ordinati in base al nome.
+     * 
+     * @param c riceve in ingresso il contatto con cui confrontare il contatto corrente
+     */
    @Override
     public int compareTo(ContattoV2 c) {
         if((this.cognome.compareTo(c.getCognome()) == 0)){ return this.nome.compareTo(c.getNome());}
