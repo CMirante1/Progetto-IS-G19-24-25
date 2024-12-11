@@ -1,4 +1,4 @@
-package com.unisa.software_engineering.project.MenuPrincipale;
+package com.unisa.software_engineering.project.controller;
 /**
  * @class ControllerPrincipale
  * @brief Gestisce la finestra di visualizzazione del menu principale
@@ -10,18 +10,13 @@ package com.unisa.software_engineering.project.MenuPrincipale;
  * @date 06/12/24
  */
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto;
-import com.unisa.software_engineering.project.Model.Contatto;
-import com.unisa.software_engineering.project.Model.ContattoV2;
-import com.unisa.software_engineering.project.Model.FileManager;
-import com.unisa.software_engineering.project.Model.Rubrica;
+import com.unisa.software_engineering.project.model.ContattoV2;
+import com.unisa.software_engineering.project.model.Rubrica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,11 +26,8 @@ import javafx.scene.Parent;
 import javafx.scene.Node;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
-public class ControllerMenuPrincipale implements Initializable{
+public class ControllerMenuPrincipale{
 
     @FXML
     private TableView<ContattoV2> tabellaContatti;
@@ -58,13 +50,17 @@ public class ControllerMenuPrincipale implements Initializable{
     private  ObservableList<ContattoV2> listaContatti;  // Lista fisica dei contatti
     private  ObservableList<ContattoV2> listaContattiFiltrati;  // Lista filtrata dei contatti
 
+    public ControllerMenuPrincipale(Rubrica rubrica) {
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        this.rubrica = rubrica;
+        inizializzaComponenti();
+    }
+
+    private void inizializzaComponenti() {
 
         System.out.println("Sono in initialize");
 
-        listaContatti = FXCollections.observableArrayList();
+        listaContatti = FXCollections.observableArrayList(rubrica.getContatti());
 
         listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
         // Collega la ObservableList alla TableView
@@ -75,7 +71,7 @@ public class ControllerMenuPrincipale implements Initializable{
         if(cognomeCln == null) System.out.println("cognCln null");
         else {
             System.out.println("colonna cognome ok");
-        cognomeCln.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+            cognomeCln.setCellValueFactory(new PropertyValueFactory<>("cognome"));
         }
         // nomeCln = new TableColumn<>();
         if(nomeCln == null) System.out.println("nome null");
@@ -86,42 +82,84 @@ public class ControllerMenuPrincipale implements Initializable{
 
         if(tabellaContatti == null) System.out.println("tabella null");
         else System.out.println("tabella ok");
-
-        tabellaContatti.setItems(listaContattiFiltrati);
-
-        // Abilita la selezione multipla nella TableView
-        tabellaContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        //  tabellaContatti.setOnMouseClicked(event -> visualizzaContatto(event));
-//        // Aggiungi listener per la barra di ricerca
-//        barraRicerca.textProperty().addListener((observable, oldValue, newValue) -> {
-//            filtraContatti(newValue);
-//        });
-
-        // Menu contestuale per selezione multipla
-        MenuItem esportaItem = new MenuItem("Esporta contatti");
-        MenuItem eliminaItem = new MenuItem("Elimina contatti");
+    }
 //
-//        // Aggiungi le azioni del menu contestuale
-//        esportaItem.setOnAction(e -> esportaContatti());
-//        eliminaItem.setOnAction(e -> eliminaContatti());
-
-        // Crea un menu contestuale
-        ContextMenu contextMenu = new ContextMenu(esportaItem, eliminaItem);
-        tabellaContatti.setContextMenu(contextMenu);
-    }
-
-    /**
-     * @brief Metodo che passa al controller la Rubrica
-     * Quando si lancia il software al controller verrà passata la rubrica salvata in memoria
-     * @param rubrica Riferimento alla rubrica salvata in memoria
-     */
-    public void setRubrica(Rubrica rubrica) {
-
-        this.rubrica = rubrica;
-
-        listaContatti.addAll(rubrica.getContatti());
-        tabellaContatti.setItems(listaContatti);
-    }
+//    private void inizializzaFXML() {
+//
+//        FXMLLoader loader=new FXMLLoader();
+//        loader.setController(this);
+//        try {
+//            loader.setLocation(new File("MenuPrincipale.fxml").toURL());
+//            loader.load();
+//        } catch (IOException e1) {
+//            // TODO Auto-generated catch block
+//            e1.printStackTrace();
+//        }
+//    }
+//
+//    @Override
+//    public void initialize(URL location, ResourceBundle resources) {
+//
+//        System.out.println("Sono in initialize");
+//
+//        listaContatti = FXCollections.observableArrayList(rubrica.getContatti());
+//
+//        listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
+//        // Collega la ObservableList alla TableView
+//
+//        // Imposta le colonne della TableView
+//        //cognomeCln = new TableColumn<>();
+//
+//        if(cognomeCln == null) System.out.println("cognCln null");
+//        else {
+//            System.out.println("colonna cognome ok");
+//        cognomeCln.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+//        }
+//        // nomeCln = new TableColumn<>();
+//        if(nomeCln == null) System.out.println("nome null");
+//        else {
+//            System.out.println("colonna nome ok");
+//            nomeCln.setCellValueFactory(new PropertyValueFactory<>("nome"));
+//        }
+//
+////        if(tabellaContatti == null) System.out.println("tabella null");
+////        else System.out.println("tabella ok");
+//
+//       //tabellaContatti.setItems(listaContattiFiltrati);
+//
+//        // Abilita la selezione multipla nella TableView
+//     //   tabellaContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        //  tabellaContatti.setOnMouseClicked(event -> visualizzaContatto(event));
+////        // Aggiungi listener per la barra di ricerca
+////        barraRicerca.textProperty().addListener((observable, oldValue, newValue) -> {
+////            filtraContatti(newValue);
+////        });
+//
+//        // Menu contestuale per selezione multipla
+//        MenuItem esportaItem = new MenuItem("Esporta contatti");
+//        MenuItem eliminaItem = new MenuItem("Elimina contatti");
+////
+////        // Aggiungi le azioni del menu contestuale
+////        esportaItem.setOnAction(e -> esportaContatti());
+////        eliminaItem.setOnAction(e -> eliminaContatti());
+//
+//        // Crea un menu contestuale
+//        ContextMenu contextMenu = new ContextMenu(esportaItem, eliminaItem);
+//        //tabellaContatti.setContextMenu(contextMenu);
+//    }
+////
+////    /**
+////     * @brief Metodo che passa al controller la Rubrica
+////     * Quando si lancia il software al controller verrà passata la rubrica salvata in memoria
+////     * @param rubrica Riferimento alla rubrica salvata in memoria
+////     */
+////    public void setRubrica(Rubrica rubrica) {
+////
+////        this.rubrica = rubrica;
+////
+////        listaContatti.addAll(rubrica.getContatti());
+////       // tabellaContatti.setItems(listaContatti);
+////    }
 
     public void setContatto(ContattoV2 contatto) {
 

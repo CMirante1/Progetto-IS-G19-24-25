@@ -1,15 +1,12 @@
-package com.unisa.software_engineering.project.Model;
+package com.unisa.software_engineering.project.model;
 
-import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
+import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @class FileManager

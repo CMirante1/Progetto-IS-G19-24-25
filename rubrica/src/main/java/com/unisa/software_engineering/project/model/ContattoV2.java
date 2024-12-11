@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unisa.software_engineering.project.Model;
+package com.unisa.software_engineering.project.model;
 
-import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
+import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

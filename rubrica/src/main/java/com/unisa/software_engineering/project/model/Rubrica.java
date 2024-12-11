@@ -1,4 +1,4 @@
-package com.unisa.software_engineering.project.Model;
+package com.unisa.software_engineering.project.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

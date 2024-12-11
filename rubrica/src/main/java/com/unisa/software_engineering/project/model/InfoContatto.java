@@ -1,6 +1,6 @@
-package com.unisa.software_engineering.project.Model;
+package com.unisa.software_engineering.project.model;
 
-import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
+import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 
 public class InfoContatto {
 

@@ -1,8 +1,8 @@
-package com.unisa.software_engineering.project.Model;
+package com.unisa.software_engineering.project.model;
 
 import java.io.Serializable;
 
-import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
+import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 
 public class NomeCompleto extends InfoContatto implements Serializable{
 

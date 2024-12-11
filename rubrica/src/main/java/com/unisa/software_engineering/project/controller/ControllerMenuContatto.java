@@ -1,4 +1,4 @@
-package com.unisa.software_engineering.project.MenuContatto;
+package com.unisa.software_engineering.project.controller;
 
 /**
  * @class ControllerMenuContatto
@@ -11,12 +11,8 @@ package com.unisa.software_engineering.project.MenuContatto;
  * @date 06/12/24
  */
 
-import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
-import com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale;
-import com.unisa.software_engineering.project.Model.Contatto;
-import com.unisa.software_engineering.project.Model.ContattoV2;
-import com.unisa.software_engineering.project.Model.Rubrica;
-import javafx.application.Platform;
+import com.unisa.software_engineering.project.exceptions.InfoContattoException;
+import com.unisa.software_engineering.project.model.ContattoV2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,11 +22,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.awt.print.Paper;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -243,6 +237,7 @@ public class ControllerMenuContatto implements Initializable{
 
             numeriTF = new TextField[ContattoV2.getnDati()];
             emailsTF = new TextField[ContattoV2.getnDati()];
+
 
             for(int i = 0; i < numeriTF.length; i++) numeriTF[i] = new TextField();
             for(int i = 0; i < emailsTF.length; i++) emailsTF[i] = new TextField();

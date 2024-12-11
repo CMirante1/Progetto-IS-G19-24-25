@@ -1,4 +1,4 @@
-package com.unisa.software_engineering.project.Model;
+package com.unisa.software_engineering.project.model;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
-import com.unisa.software_engineering.project.Exceptions.InfoContattoException;
+import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 
 /**
  * @class Contatto
