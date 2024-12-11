@@ -11,9 +11,9 @@ public class Email extends InfoContatto implements Serializable{
     @Override
     public void verifica(String info) throws InfoContattoException{
         if (!(info == null ||
-        info.trim().isEmpty() ||
-        !info.matches(
-        "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")))
-        throw new InfoContattoException("");
+            info.trim().isEmpty() ||
+            !info.matches(
+            "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")))
+            throw new InfoContattoException("");
     }
 }
