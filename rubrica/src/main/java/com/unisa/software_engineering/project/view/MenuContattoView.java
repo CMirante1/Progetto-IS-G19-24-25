@@ -28,6 +28,7 @@ public class MenuContattoView extends AnchorPane {
 
         this.getChildren().addAll(escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, nomeLB, cognomeLB);
         this.getChildren().addAll(numeriLB[0], numeriLB[1], numeriLB[2], emailsLB[0], emailsLB[1], emailsLB[2],immagineProfilo);
+        this.getChildren().addAll(numeriTF[0], numeriTF[1], numeriTF[2], emailsTF[0], emailsTF[1], emailsTF[2]);
     }
 
     private void inizializzaCampi() {
@@ -35,13 +36,13 @@ public class MenuContattoView extends AnchorPane {
         nomeTF = new TextField();
         nomeTF.setFocusTraversable(true);
         nomeTF.setPrefWidth(190);
-        nomeTF.setPrefHeight(90);
+        nomeTF.setPrefHeight(30);
         nomeTF.setLayoutX(35);
         nomeTF.setLayoutY(385);
 
         cognomeTF = new TextField();
         cognomeTF.setPrefWidth(190);
-        cognomeTF.setPrefHeight(90);
+        cognomeTF.setPrefHeight(30);
         cognomeTF.setLayoutX(285);
         cognomeTF.setLayoutY(385);
 
@@ -51,7 +52,7 @@ public class MenuContattoView extends AnchorPane {
 
             numeriTF[i] = new TextField();
             numeriTF[i].setPrefWidth(190);
-            numeriTF[i].setPrefHeight(90);
+            numeriTF[i].setPrefHeight(30);
             numeriTF[i].setLayoutY(385);
         }
         numeriTF[0].setLayoutY(35);
@@ -62,7 +63,7 @@ public class MenuContattoView extends AnchorPane {
 
             emailsTF[i] = new TextField();
             emailsTF[i].setPrefWidth(190);
-            emailsTF[i].setPrefHeight(90);
+            emailsTF[i].setPrefHeight(30);
             emailsTF[i].setLayoutY(545);
         }
         emailsTF[0].setLayoutX(35);
@@ -74,7 +75,7 @@ public class MenuContattoView extends AnchorPane {
 
         nomeLB = new Label("Nome:");
         nomeLB.setPrefWidth(45);
-        nomeLB.setPrefHeight(30);
+        nomeLB.setPrefHeight(20);
         nomeLB.setLayoutX(35);
         nomeLB.setLayoutY(345);
 
@@ -112,7 +113,7 @@ public class MenuContattoView extends AnchorPane {
 
     private void inizializzaImmagini() {
 
-        immagineProfilo = new ImageView(new Image("immagineProfiloDefault.png"));
+        immagineProfilo = new ImageView();
         immagineProfilo.setFitWidth(255);
         immagineProfilo.setFitHeight(255);
         immagineProfilo.setLayoutX(220);

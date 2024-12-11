@@ -2,7 +2,6 @@ package com.unisa.software_engineering.project.model;
 
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 import javafx.scene.control.Alert;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -16,7 +15,7 @@ import java.util.List;
  * importazione di contatti sempre sottoforma di rubrica.
  *
  * @ingroup Models
- * @see Rubrica.java
+ * @see Rubrica
  * @todo Scegliere se l'importazione supporta anche i singoli contatti
  * @todo Scegliere se la rubrica va passata da parametro o è unica e statica
  * @author andre
@@ -25,7 +24,7 @@ import java.util.List;
 public abstract class FileManager {
 
     private static final String FILE_BACKUP = "rubrica.dat";
-    private static Alert alert = new Alert(Alert.AlertType.ERROR);
+    private static Alert alert;
     private static Stage stage;
     /**
      * @brief Salva la rubrica sulla memoria di massa
@@ -41,6 +40,7 @@ public abstract class FileManager {
             oos.writeObject(rubrica);
         } catch(IOException e) {
 
+            alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Errore nel salvataggio della rubrica");
             alert.showAndWait();
         }
@@ -49,8 +49,8 @@ public abstract class FileManager {
     /**
      * @brief Carica la rubrica srializzata salvata in memoria
      *
-     * Legge i dati serializzati all'interno di un file e li converte in Rubrica 
-     * 
+     * Legge i dati serializzati all'interno di un file e li converte in Rubrica
+     *
      * @return rubrica restituisce la rubrica letta dal file.
      */
     public static Rubrica caricaRubrica() {
@@ -67,7 +67,8 @@ public abstract class FileManager {
                 return rubrica;
             } catch(IOException | ClassNotFoundException e) {
 
-                alert.setContentText("Errore nell'apertura della rubrica");
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Errore nell'apertura della rubrica!");
                 alert.showAndWait();
             }
         }
@@ -77,38 +78,26 @@ public abstract class FileManager {
     }
 
     /**
-     * @brief Esporta i contatti selezionati
-     *
-     * Esporta la lista di contatti selezionati dall'utente formattati in formato .vcf
-     *
      * @param contatti riceve in input i contatti da esportare
-     *
+     * @brief Esporta i contatti selezionati
+     * <p>
+     * Esporta la lista di contatti selezionati dall'utente formattati in formato .vcf
      */
-    public static void esportaContatti(List<Contatto> contatti) {
-
-        FileChooser fileChooser = new FileChooser();
-
-        File file = fileChooser.showSaveDialog(stage);
-
-        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
-        fileChooser.getExtensionFilters().add(filtro);
-
-        if(!file.getName().endsWith(".vcf"))
-            file = new File(file.getAbsolutePath() + ".vcf");
+    public static void esportaContatti(List<ContattoV2> contatti, File file) {
 
         try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())))) {
 
             String[] numeriDiTelefono;
             String[] emails;
 
-            for(Contatto contatto : contatti) {
+            for(ContattoV2 contatto : contatti) {
 
-                numeriDiTelefono = contatto.getNumeriDiTelefono();
+                numeriDiTelefono = contatto.getNumeri();
                 emails = contatto.getEmails();
 
                 pw.println("BEGIN:VCARD");
                 pw.println("VERSION:4.0");
-                pw.println("N:" + contatto.getCognomi() + ";" + contatto.getNomi() + ";");
+                pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";");
                 for(int i = 0; i < numeriDiTelefono.length; i++) {
 
                     if(numeriDiTelefono[i] == null) break;
@@ -125,37 +114,32 @@ public abstract class FileManager {
             }
         } catch (IOException e) {
 
-            alert.setContentText("Errore nell'esportazione dei contatti");
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Errore nell'esportazione dei contatti!");
             alert.showAndWait();
         }
 
     }
 
     /**
-     * 
+     * @param file
+     * @param rubrica
      * @brief Importa i contatti selezionati
-     * 
+     * <p>
      * Riceve in inngresso i file selezioanti dall'utente e ne legge i contatti contenuti importandoli nella rubtrica
-     * 
-     * @param nomeFile
      */
-    public static void importaContatti(String nomeFile) {
+    public static void importaContatti(File file, Rubrica rubrica) {
 
-        FileChooser fileChooser = new FileChooser();
-
-        File fileSelezionato = fileChooser.showOpenDialog(stage);
-
-        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
-        fileChooser.getExtensionFilters().add(filtro);
-
-        if(fileSelezionato == null) return;
         String riga;
         String nome;
         String cognome;
         String[] numeri = new String[3];
         String[] emails = new String[3];
+
         int index;
-        try(BufferedReader br = new BufferedReader(new FileReader(fileSelezionato))) {
+        int contattiNonImportati = 0;
+
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             nome=null;
             cognome=null;
             index = 0;
@@ -175,30 +159,24 @@ public abstract class FileManager {
                     numeri[index++] = riga.substring(4);
                 }
                 else if(riga.startsWith("EMAIL:")) {
-                    emails[index++] = riga.substring(7);
+                    emails[index++] = riga.substring(6);
                 }
                 else if(riga.startsWith("END")) {
                     if (nome != null || cognome != null) {
-                        Contatto contatto = new Contatto(nome, cognome, numeri, emails,null);
-                        System.out.println(contatto);
-                    } else {
-                        System.out.println("Dati incompleti per un contatto");
+                        ContattoV2 contatto = new ContattoV2(nome, cognome, numeri, emails);
+                        rubrica.aggiungiContatto(contatto);
                     }
                 }
 
             }
         } catch (IOException   e) {
-
-            System.out.println("Errore nella lettura del file");
+            System.out.println("Errore nella lettura del file!");
         } catch (InfoContattoException ex) {
-            System.out.println("Errore nel formato dati del contatto");
+            contattiNonImportati++;
         }
 
-    }
-
-    
-    public static void setStage(Stage stagePrincipale) {
-
-        stage = stagePrincipale;
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(contattiNonImportati + "non stati importati!");
+        alert.showAndWait();
     }
 }

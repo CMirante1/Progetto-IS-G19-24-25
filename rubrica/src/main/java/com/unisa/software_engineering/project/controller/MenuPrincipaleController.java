@@ -24,16 +24,17 @@ public class MenuPrincipaleController {
     private MenuPrincipaleView mpView;
     private Rubrica rubrica;
     private ObservableList<ContattoV2> listaContatti;
-    private ObservableList<ContattoV2> listaContattiFiltrati;
 
+    private Stage stage;
     private MenuContattoView mcView;
     private MenuContattoController mcController;
     private Scene menuContatto;
 
-    public MenuPrincipaleController(Rubrica rubrica, MenuPrincipaleView mpView, Scene menuPrincipale) {
+    public MenuPrincipaleController(Rubrica rubrica, Stage stage,  MenuPrincipaleView mpView, Scene menuPrincipale) {
 
         this.rubrica = rubrica;
         this.mpView = mpView;
+        this.stage = stage;
 
         mcView = new MenuContattoView();
         mcController = new MenuContattoController(mcView, menuPrincipale);
@@ -45,12 +46,27 @@ public class MenuPrincipaleController {
     private void inizializzaComponenti() {
 
         listaContatti = FXCollections.observableArrayList(rubrica.getContatti());
-        listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
 
         mpView.getTabellaContatti().setItems(listaContatti);
         mpView.getTabellaContatti().setOnMouseClicked(event -> visualizzaContatto(event));
 
-        mpView.getBarraRicerca();
+        mpView.getBarraRicerca().textProperty().addListener((observable, vecchiaStringa, nuovaStringa) -> {
+
+            ObservableList<ContattoV2> listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
+
+            for(ContattoV2 contatto : listaContatti) {
+
+                if(contatto.getNome().toLowerCase().contains(nuovaStringa.toLowerCase()) ||
+                    contatto.getCognome().toLowerCase().contains(nuovaStringa.toLowerCase()))
+
+                    listaContattiFiltrati.add(contatto);
+            }
+
+            mpView.getTabellaContatti().setItems(listaContattiFiltrati);
+
+            if(mpView.getBarraRicerca().getText().isEmpty())
+                mpView.getTabellaContatti().setItems(listaContatti);
+        });
 
         mpView.getAggiungiBtn().setOnAction(event -> aggiungiContatto(event));
 
@@ -65,9 +81,7 @@ public class MenuPrincipaleController {
 
         List<ContattoV2> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
 
-        if(contattiSelezionati.size() == 0) return;
-
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        if(contattiSelezionati.isEmpty()) return;
 
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(stage);
@@ -83,14 +97,21 @@ public class MenuPrincipaleController {
 
     private void eliminaContatto() {
 
-        ContattoV2 contattoSelezionato = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
-        listaContatti.remove(contattoSelezionato);
+        List<ContattoV2> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
+
+        if(contattiSelezionati.isEmpty()) return;
+
+        for(ContattoV2 contattoV2 : contattiSelezionati) {
+
+            rubrica.rimuoviContatto(contattoV2);
+            listaContatti.remove(contattoV2);
+        }
+
+        FileManager.salvaRubrica(rubrica);
     }
 
     //metodo completato
     private void importaContatto(ActionEvent event) {
-
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
@@ -99,7 +120,13 @@ public class MenuPrincipaleController {
         File file = fileChooser.showOpenDialog(stage);
 
         if(file == null) return;
-        FileManager.importaContatti(file);
+
+        FileManager.importaContatti(file, rubrica);
+
+        listaContatti.clear();
+        listaContatti.addAll(rubrica.getContatti());
+
+        FileManager.salvaRubrica(rubrica);
     }
 
     //metodo completato
@@ -120,12 +147,15 @@ public class MenuPrincipaleController {
         ContattoV2 contatto = null;
         mcController.setContatto(contatto);
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(menuContatto);
     }
 
-//    public void nuovoContatto(ContattoV2 contatto) {
-//
-//
-//    }
+    public void passaNuovoContatto(ContattoV2 contatto) {
+
+        rubrica.aggiungiContatto(contatto);
+
+        listaContatti.add(contatto);
+
+        FileManager.salvaRubrica(rubrica);
+    }
 }
