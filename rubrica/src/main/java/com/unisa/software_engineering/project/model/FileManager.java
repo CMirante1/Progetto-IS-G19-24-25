@@ -46,7 +46,13 @@ public abstract class FileManager {
         }
     }
 
-
+    /**
+     * @brief Carica la rubrica srializzata salvata in memoria
+     *
+     * Legge i dati serializzati all'interno di un file e li converte in Rubrica 
+     * 
+     * @return rubrica restituisce la rubrica letta dal file.
+     */
     public static Rubrica caricaRubrica() {
 
         File file = new File("res/" + FILE_BACKUP);
@@ -73,27 +79,36 @@ public abstract class FileManager {
     /**
      * @brief Esporta i contatti selezionati
      *
-     * Esporta la lista di contatti selezionati dall'utente e li serializza in un file .vcf
+     * Esporta la lista di contatti selezionati dall'utente formattati in formato .vcf
      *
-     * @param contatti I contatti da esportare
+     * @param contatti riceve in input i contatti da esportare
      *
      */
-    public static void esportaContatti(List<ContattoV2> contatti, File file) {
+    public static void esportaContatti(List<Contatto> contatti) {
 
+        FileChooser fileChooser = new FileChooser();
+
+        File file = fileChooser.showSaveDialog(stage);
+
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
+        fileChooser.getExtensionFilters().add(filtro);
+
+        if(!file.getName().endsWith(".vcf"))
+            file = new File(file.getAbsolutePath() + ".vcf");
 
         try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())))) {
 
             String[] numeriDiTelefono;
             String[] emails;
 
-            for(ContattoV2 contatto : contatti) {
+            for(Contatto contatto : contatti) {
 
-                numeriDiTelefono = contatto.getNumeri();
+                numeriDiTelefono = contatto.getNumeriDiTelefono();
                 emails = contatto.getEmails();
 
                 pw.println("BEGIN:VCARD");
                 pw.println("VERSION:4.0");
-                pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";");
+                pw.println("N:" + contatto.getCognomi() + ";" + contatto.getNomi() + ";");
                 for(int i = 0; i < numeriDiTelefono.length; i++) {
 
                     if(numeriDiTelefono[i] == null) break;
@@ -117,24 +132,23 @@ public abstract class FileManager {
     }
 
     /**
-<<<<<<< HEAD
-=======
-     *
->>>>>>> a4bfe4d14dab1d207cfa026526ca5d24d04d1063
-     *
+     * 
      * @brief Importa i contatti selezionati
-     *
-     * Importa la rubrica dei contatti selezionata dall'utente e aggiunge quelli semanticamente corretti,
-     * per quelli incorretti appare un pop up riassuntivo di errore.
-     *
-     * Al momento non ha alcun senso la scelta di questi parametri
-     * Se gli elemnti selezionati dall'utente sono contatti significa che l'utente sta già
-     * scegliendo da un file, a che serve nomeFile?
-     * Ma poi non può importare un intera rubrica .vcf?
-     *
+     * 
+     * Riceve in inngresso i file selezioanti dall'utente e ne legge i contatti contenuti importandoli nella rubtrica
+     * 
+     * @param nomeFile
      */
-    public static void importaContatti(File fileSelezionato) {
+    public static void importaContatti(String nomeFile) {
 
+        FileChooser fileChooser = new FileChooser();
+
+        File fileSelezionato = fileChooser.showOpenDialog(stage);
+
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
+        fileChooser.getExtensionFilters().add(filtro);
+
+        if(fileSelezionato == null) return;
         String riga;
         String nome;
         String cognome;
@@ -182,6 +196,7 @@ public abstract class FileManager {
 
     }
 
+    
     public static void setStage(Stage stagePrincipale) {
 
         stage = stagePrincipale;

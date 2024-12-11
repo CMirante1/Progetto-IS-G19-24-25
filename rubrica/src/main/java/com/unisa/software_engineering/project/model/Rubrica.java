@@ -23,7 +23,7 @@ public class Rubrica implements Serializable {
 
     /**
      * @constructor
-     * EasterEgg: (┛◉Д◉)┛彡┻━┻
+     * 
      */
     public Rubrica(){
         contatti = new ArrayList<>();

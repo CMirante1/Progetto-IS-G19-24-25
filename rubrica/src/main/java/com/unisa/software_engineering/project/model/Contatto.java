@@ -28,6 +28,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     private byte[] immagineProfilo;
 
     private final int MAX_NUMERI = 3;
+    private final int MAX_EMAIL = 3;
 
     /**
      * @constructor
@@ -40,6 +41,8 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     public Contatto(String nomi, String cognomi, String[] numeriDiTelefono, String[] emails, BufferedImage immagineProfilo) throws InfoContattoException {
 
         nomeCompleto = new NomeCompleto(nomi, cognomi);
+        this.numeriDiTelefono = new NumeroDiTelefono[MAX_NUMERI];
+        this.emails = new Email[MAX_EMAIL];
 
         for(int index = 0; index < this.numeriDiTelefono.length; index++)
             this.numeriDiTelefono[index] = new NumeroDiTelefono(numeriDiTelefono[index]);
@@ -66,7 +69,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
 
         String[] numeriDiTelefono = new String[this.numeriDiTelefono.length];
         for(int index = 0; index < this.numeriDiTelefono.length; index++)
-        numeriDiTelefono[index] = this.numeriDiTelefono[index].getInfo();
+            numeriDiTelefono[index] = this.numeriDiTelefono[index].getInfo();
         return numeriDiTelefono;
     }
 
@@ -77,20 +80,6 @@ public class Contatto implements Comparable<Contatto>, Serializable{
             emails[index] = this.emails[index].getInfo();
         return emails;
     }
-
-    /* //La verifica avviene in automatico quando si chiama setInfo();
-    public boolean verificaNome(){ return Nomi.verifica() && Cognomi.verifica(); }
-
-    public boolean verificaNumeri() {
-        for(InfoContatto info : numeriDiTelefono) if(!info.verifica()) return false;
-        return true;
-    }
-
-    public boolean verificaEmail() {
-        for(InfoContatto info : emails) if(!info.verifica()) return false;
-        return true;
-    }
-    */
 
     /**
      * @brief Converte la BufferedImage a byte[]
@@ -116,7 +105,7 @@ public class Contatto implements Comparable<Contatto>, Serializable{
     * chiamano la get
     *
     * @author gruppo_19
-     * @return
+    * @return
     * @date 06/12/24
     * @throws IOException
     */
