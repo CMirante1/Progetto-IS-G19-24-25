@@ -13,7 +13,7 @@ public class Email extends InfoContatto implements Serializable{
         if (!(info == null ||
             info.trim().isEmpty() ||
             !info.matches(
-            "^[a-zA-Z0-9_+&*-]+(?:\\\\.[a-zA-Z0-9_+&*-]+)*@[a-zA-Z0-9-]+(?:\\\\.[a-zA-Z0-9-]+)*\\\\.[a-zA-Z]{2,7}$")))
-            throw new InfoContattoException("");
+            "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")))
+            throw new InfoContattoException("Email non valida");
     }
 }
