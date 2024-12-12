@@ -128,7 +128,7 @@ public abstract class FileManager {
      * <p>
      * Riceve in inngresso i file selezioanti dall'utente e ne legge i contatti contenuti importandoli nella rubtrica
      */
-    public static void importaContatti(File file, Rubrica rubrica) {
+    public static void importaContatti(File file, Rubrica rubrica) throws IOException{
 
         String riga;
         String nome;
@@ -169,8 +169,9 @@ public abstract class FileManager {
                 }
 
             }
-        } catch (IOException   e) {
+        } catch (IOException e) {
             System.out.println("Errore nella lettura del file!");
+            throw e;
         } catch (InfoContattoException ex) {
             contattiNonImportati++;
         }
