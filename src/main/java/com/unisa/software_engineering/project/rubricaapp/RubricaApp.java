@@ -4,11 +4,8 @@ package com.unisa.software_engineering.project.rubricaapp;
  * @file RubricaApp.java
  * @brief Classe principale per l'avvio dell'applicazione della rubrica.
  */
-<<<<<<< HEAD
 
-import com.unisa.software_engineering.project.controller.MenuContattoController;
-=======
->>>>>>> c3aac8fcd74f3dbf861c3a65854a29ed39e87ec8
+
 import com.unisa.software_engineering.project.controller.MenuPrincipaleController;
 import com.unisa.software_engineering.project.view.MenuPrincipaleView;
 import com.unisa.software_engineering.project.model.FileManager;
