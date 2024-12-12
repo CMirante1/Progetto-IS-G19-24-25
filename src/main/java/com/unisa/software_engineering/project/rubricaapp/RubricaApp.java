@@ -4,9 +4,7 @@ package com.unisa.software_engineering.project.rubricaapp;
  *
  * @author andre
  */
-import com.unisa.software_engineering.project.controller.MenuContattoController;
 import com.unisa.software_engineering.project.controller.MenuPrincipaleController;
-import com.unisa.software_engineering.project.view.MenuContattoView;
 import com.unisa.software_engineering.project.view.MenuPrincipaleView;
 import com.unisa.software_engineering.project.model.FileManager;
 import com.unisa.software_engineering.project.model.Rubrica;
@@ -17,6 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class RubricaApp extends Application {
@@ -26,7 +25,15 @@ public class RubricaApp extends Application {
     @Override
     public void start(Stage primaryStage)  {
 
-        rubrica = FileManager.caricaRubrica();
+        try {
+
+            rubrica = FileManager.caricaRubrica();
+        } catch (IOException | ClassNotFoundException e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Errore nella lettura della rubrica!");
+            alert.showAndWait();
+        }
 
         MenuPrincipaleView mpView = new MenuPrincipaleView();
 
@@ -51,6 +58,15 @@ public class RubricaApp extends Application {
 
         if (scelta.isPresent() && scelta.get() == ButtonType.OK) {
 
+            try {
+
+                FileManager.salvaRubrica(rubrica);
+            } catch (IOException e) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Errore nel salvataggio della rubrica");
+                alert.showAndWait();
+            }
             primaryStage.close();
             System.exit(0);
         } else {
