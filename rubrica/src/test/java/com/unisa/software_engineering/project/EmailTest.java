@@ -28,7 +28,7 @@ public class EmailTest {
     @Test
     void testInvalidEmailMissingDomain() {
         try {
-            new Email("test@");
+            new Email("testexample@");
             fail("Exception should have been thrown for an invalid email");
         } catch (InfoContattoException e) {
             // expected exception

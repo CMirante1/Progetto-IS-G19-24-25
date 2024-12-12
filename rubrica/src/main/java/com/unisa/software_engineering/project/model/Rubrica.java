@@ -26,6 +26,7 @@ public class Rubrica implements Serializable {
      *
      */
     public Rubrica(){
+        
         contatti = new ArrayList<>();
     }
 
@@ -47,9 +48,10 @@ public class Rubrica implements Serializable {
     public void rimuoviContatto(ContattoV2 contatto){
 
         if(contatti.contains(contatto)) contatti.remove(contatto);
-
     }
 
     public List<ContattoV2> getContatti(){
-        return contatti; }
+
+        return contatti;
+    }
  }
