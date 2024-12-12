@@ -15,7 +15,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.List;
-
+/**
+ * @file MenuPrincipaleController.java
+ * @class MenuPrincipaleController
+ * @brief Gestisce le azioni dell'interfaccia grafica e l'interazione con il la Rubrica.
+ */
 public class MenuPrincipaleController {
 
     private MenuPrincipaleView mpView;
@@ -26,7 +30,13 @@ public class MenuPrincipaleController {
     private MenuContattoView mcView;
     private MenuContattoController mcController;
     private Scene menuContatto;
-
+    /**
+     * @brief Costruttore della del controller del menu principale.
+     * @param rubrica La rubrica su cui operare.
+     * @param stage La finestra principale dell'applicazione.
+     * @param mpView La view del menu principale.
+     * @param menuPrincipale La scena principale per tornare indietro.
+     */
     public MenuPrincipaleController(Rubrica rubrica, Stage stage,  MenuPrincipaleView mpView, Scene menuPrincipale) {
 
         this.rubrica = rubrica;
@@ -146,7 +156,10 @@ public class MenuPrincipaleController {
 
         stage.setScene(menuContatto);
     }
-
+     /**
+     * @brief Aggiunge un contatto alla rubrica e aggiorna la vista.
+     * @param contatto Il nuovo contatto da aggiungere.
+     */
     public void passaNuovoContatto(ContattoV3 contatto) {
 
         rubrica.aggiungiContatto(contatto);

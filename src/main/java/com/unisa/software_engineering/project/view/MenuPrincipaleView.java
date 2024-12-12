@@ -16,7 +16,11 @@ public class MenuPrincipaleView extends AnchorPane {
     private Button aggiungiBtn, importaBtn;
     private ContextMenu menuContestuale;
     private MenuItem eliminaBtn, esportaBtn;
-
+/**
+ * @file MenuPrincipaleView.java
+ * @class MenuPrincipaleView
+ * @brief Gestisce l'interfaccia grafica principale dell'applicazione per la visualizzazione e gestione dei contatti.
+ */
     public MenuPrincipaleView() {
 
         super();

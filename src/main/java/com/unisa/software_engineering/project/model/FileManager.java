@@ -1,3 +1,11 @@
+/**
+ * @class FileManager
+ * @brief Gestisce il caricamento, il salvataggio, l'importazione e l'esportazione dei contatti.
+ *
+ * Questa classe offre metodi statici per gestire la persistenza dei dati della rubrica,
+ * inclusa la lettura e scrittura su file, e l'importazione/esportazione di contatti in formato .vcf
+ *
+ */
 package com.unisa.software_engineering.project.model;
 
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
@@ -27,11 +35,12 @@ public abstract class FileManager {
     private static Alert alert;
     private static Stage stage;
     /**
-     * @brief Salva la rubrica sulla memoria di massa
+     * @brief Salva la rubrica su file.
      *
-     * Serializza la rubrica e i contatti al suo interno e la salva ad un path predefinito
+     * Serializza la rubrica e i contatti contenuti al suo interno, salvandoli
+     * in un file di backup "FILE_BACKUP"
      *
-     * @param rubrica La rubrica da salvare
+     * @param rubrica La rubrica da salvare.
      */
     public static void salvaRubrica(Rubrica rubrica) {
 
@@ -47,11 +56,12 @@ public abstract class FileManager {
     }
 
     /**
-     * @brief Carica la rubrica srializzata salvata in memoria
+     * @brief Carica la rubrica salvata su file.
      *
-     * Legge i dati serializzati all'interno di un file e li converte in Rubrica
+     * Legge i dati serializzati da un file di backup e li converte in un'istanza della classe Rubrica.
+     * Se il file non esiste, restituisce una nuova rubrica vuota.
      *
-     * @return rubrica restituisce la rubrica letta dal file.
+     * @return rubrica. Ritorna la rubrica contenente i dati caricati dal file.
      */
     public static Rubrica caricaRubrica() {
 

@@ -1,3 +1,5 @@
+
+
 package com.unisa.software_engineering.project.controller;
 
 import com.unisa.software_engineering.project.model.ContattoV3;
@@ -9,12 +11,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * @file MenuContattoController.java
+ * @class MenuContattoController
+ * @brief Gestisce le azioni dell'interfaccia grafica e l'interazione con i contatti.
+ */
 public class MenuContattoController {
 
     private MenuContattoView mcView;
     private Scene menuPrincipale;
     private ContattoV3 contattoRicevuto;
-
+    /**
+     * @brief Costruttore del controller del Menu contatto.
+     * @param mcView La view associata al menu contatto.
+     * @param menuPrincipale La scena principale a cui ritornare alla fine delle operazioni.
+     */
     public MenuContattoController(MenuContattoView mcView, Scene menuPrincipale) {
 
         this.mcView = mcView;
@@ -52,7 +63,10 @@ public class MenuContattoController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(menuPrincipale);
     }
-
+    /**
+     * @brief Imposta il contatto corrente da visualizzare o modificare all'interno del menu contatto.
+     * @param contatto Il contatto da gestire.
+     */
     public void setContatto(ContattoV3 contatto) {
 
         this.contattoRicevuto = contatto;

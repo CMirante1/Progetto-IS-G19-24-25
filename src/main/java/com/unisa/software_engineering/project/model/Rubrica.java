@@ -49,7 +49,11 @@ public class Rubrica implements Serializable {
         if(contatti.contains(contatto)) contatti.remove(contatto);
 
     }
-
+    /**
+     * 
+     * @brief Rimuove un contatto dalla rubrica
+     * @return contatti ritorna il riferimento alla lista di contatti
+     */
     public List<ContattoV3> getContatti(){
         return contatti; }
  }

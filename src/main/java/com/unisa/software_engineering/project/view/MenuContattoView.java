@@ -10,6 +10,11 @@ import javafx.scene.layout.AnchorPane;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * @file MenuContattoView.java
+ * @class MenuContattoView
+ * @brief Definisce l'interfaccia grafica per la gestione dei dettagli di un contatto
+ */
 public class MenuContattoView extends AnchorPane {
 
     private TextField nomeTF, cognomeTF;

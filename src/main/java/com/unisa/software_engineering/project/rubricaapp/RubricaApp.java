@@ -1,9 +1,10 @@
 package com.unisa.software_engineering.project.rubricaapp;
 
 /**
- *
- * @author andre
+ * @file RubricaApp.java
+ * @brief Classe principale per l'avvio dell'applicazione della rubrica.
  */
+
 import com.unisa.software_engineering.project.controller.MenuContattoController;
 import com.unisa.software_engineering.project.controller.MenuPrincipaleController;
 import com.unisa.software_engineering.project.view.MenuContattoView;
@@ -19,10 +20,18 @@ import javafx.stage.WindowEvent;
 
 import java.util.Optional;
 
+/**
+ * @class RubricaApp
+ * @brief Classe principale che estende `Application` per l'avvio e gestione della GUI dell'applicazione.
+ */
+
 public class RubricaApp extends Application {
 
-    private Rubrica rubrica;  // La lista fisica dei contatti
-
+    private Rubrica rubrica; 
+     /**
+     * @brief Metodo principale di avvio dell'applicazione.
+     * @param primaryStage Lo stage principale dell'applicazione.
+     */
     @Override
     public void start(Stage primaryStage)  {
 
@@ -59,7 +68,10 @@ public class RubricaApp extends Application {
         }
     }
 
-    // Metodo che avvia l'applicazione
+     /**
+     * @brief Metodo principale per l'avvio dell'applicazione.
+     * @param args Argomenti della linea di comando (non utilizzati).
+     */
     public static void main(String[] args) {
         launch(args);
     }
