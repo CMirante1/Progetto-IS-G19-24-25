@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-import java.awt.image.BufferedImage;
-
 public class MenuContattoView extends AnchorPane {
 
     private TextField nomeTF, cognomeTF;
@@ -28,7 +26,7 @@ public class MenuContattoView extends AnchorPane {
         inizializzaImmagini();
         inizializzaPulsanti();
 
-        this.getChildren().addAll(escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, nomeLB, cognomeLB);
+        this.getChildren().addAll(escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, nomeLB, cognomeLB, nomeTF, cognomeTF);
         this.getChildren().addAll(numeriLB[0], numeriLB[1], numeriLB[2], emailsLB[0], emailsLB[1], emailsLB[2],immagineProfilo);
         this.getChildren().addAll(numeriTF[0], numeriTF[1], numeriTF[2], emailsTF[0], emailsTF[1], emailsTF[2]);
     }
@@ -55,22 +53,18 @@ public class MenuContattoView extends AnchorPane {
             numeriTF[i] = new TextField();
             numeriTF[i].setPrefWidth(190);
             numeriTF[i].setPrefHeight(30);
-            numeriTF[i].setLayoutY(385);
+            numeriTF[i].setLayoutX(35 + 250 * i);
+            numeriTF[i].setLayoutY(465);
         }
-        numeriTF[0].setLayoutY(35);
-        numeriTF[1].setLayoutY(285);
-        numeriTF[2].setLayoutY(525);
 
         for(int i = 0; i < emailsTF.length; i++) {
 
             emailsTF[i] = new TextField();
             emailsTF[i].setPrefWidth(190);
             emailsTF[i].setPrefHeight(30);
+            emailsTF[i].setLayoutX(35 + 250 * i);
             emailsTF[i].setLayoutY(545);
         }
-        emailsTF[0].setLayoutX(35);
-        emailsTF[1].setLayoutX(285);
-        emailsTF[2].setLayoutX(385);
     }
 
     private void inizializzaEtichette() {
@@ -95,22 +89,18 @@ public class MenuContattoView extends AnchorPane {
             numeriLB[i] = new Label("Numero " + i + ":");
             numeriLB[i].setPrefWidth(70);
             numeriLB[i].setPrefHeight(20);
+            numeriLB[i].setLayoutX(35 + 250 * i);
             numeriLB[i].setLayoutY(425);
         }
-        numeriLB[0].setLayoutX(35);
-        numeriLB[1].setLayoutX(285);
-        numeriLB[2].setLayoutX(535);
 
         for(int i = 0; i < emailsLB.length; i++) {
 
             emailsLB[i] = new Label("Email " + i + ":");
             emailsLB[i].setPrefWidth(70);
             emailsLB[i].setPrefHeight(20);
+            emailsLB[i].setLayoutX(35 + 250 * i);
             emailsLB[i].setLayoutY(505);
         }
-        emailsLB[0].setLayoutX(35);
-        emailsLB[1].setLayoutX(285);
-        emailsLB[2].setLayoutX(535);
     }
 
     private void inizializzaImmagini() {
