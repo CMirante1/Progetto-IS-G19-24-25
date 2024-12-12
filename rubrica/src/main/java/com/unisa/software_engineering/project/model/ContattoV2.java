@@ -63,7 +63,7 @@ public class ContattoV2 implements Comparable<ContattoV2>, Serializable {
         if (nome == null || cognome == null || numeri == null || emails == null)
             throw new InfoContattoException("Parametri null");
         if(nome.equals("") && cognome.equals(""))
-            throw new InfoContattoException("Il campo nome o cognome non possono essere vuoti");
+            throw new InfoContattoException("I campi nome e cognome non possono essere entrambi vuoti");
         if (!nome.matches("[a-zA-Z0-9]+"))
             throw new InfoContattoException("Il nome non può contenere caratteri speciali!");
         if (!cognome.matches("[a-zA-Z0-9]+"))
