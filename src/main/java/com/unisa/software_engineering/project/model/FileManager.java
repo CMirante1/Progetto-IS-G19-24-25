@@ -40,7 +40,7 @@ public abstract class FileManager {
      */
     public static void salvaRubrica(Rubrica rubrica) throws IOException {
 
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("res/" + FILE_BACKUP));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/res/" + FILE_BACKUP));
             oos.writeObject(rubrica);
        }
 
@@ -54,20 +54,17 @@ public abstract class FileManager {
      */
     public static Rubrica caricaRubrica() throws IOException, ClassNotFoundException {
 
-        File file = new File(System.getProperty("user.dir") + "res/" + FILE_BACKUP);
-
-        Rubrica rubrica = null;
+        File file = new File(System.getProperty("user.dir") + "/res/" + FILE_BACKUP);
 
         if(file.exists()) {
 
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()));
-                rubrica = (Rubrica) ois.readObject();
+                Rubrica rubrica = (Rubrica) ois.readObject();
 
                 return rubrica;
         }
-        else rubrica = new Rubrica();
 
-        return rubrica;
+        return  new Rubrica();
     }
 
     /**

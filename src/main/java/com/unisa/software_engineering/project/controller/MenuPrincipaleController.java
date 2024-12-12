@@ -118,6 +118,9 @@ public class MenuPrincipaleController {
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(menuContatto);
+
+            listaContatti.sort(null);
+            mpView.getTabellaContatti().refresh();
         }
     }
 
@@ -145,6 +148,7 @@ public class MenuPrincipaleController {
             alert.showAndWait();
         }
 
+        rubrica.getContatti().sort(null);
         listaContatti.clear();
         listaContatti.addAll(rubrica.getContatti());
     }
@@ -157,6 +161,8 @@ public class MenuPrincipaleController {
 
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showSaveDialog(stage);
+
+        if(file == null) return;
 
         if(!file.getName().endsWith(".vcf"))
             file = new File(file.getAbsolutePath() + ".vcf");
@@ -180,5 +186,6 @@ public class MenuPrincipaleController {
         rubrica.aggiungiContatto(contatto);
 
         listaContatti.add(contatto);
+        listaContatti.sort(null);
     }
 }

@@ -55,11 +55,11 @@ public class ContattoV3 implements Serializable {
             if(!email.isEmpty() && (email.split("@").length != 2))
                 throw new InfoContattoException("Formato email non valido!");
 
-            if (!email.split("@")[0]
+            if (!email.isEmpty() && !email.split("@")[0]
                 .matches("^[a-zA-Z0-9._+&*-]+([a-zA-Z0-9._+&*-]*[a-zA-Z0-9])?$"))
                     throw new InfoContattoException("Local part dell'email non valida!");
 
-            if (!email.split("@")[1]
+            if (!email.isEmpty() && !email.split("@")[1]
                 .matches("^[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$"))
                     throw new InfoContattoException("Dominio dell'email non valido");
         }
