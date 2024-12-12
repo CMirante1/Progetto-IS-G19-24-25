@@ -1,9 +1,6 @@
 package com.unisa.software_engineering.project.controller;
 
-import com.unisa.software_engineering.project.model.Contatto;
-import com.unisa.software_engineering.project.model.ContattoV2;
-import com.unisa.software_engineering.project.model.FileManager;
-import com.unisa.software_engineering.project.model.Rubrica;
+import com.unisa.software_engineering.project.model.*;
 import com.unisa.software_engineering.project.view.MenuContattoView;
 import com.unisa.software_engineering.project.view.MenuPrincipaleView;
 import javafx.collections.FXCollections;
@@ -23,7 +20,7 @@ public class MenuPrincipaleController {
 
     private MenuPrincipaleView mpView;
     private Rubrica rubrica;
-    private ObservableList<ContattoV2> listaContatti;
+    private ObservableList<ContattoV3> listaContatti;
 
     private Stage stage;
     private MenuContattoView mcView;
@@ -52,9 +49,9 @@ public class MenuPrincipaleController {
 
         mpView.getBarraRicerca().textProperty().addListener((observable, vecchiaStringa, nuovaStringa) -> {
 
-            ObservableList<ContattoV2> listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
+            ObservableList<ContattoV3> listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
 
-            for(ContattoV2 contatto : listaContatti) {
+            for(ContattoV3 contatto : listaContatti) {
 
                 if(contatto.getNome().toLowerCase().contains(nuovaStringa.toLowerCase()) ||
                     contatto.getCognome().toLowerCase().contains(nuovaStringa.toLowerCase()))
@@ -79,7 +76,7 @@ public class MenuPrincipaleController {
 
     private void esportaContatto(ActionEvent event) {
 
-        List<ContattoV2> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
+        List<ContattoV3> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
 
         if(contattiSelezionati.isEmpty()) return;
 
@@ -97,14 +94,14 @@ public class MenuPrincipaleController {
 
     private void eliminaContatto() {
 
-        List<ContattoV2> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
+        List<ContattoV3> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
 
         if(contattiSelezionati.isEmpty()) return;
 
-        for(ContattoV2 contattoV2 : contattiSelezionati) {
+        for(ContattoV3 contattoV3 : contattiSelezionati) {
 
-            rubrica.rimuoviContatto(contattoV2);
-            listaContatti.remove(contattoV2);
+            rubrica.rimuoviContatto(contattoV3);
+            listaContatti.remove(contattoV3);
         }
 
         FileManager.salvaRubrica(rubrica);
@@ -134,7 +131,7 @@ public class MenuPrincipaleController {
 
         if(event.getClickCount() == 2) {
 
-            ContattoV2 contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
+            ContattoV3 contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
             mcController.setContatto(contatto);
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -144,13 +141,13 @@ public class MenuPrincipaleController {
     //metodo completato
     private void aggiungiContatto(ActionEvent event) {
 
-        ContattoV2 contatto = null;
+        ContattoV3 contatto = null;
         mcController.setContatto(contatto);
 
         stage.setScene(menuContatto);
     }
 
-    public void passaNuovoContatto(ContattoV2 contatto) {
+    public void passaNuovoContatto(ContattoV3 contatto) {
 
         rubrica.aggiungiContatto(contatto);
 

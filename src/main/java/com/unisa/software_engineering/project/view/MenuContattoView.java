@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import java.awt.image.BufferedImage;
+
 public class MenuContattoView extends AnchorPane {
 
     private TextField nomeTF, cognomeTF;

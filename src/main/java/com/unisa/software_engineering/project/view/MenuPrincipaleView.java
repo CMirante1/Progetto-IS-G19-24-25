@@ -1,6 +1,7 @@
 package com.unisa.software_engineering.project.view;
 
 import com.unisa.software_engineering.project.model.ContattoV2;
+import com.unisa.software_engineering.project.model.ContattoV3;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -8,9 +9,9 @@ import javafx.scene.layout.AnchorPane;
 
 public class MenuPrincipaleView extends AnchorPane {
 
-    private TableView<ContattoV2> tabellaContatti;
-    private TableColumn<ContattoV2, String> cognomeCln;
-    private TableColumn<ContattoV2, String> nomeCln;
+    private TableView<ContattoV3> tabellaContatti;
+    private TableColumn<ContattoV3, String> cognomeCln;
+    private TableColumn<ContattoV3, String> nomeCln;
     private TextField barraRicerca;
     private Button aggiungiBtn, importaBtn;
     private ContextMenu menuContestuale;
@@ -92,17 +93,17 @@ public class MenuPrincipaleView extends AnchorPane {
         tabellaContatti.setContextMenu(menuContestuale);
     }
 
-    public TableView<ContattoV2> getTabellaContatti() {
+    public TableView<ContattoV3> getTabellaContatti() {
 
         return tabellaContatti;
     }
 
-    public TableColumn<ContattoV2, String> getCognomeCln() {
+    public TableColumn<ContattoV3, String> getCognomeCln() {
 
         return cognomeCln;
     }
 
-    public TableColumn<ContattoV2, String> getNomeCln() {
+    public TableColumn<ContattoV3, String> getNomeCln() {
 
         return nomeCln;
     }

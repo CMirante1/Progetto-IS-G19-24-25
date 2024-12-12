@@ -1,6 +1,6 @@
 package com.unisa.software_engineering.project.controller;
 
-import com.unisa.software_engineering.project.model.ContattoV2;
+import com.unisa.software_engineering.project.model.ContattoV3;
 import com.unisa.software_engineering.project.view.MenuContattoView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -13,7 +13,7 @@ public class MenuContattoController {
 
     private MenuContattoView mcView;
     private Scene menuPrincipale;
-    private ContattoV2 contattoRicevuto;
+    private ContattoV3 contattoRicevuto;
 
     public MenuContattoController(MenuContattoView mcView, Scene menuPrincipale) {
 
@@ -53,7 +53,7 @@ public class MenuContattoController {
         stage.setScene(menuPrincipale);
     }
 
-    public void setContatto(ContattoV2 contatto) {
+    public void setContatto(ContattoV3 contatto) {
 
         this.contattoRicevuto = contatto;
 

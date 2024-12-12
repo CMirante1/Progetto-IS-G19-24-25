@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.software_engineering.project.controller.ControllerMenuContatto">
+   <children>
+      <TextField fx:id="nomeTF" layoutX="35.0" layoutY="385.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.bottomAnchor="199.0" AnchorPane.topAnchor="370.0" />
+      <TextField fx:id="cognomeTF" layoutX="285.0" layoutY="385.0" AnchorPane.topAnchor="370.0" />
+      <TextField layoutX="285.0" layoutY="465.0" AnchorPane.topAnchor="460.0" />
+      <TextField layoutX="525.0" layoutY="465.0" prefWidth="190.0" AnchorPane.topAnchor="463.0" />
+      <TextField layoutX="35.0" layoutY="465.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.topAnchor="460.0" />
+      <TextField layoutX="35.0" layoutY="545.0" prefHeight="30.0" prefWidth="190.0" />
+      <TextField layoutX="285.0" layoutY="545.0" />
+      <TextField layoutX="529.0" layoutY="545.0" />
+      <Label fx:id="nomeLBL" layoutX="35.0" layoutY="345.0" text="Nome:" />
+      <Label fx:id="cognomeLBL" layoutX="285.0" layoutY="346.0" text="Cognome:" />
+      <Label fx:id="cell1LBL" layoutX="35.0" layoutY="425.0" text="Cell1:" />
+      <Label fx:id="cell2LBL" layoutX="285.0" layoutY="425.0" text="Cell2:" />
+      <Label fx:id="cell3LBL" layoutX="525.0" layoutY="425.0" text="Cell3" />
+      <Label fx:id="email1LBL" layoutX="35.0" layoutY="505.0" text="Email1:" />
+      <Label fx:id="email2LBL" layoutX="281.0" layoutY="494.0" text="Email2." />
+      <Label fx:id="email3LBL" layoutX="525.0" layoutY="494.0" text="Email3:" />
+      <ImageView fx:id="immagineProfilo" fitHeight="255.0" fitWidth="255.0" layoutX="220.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../res/immagine-profilo-default.jpg" />
+         </image></ImageView>
+      <Button fx:id="modificaBtn" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#modificaContatto" prefHeight="39.0" prefWidth="94.0" text="Modifica">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="salvaBtn" layoutX="635.0" layoutY="10.0" mnemonicParsing="false" onAction="#salvaContatto" prefHeight="39.0" prefWidth="93.0" text="Salva">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="escBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#tornaIndietro" prefHeight="30.0" prefWidth="95.0">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="immagineBtn" layoutX="220.0" layoutY="275.0" mnemonicParsing="false" onAction="#aggiungiImmagine" text="Aggiungi immagine profilo">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

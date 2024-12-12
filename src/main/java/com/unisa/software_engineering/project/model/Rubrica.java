@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class Rubrica implements Serializable {
 
-    private List<ContattoV2> contatti;
+    private List<ContattoV3> contatti;
 
     /**
      * @constructor
@@ -34,7 +34,7 @@ public class Rubrica implements Serializable {
      *
      * @param contatto Il contatto già verificato
      */
-    public void aggiungiContatto(ContattoV2 contatto){
+    public void aggiungiContatto(ContattoV3 contatto){
 
         contatti.add(contatto);
     }
@@ -44,12 +44,12 @@ public class Rubrica implements Serializable {
      *
      * @param contatto Il contatto da rimuovere
      */
-    public void rimuoviContatto(ContattoV2 contatto){
+    public void rimuoviContatto(ContattoV3 contatto){
 
         if(contatti.contains(contatto)) contatti.remove(contatto);
 
     }
 
-    public List<ContattoV2> getContatti(){
+    public List<ContattoV3> getContatti(){
         return contatti; }
  }

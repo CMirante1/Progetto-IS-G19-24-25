@@ -83,14 +83,14 @@ public abstract class FileManager {
      * <p>
      * Esporta la lista di contatti selezionati dall'utente formattati in formato .vcf
      */
-    public static void esportaContatti(List<ContattoV2> contatti, File file) {
+    public static void esportaContatti(List<ContattoV3> contatti, File file) {
 
         try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())))) {
 
             String[] numeriDiTelefono;
             String[] emails;
 
-            for(ContattoV2 contatto : contatti) {
+            for(ContattoV3 contatto : contatti) {
 
                 numeriDiTelefono = contatto.getNumeri();
                 emails = contatto.getEmails();
@@ -163,7 +163,7 @@ public abstract class FileManager {
                 }
                 else if(riga.startsWith("END")) {
                     if (nome != null || cognome != null) {
-                        ContattoV2 contatto = new ContattoV2(nome, cognome, numeri, emails);
+                        ContattoV3 contatto = new ContattoV3(nome, cognome, numeri, emails, null);
                         rubrica.aggiungiContatto(contatto);
                     }
                 }

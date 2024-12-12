@@ -18,3 +18,4 @@
 # Log e file temporanei
 *.log
 *.tmp
+/.idea/
