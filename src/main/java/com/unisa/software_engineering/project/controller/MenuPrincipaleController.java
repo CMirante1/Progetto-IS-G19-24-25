@@ -1,5 +1,6 @@
 package com.unisa.software_engineering.project.controller;
 
+import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 import com.unisa.software_engineering.project.model.*;
 import com.unisa.software_engineering.project.view.MenuContattoView;
 import com.unisa.software_engineering.project.view.MenuPrincipaleView;
@@ -9,11 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 /**
  * @file MenuPrincipaleController.java
@@ -91,15 +94,20 @@ public class MenuPrincipaleController {
         if(contattiSelezionati.isEmpty()) return;
 
         FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(stage);
-
-        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
-        fileChooser.getExtensionFilters().add(filtro);
+        File file = fileChooser.showSaveDialog(stage);
 
         if(!file.getName().endsWith(".vcf"))
             file = new File(file.getAbsolutePath() + ".vcf");
 
-        FileManager.esportaContatti(contattiSelezionati, file);
+        try {
+
+            FileManager.esportaContatti(contattiSelezionati, file);
+        } catch (IOException e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Errore nell'esportazione dei contatti!");
+            alert.showAndWait();
+        }
     }
 
     private void eliminaContatto() {
@@ -111,10 +119,9 @@ public class MenuPrincipaleController {
         for(ContattoV3 contattoV3 : contattiSelezionati) {
 
             rubrica.rimuoviContatto(contattoV3);
-            listaContatti.remove(contattoV3);
         }
 
-        FileManager.salvaRubrica(rubrica);
+        listaContatti.removeAll(contattiSelezionati);
     }
 
     //metodo completato
@@ -125,15 +132,25 @@ public class MenuPrincipaleController {
         fileChooser.getExtensionFilters().add(filtro);
 
         File file = fileChooser.showOpenDialog(stage);
+        int contattiImportati = 0;
 
         if(file == null) return;
 
-        FileManager.importaContatti(file, rubrica);
+        try {
+
+            contattiImportati = FileManager.importaContatti(file, rubrica);
+        } catch (IOException e) {
+
+            System.out.println("Errore nella lettura del file!");
+        } catch (InfoContattoException e) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(contattiImportati + "non stati importati!");
+            alert.showAndWait();
+        }
 
         listaContatti.clear();
         listaContatti.addAll(rubrica.getContatti());
-
-        FileManager.salvaRubrica(rubrica);
     }
 
     //metodo completato
@@ -145,6 +162,7 @@ public class MenuPrincipaleController {
             mcController.setContatto(contatto);
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(menuContatto);
         }
     }
 
@@ -165,7 +183,5 @@ public class MenuPrincipaleController {
         rubrica.aggiungiContatto(contatto);
 
         listaContatti.add(contatto);
-
-        FileManager.salvaRubrica(rubrica);
     }
 }

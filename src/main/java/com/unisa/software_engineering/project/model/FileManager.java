@@ -10,7 +10,6 @@ package com.unisa.software_engineering.project.model;
 
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.List;
@@ -32,8 +31,6 @@ import java.util.List;
 public abstract class FileManager {
 
     private static final String FILE_BACKUP = "rubrica.dat";
-    private static Alert alert;
-    private static Stage stage;
     /**
      * @brief Salva la rubrica su file.
      *
@@ -42,18 +39,11 @@ public abstract class FileManager {
      *
      * @param rubrica La rubrica da salvare.
      */
-    public static void salvaRubrica(Rubrica rubrica) {
+    public static void salvaRubrica(Rubrica rubrica) throws IOException {
 
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("res/" + FILE_BACKUP))) {
-
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("res/" + FILE_BACKUP));
             oos.writeObject(rubrica);
-        } catch(IOException e) {
-
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Errore nel salvataggio della rubrica");
-            alert.showAndWait();
-        }
-    }
+       }
 
     /**
      * @brief Carica la rubrica salvata su file.
@@ -63,24 +53,18 @@ public abstract class FileManager {
      *
      * @return rubrica. Ritorna la rubrica contenente i dati caricati dal file.
      */
-    public static Rubrica caricaRubrica() {
+    public static Rubrica caricaRubrica() throws IOException, ClassNotFoundException {
 
-        File file = new File("res/" + FILE_BACKUP);
+        File file = new File(System.getProperty("user.dir") + "res/" + FILE_BACKUP);
+
         Rubrica rubrica = null;
 
         if(file.exists()) {
 
-            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
-
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()));
                 rubrica = (Rubrica) ois.readObject();
 
                 return rubrica;
-            } catch(IOException | ClassNotFoundException e) {
-
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Errore nell'apertura della rubrica!");
-                alert.showAndWait();
-            }
         }
         else rubrica = new Rubrica();
 
@@ -93,42 +77,34 @@ public abstract class FileManager {
      * <p>
      * Esporta la lista di contatti selezionati dall'utente formattati in formato .vcf
      */
-    public static void esportaContatti(List<ContattoV3> contatti, File file) {
+    public static void esportaContatti(List<ContattoV3> contatti, File file) throws IOException {
 
-        try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())))) {
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())));
+        String[] numeriDiTelefono;
+        String[] emails;
 
-            String[] numeriDiTelefono;
-            String[] emails;
+        for(ContattoV3 contatto : contatti) {
 
-            for(ContattoV3 contatto : contatti) {
+            numeriDiTelefono = contatto.getNumeri();
+            emails = contatto.getEmails();
 
-                numeriDiTelefono = contatto.getNumeri();
-                emails = contatto.getEmails();
+            pw.println("BEGIN:VCARD");
+            pw.println("VERSION:4.0");
+            pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";");
+            for(int i = 0; i < numeriDiTelefono.length; i++) {
 
-                pw.println("BEGIN:VCARD");
-                pw.println("VERSION:4.0");
-                pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";");
-                for(int i = 0; i < numeriDiTelefono.length; i++) {
+                if(numeriDiTelefono[i] == null) break;
 
-                    if(numeriDiTelefono[i] == null) break;
-
-                    pw.println("TEL:" + numeriDiTelefono[i]);
-                }
-                for(int i = 0; i < emails.length; i++) {
-
-                    if(emails[i] == null) break;
-
-                    pw.println("EMAIL:" + emails[i]);
-                }
-                pw.println("END:VCARD");
+                pw.println("TEL:" + numeriDiTelefono[i]);
             }
-        } catch (IOException e) {
+            for(int i = 0; i < emails.length; i++) {
 
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Errore nell'esportazione dei contatti!");
-            alert.showAndWait();
+                if(emails[i] == null) break;
+
+                pw.println("EMAIL:" + emails[i]);
+            }
+            pw.println("END:VCARD");
         }
-
     }
 
     /**
@@ -138,7 +114,7 @@ public abstract class FileManager {
      * <p>
      * Riceve in inngresso i file selezioanti dall'utente e ne legge i contatti contenuti importandoli nella rubtrica
      */
-    public static void importaContatti(File file, Rubrica rubrica) {
+    public static int importaContatti(File file, Rubrica rubrica) throws IOException, InfoContattoException {
 
         String riga;
         String nome;
@@ -147,46 +123,39 @@ public abstract class FileManager {
         String[] emails = new String[3];
 
         int index;
-        int contattiNonImportati = 0;
+        int contattiImportati = 0;
 
-        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-            nome=null;
-            cognome=null;
-            index = 0;
-            for(int i = 0; i<3; i++){
-                numeri[i]=null;
-                emails[i]=null;
-            }
-            while((riga = br.readLine()) != null) {
+        nome = null;
+        cognome = null;
+        index = 0;
 
-                if(riga.startsWith("N:")) {
-                    // Dividi il nome usando gli spazi, ma prendi il primo come nome e il resto come cognome
-                    String[] partiNome = riga.substring(2).split(";");
-                    cognome = partiNome[0];
-                    nome = partiNome[1];
-                }
-                else if(riga.startsWith("TEL:")) {
-                    numeri[index++] = riga.substring(4);
-                }
-                else if(riga.startsWith("EMAIL:")) {
-                    emails[index++] = riga.substring(6);
-                }
-                else if(riga.startsWith("END")) {
-                    if (nome != null || cognome != null) {
-                        ContattoV3 contatto = new ContattoV3(nome, cognome, numeri, emails, null);
-                        rubrica.aggiungiContatto(contatto);
-                    }
-                }
+        for(int i = 0; i<3; i++){
 
-            }
-        } catch (IOException   e) {
-            System.out.println("Errore nella lettura del file!");
-        } catch (InfoContattoException ex) {
-            contattiNonImportati++;
+            numeri[i] = null;
+            emails[i] = null;
         }
 
-        alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(contattiNonImportati + "non stati importati!");
-        alert.showAndWait();
+        BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()));
+        while((riga = br.readLine()) != null) {
+
+            if (riga.startsWith("N:")) {
+                // Dividi il nome usando gli spazi, ma prendi il primo come nome e il resto come cognome
+                String[] partiNome = riga.substring(2).split(";");
+                cognome = partiNome[0];
+                nome = partiNome[1];
+            } else if (riga.startsWith("TEL:")) {
+
+                numeri[index++] = riga.substring(4);
+            } else if (riga.startsWith("EMAIL:")) {
+                emails[index++] = riga.substring(6);
+            } else if (riga.startsWith("END")) {
+                if (nome != null || cognome != null) {
+                    ContattoV3 contatto = new ContattoV3(nome, cognome, numeri, emails, null);
+                    rubrica.aggiungiContatto(contatto);
+                }
+            }
+        }
+
+        return contattiImportati;
     }
 }
