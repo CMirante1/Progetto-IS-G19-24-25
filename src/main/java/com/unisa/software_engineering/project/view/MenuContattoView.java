@@ -1,6 +1,6 @@
 package com.unisa.software_engineering.project.view;
 
-import com.unisa.software_engineering.project.model.ContattoV2;
+import com.unisa.software_engineering.project.model.ContattoV3;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -53,8 +53,8 @@ public class MenuContattoView extends AnchorPane {
         cognomeTF.setLayoutX(285);
         cognomeTF.setLayoutY(385);
 
-        numeriTF = new TextField[ContattoV2.getnDati()];
-        emailsTF = new TextField[ContattoV2.getnDati()];
+        numeriTF = new TextField[ContattoV3.MAX_NUMERI];
+        emailsTF = new TextField[ContattoV3.MAX_EMAILS];
         for(int i = 0; i < numeriTF.length; i++) {
 
             numeriTF[i] = new TextField();

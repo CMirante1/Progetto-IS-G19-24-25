@@ -9,7 +9,6 @@
 package com.unisa.software_engineering.project.model;
 
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
-import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.util.List;

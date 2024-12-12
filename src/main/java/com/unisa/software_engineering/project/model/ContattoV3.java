@@ -3,6 +3,7 @@ package com.unisa.software_engineering.project.model;
 
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 
+import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -77,7 +78,8 @@ public class ContattoV3 implements Serializable {
     private byte[] immagineAByte(BufferedImage immagineProfilo) throws IOException {
 
        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-       ImageIO.write(immagineProfilo, "JPEG", baos);
+       ImageIO.write(immagineProfilo, "PNG", baos);
+
        return baos.toByteArray();
     }
 
@@ -101,9 +103,9 @@ public class ContattoV3 implements Serializable {
         return emails;
     }
 
-    public BufferedImage getImmagineProfilo() throws IOException{
+    public Image getImmagineProfilo() throws IOException{
 
         ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
-        return ImageIO.read(bais);
+        return new Image(bais);
     }
 }

@@ -1,6 +1,5 @@
 package com.unisa.software_engineering.project.view;
 
-import com.unisa.software_engineering.project.model.ContattoV2;
 import com.unisa.software_engineering.project.model.ContattoV3;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;

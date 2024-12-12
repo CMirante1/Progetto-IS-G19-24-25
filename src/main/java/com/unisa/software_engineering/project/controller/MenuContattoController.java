@@ -1,5 +1,3 @@
-
-
 package com.unisa.software_engineering.project.controller;
 
 import com.unisa.software_engineering.project.model.ContattoV3;
@@ -7,27 +5,24 @@ import com.unisa.software_engineering.project.view.MenuContattoView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * @file MenuContattoController.java
- * @class MenuContattoController
- * @brief Gestisce le azioni dell'interfaccia grafica e l'interazione con i contatti.
- */
+import java.io.IOException;
+
 public class MenuContattoController {
 
+    private MenuPrincipaleController mpController;
     private MenuContattoView mcView;
     private Scene menuPrincipale;
     private ContattoV3 contattoRicevuto;
-    /**
-     * @brief Costruttore del controller del Menu contatto.
-     * @param mcView La view associata al menu contatto.
-     * @param menuPrincipale La scena principale a cui ritornare alla fine delle operazioni.
-     */
-    public MenuContattoController(MenuContattoView mcView, Scene menuPrincipale) {
+    private boolean contattoAggiunto;
 
+    public MenuContattoController(MenuPrincipaleController mpController, MenuContattoView mcView, Scene menuPrincipale) {
+
+        this.mpController = mpController;
         this.mcView = mcView;
         this.menuPrincipale = menuPrincipale;
 
@@ -45,28 +40,15 @@ public class MenuContattoController {
         mcView.getAggiungiImmagineBtn().setOnAction(event -> aggiungiImmagine());
     }
 
-    private void aggiungiImmagine() {
-    }
-
-    private void salvaContatto() {
-    }
-
-    private void abilitaModifica() {
-
-        abilitaCampi();
-        mcView.getSalvaBtn().setDisable(false);
-        mcView.getSalvaBtn().setVisible(true);
-    }
-
     private void tornaIndietro(ActionEvent event) {
+
+        if(contattoAggiunto == true)
+            mpController.passaNuovoContatto(contattoRicevuto);
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(menuPrincipale);
     }
-    /**
-     * @brief Imposta il contatto corrente da visualizzare o modificare all'interno del menu contatto.
-     * @param contatto Il contatto da gestire.
-     */
+
     public void setContatto(ContattoV3 contatto) {
 
         this.contattoRicevuto = contatto;
@@ -88,6 +70,19 @@ public class MenuContattoController {
 
     }
 
+    private void salvaContatto() {
+    }
+
+    private void aggiungiImmagine() {
+    }
+
+    private void abilitaModifica() {
+
+        abilitaCampi();
+        mcView.getSalvaBtn().setDisable(false);
+        mcView.getSalvaBtn().setVisible(true);
+    }
+
     private void pulisciCampi() {
 
         mcView.getNomeTF().setText("");
@@ -105,7 +100,15 @@ public class MenuContattoController {
             mcView.getNumeriTF()[i].setText(contattoRicevuto.getNumeri()[i]);
         for(int i = 0; i < mcView.getEmailsTF().length; i++)
             mcView.getEmailsTF()[i].setText(contattoRicevuto.getEmails()[i]);
-        mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
+        try {
+
+            mcView.getImmagineProfilo().setImage(contattoRicevuto.getImmagineProfilo());
+        } catch (IOException e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Errore durante il caricamento dell'immagine profilo!");
+            alert.showAndWait();
+        }
     }
 
     private void abilitaCampi() {

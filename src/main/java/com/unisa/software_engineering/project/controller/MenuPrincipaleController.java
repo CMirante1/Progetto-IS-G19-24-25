@@ -47,7 +47,7 @@ public class MenuPrincipaleController {
         this.stage = stage;
 
         mcView = new MenuContattoView();
-        mcController = new MenuContattoController(mcView, menuPrincipale);
+        mcController = new MenuContattoController(this, mcView, menuPrincipale);
         menuContatto = new Scene(mcView, 750, 600);
 
         inizializzaComponenti();
@@ -87,27 +87,12 @@ public class MenuPrincipaleController {
         mpView.getEsportaBtn().setOnAction(event -> esportaContatto(event));
     }
 
-    private void esportaContatto(ActionEvent event) {
+    private void aggiungiContatto(ActionEvent event) {
 
-        List<ContattoV3> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
+        ContattoV3 contatto = null;
+        mcController.setContatto(contatto);
 
-        if(contattiSelezionati.isEmpty()) return;
-
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showSaveDialog(stage);
-
-        if(!file.getName().endsWith(".vcf"))
-            file = new File(file.getAbsolutePath() + ".vcf");
-
-        try {
-
-            FileManager.esportaContatti(contattiSelezionati, file);
-        } catch (IOException e) {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Errore nell'esportazione dei contatti!");
-            alert.showAndWait();
-        }
+        stage.setScene(menuContatto);
     }
 
     private void eliminaContatto() {
@@ -124,7 +109,18 @@ public class MenuPrincipaleController {
         listaContatti.removeAll(contattiSelezionati);
     }
 
-    //metodo completato
+    private void visualizzaContatto(MouseEvent event) {
+
+        if(event.getClickCount() == 2) {
+
+            ContattoV3 contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
+            mcController.setContatto(contatto);
+
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(menuContatto);
+        }
+    }
+
     private void importaContatto(ActionEvent event) {
 
         FileChooser fileChooser = new FileChooser();
@@ -153,26 +149,27 @@ public class MenuPrincipaleController {
         listaContatti.addAll(rubrica.getContatti());
     }
 
-    //metodo completato
-    private void visualizzaContatto(MouseEvent event) {
+    private void esportaContatto(ActionEvent event) {
 
-        if(event.getClickCount() == 2) {
+        List<ContattoV3> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
 
-            ContattoV3 contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
-            mcController.setContatto(contatto);
+        if(contattiSelezionati.isEmpty()) return;
 
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(menuContatto);
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if(!file.getName().endsWith(".vcf"))
+            file = new File(file.getAbsolutePath() + ".vcf");
+
+        try {
+
+            FileManager.esportaContatti(contattiSelezionati, file);
+        } catch (IOException e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Errore nell'esportazione dei contatti!");
+            alert.showAndWait();
         }
-    }
-
-    //metodo completato
-    private void aggiungiContatto(ActionEvent event) {
-
-        ContattoV3 contatto = null;
-        mcController.setContatto(contatto);
-
-        stage.setScene(menuContatto);
     }
      /**
      * @brief Aggiunge un contatto alla rubrica e aggiorna la vista.
