@@ -72,10 +72,13 @@ public abstract class FileManager {
     }
 
     /**
-     * @param contatti riceve in input i contatti da esportare
-     * @brief Esporta i contatti selezionati
-     * <p>
-     * Esporta la lista di contatti selezionati dall'utente formattati in formato .vcf
+     * @brief Esporta una lista di contatti in formato `.vcf`.
+     *
+     * Scrive i contatti selezionati in un file in formato  VFC, includendo nome, cognome,
+     * numeri di telefono ed email mostrando eventuali messaggi di errore
+     *
+     * @param contatti La lista di contatti da esportare.
+     * @param file Il file di destinazione per l'esportazione.
      */
     public static void esportaContatti(List<ContattoV3> contatti, File file) throws IOException {
 
@@ -107,12 +110,14 @@ public abstract class FileManager {
         }
     }
 
+
     /**
-     * @param file
-     * @param rubrica
-     * @brief Importa i contatti selezionati
-     * <p>
-     * Riceve in inngresso i file selezioanti dall'utente e ne legge i contatti contenuti importandoli nella rubtrica
+     * @brief Importa contatti da un file in formato .vcf.
+     *
+     * Legge un file .vcf contenente uno o più contatti e li aggiunge alla rubrica dell'utente mostrando eventuali errori in fase di parsing
+     *
+     * @param file Il file `.vcf` da importare.
+     * @param rubrica La rubrica in cui aggiungere i contatti importati.
      */
     public static int importaContatti(File file, Rubrica rubrica) throws IOException, InfoContattoException {
 
