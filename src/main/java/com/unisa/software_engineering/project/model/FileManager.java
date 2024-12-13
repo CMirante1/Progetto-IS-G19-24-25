@@ -179,6 +179,7 @@ public abstract class FileManager {
                         continue;
                     emails[emailIndex++] = riga.substring(6);
                 } else if (riga.equals("END:VCARD")) {
+                    creazioneContatto = false;
                     try {
                         Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
                         rubrica.aggiungiContatto(contatto);
