@@ -84,10 +84,12 @@ public class Contatto implements Serializable {
 
     private byte[] immagineAByte(BufferedImage immagineProfilo) throws IOException {
 
-       ByteArrayOutputStream baos = new ByteArrayOutputStream();
-       ImageIO.write(immagineProfilo, "PNG", baos);
+        if(immagineProfilo == null) return new byte[0];
 
-       return baos.toByteArray();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(immagineProfilo, "PNG", baos);
+
+        return baos.toByteArray();
     }
 
     public String getNome() {
