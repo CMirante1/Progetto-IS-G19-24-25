@@ -1,15 +1,12 @@
 package com.unisa.software_engineering.project;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
+import com.unisa.software_engineering.project.model.*;
+import com.unisa.software_engineering.project.exceptions.*;
 
 import java.awt.image.BufferedImage;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import com.unisa.software_engineering.project.exceptions.InfoContattoException;
-import com.unisa.software_engineering.project.model.Contatto;
+import java.io.IOException;
 
 public class ContattoTest {
 
@@ -197,5 +194,49 @@ public class ContattoTest {
                 new String[]{"BruttaQu..estaAltra@gmail.it"},
                 null);
         });
+    }
+
+    @Test
+    void testModificaContatto() throws InfoContattoException, IOException{
+        
+        Rubrica rubrica = new Rubrica();
+        String[] numeri = {"123456789"};
+        String[] emails = {"email@example.com"};
+        BufferedImage immagine = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+        Contatto contatto = new Contatto("Mario", "Rossi", numeri, emails, immagine);
+
+        rubrica.aggiungiContatto(contatto);
+        String[] nuoviNumeri = {"987654321"};
+        String[] nuoveEmails = {"newemail@example.com"};
+        BufferedImage nuovaImmagine = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+
+        contatto.modificaContatto("Luigi", "Verdi", nuoviNumeri, nuoveEmails, nuovaImmagine);
+
+        assertEquals("Luigi", contatto.getNome());
+        assertEquals("Verdi", contatto.getCognome());
+        assertEquals("987654321", contatto.getNumeri()[0]);
+        assertEquals("newemail@example.com", contatto.getEmails()[0]);
+    }
+
+    @Test
+    void testToString() throws InfoContattoException, IOException {
+        contatto = new Contatto(
+                "Marco","Bello",
+                new String[]{"123456789"},
+                new String[]{"email@mail.com"},
+                null);
+        String expected =
+            "Marco Bello:\n" +
+            "Tel:\n" +
+            "123456789\n" +
+            "\n" +
+            "\n" +
+            "Email:\n" +
+            "email@mail.com\n" +
+            "\n" +
+            "\n" +
+            "Image size: 0";
+
+        assertEquals(expected, contatto.toString());
     }
 }
