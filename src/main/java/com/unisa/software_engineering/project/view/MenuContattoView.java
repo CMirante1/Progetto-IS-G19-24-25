@@ -47,7 +47,6 @@ public class MenuContattoView extends AnchorPane {
         cognomeTF.setLayoutY(385);
 
         nomeTF = new TextField();
-        nomeTF.setFocusTraversable(true);
         nomeTF.setPrefWidth(190);
         nomeTF.setPrefHeight(30);
         nomeTF.setLayoutX(285);

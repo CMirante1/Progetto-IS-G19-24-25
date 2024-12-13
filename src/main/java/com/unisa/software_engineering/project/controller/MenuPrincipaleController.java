@@ -60,7 +60,7 @@ public class MenuPrincipaleController {
 
         mpView.getBarraRicerca().textProperty().addListener((observable, vecchiaStringa, nuovaStringa) -> {
 
-            ObservableList<Contatto> listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
+            ObservableList<Contatto> listaContattiFiltrati = FXCollections.observableArrayList();
 
             for(Contatto contatto : listaContatti) {
 
@@ -70,10 +70,9 @@ public class MenuPrincipaleController {
                     listaContattiFiltrati.add(contatto);
             }
 
-            mpView.getTabellaContatti().setItems(listaContattiFiltrati);
-
             if(mpView.getBarraRicerca().getText().isEmpty())
                 mpView.getTabellaContatti().setItems(listaContatti);
+            else mpView.getTabellaContatti().setItems(listaContattiFiltrati);
         });
 
         mpView.getAggiungiBtn().setOnAction(event -> aggiungiContatto());
