@@ -1,7 +1,7 @@
 package com.unisa.software_engineering.project.controller;
 
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
-import com.unisa.software_engineering.project.model.ContattoV3;
+import com.unisa.software_engineering.project.model.Contatto;
 import com.unisa.software_engineering.project.view.MenuContattoView;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -22,7 +22,7 @@ public class MenuContattoController {
     private MenuPrincipaleController mpController;
     private MenuContattoView mcView;
     private Scene menuPrincipale;
-    private ContattoV3 contattoRicevuto;
+    private Contatto contattoRicevuto;
     private boolean contattoAggiunto;
 
     public MenuContattoController(MenuPrincipaleController mpController, MenuContattoView mcView, Scene menuPrincipale) {
@@ -54,9 +54,10 @@ public class MenuContattoController {
         stage.setScene(menuPrincipale);
     }
 
-    public void setContatto(ContattoV3 contatto) {
+    public void setContatto(Contatto contatto) {
 
         this.contattoRicevuto = contatto;
+        this.contattoAggiunto = false;
 
         if(contattoRicevuto == null) {
 
@@ -85,8 +86,8 @@ public class MenuContattoController {
 
         String nome = mcView.getNomeTF().getText();
         String cognome = mcView.getCognomeTF().getText();
-        String[] numeri = new String[ContattoV3.MAX_NUMERI];
-        String[] emails = new String[ContattoV3.MAX_EMAILS];
+        String[] numeri = new String[Contatto.MAX_NUMERI];
+        String[] emails = new String[Contatto.MAX_EMAILS];
         for(int i = 0; i < numeri.length; i++) numeri[i] = mcView.getNumeriTF()[i].getText();
         for(int i = 0; i < emails.length; i++) emails[i] = mcView.getEmailsTF()[i].getText();
         BufferedImage immagineprofilo = immagineABufferedImage(mcView.getImmagineProfilo().getImage());
@@ -95,7 +96,7 @@ public class MenuContattoController {
 
             if(contattoRicevuto == null) {
 
-                contattoRicevuto = new ContattoV3(nome, cognome, numeri, emails, immagineprofilo);
+                contattoRicevuto = new Contatto(nome, cognome, numeri, emails, immagineprofilo);
 
                 disabilitaCampi();
                 mcView.getModificaBtn().setDisable(false);
@@ -108,6 +109,12 @@ public class MenuContattoController {
             else {
 
                 contattoRicevuto.modificaContatto(nome, cognome, numeri, emails, immagineprofilo);
+
+                disabilitaCampi();
+                mcView.getModificaBtn().setDisable(false);
+                mcView.getModificaBtn().setVisible(true);
+                mcView.getSalvaBtn().setDisable(true);
+                mcView.getSalvaBtn().setVisible(false);
 
                 contattoAggiunto = false;
             }

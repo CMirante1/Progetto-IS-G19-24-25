@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class Rubrica implements Serializable {
 
-    private List<ContattoV3> contatti;
+    private List<Contatto> contatti;
 
     /**
      * @constructor
@@ -34,7 +34,7 @@ public class Rubrica implements Serializable {
      *
      * @param contatto Il contatto già verificato
      */
-    public void aggiungiContatto(ContattoV3 contatto){
+    public void aggiungiContatto(Contatto contatto){
 
         contatti.add(contatto);
     }
@@ -44,16 +44,26 @@ public class Rubrica implements Serializable {
      *
      * @param contatto Il contatto da rimuovere
      */
-    public void rimuoviContatto(ContattoV3 contatto){
+    public void rimuoviContatto(Contatto contatto){
 
         if(contatti.contains(contatto)) contatti.remove(contatto);
 
     }
     /**
-     * 
+     *
      * @brief Rimuove un contatto dalla rubrica
      * @return contatti ritorna il riferimento alla lista di contatti
      */
-    public List<ContattoV3> getContatti(){
+    public List<Contatto> getContatti(){
         return contatti; }
+
+    @Override
+    public String toString() {
+
+        StringBuffer sb = new StringBuffer("Rubrica:\n");
+
+        for(Contatto contatto : contatti) sb.append(contatto + "\n");
+
+        return sb.toString();
+    }
  }

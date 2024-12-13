@@ -1,7 +1,7 @@
 package com.unisa.software_engineering.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import com.unisa.software_engineering.project.model.Email;
+
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 
 public class EmailTest {

@@ -1,6 +1,6 @@
 package com.unisa.software_engineering.project.view;
 
-import com.unisa.software_engineering.project.model.ContattoV3;
+import com.unisa.software_engineering.project.model.Contatto;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -8,13 +8,13 @@ import javafx.scene.layout.AnchorPane;
 
 public class MenuPrincipaleView extends AnchorPane {
 
-    private TableView<ContattoV3> tabellaContatti;
-    private TableColumn<ContattoV3, String> cognomeCln;
-    private TableColumn<ContattoV3, String> nomeCln;
+    private TableView<Contatto> tabellaContatti;
+    private TableColumn<Contatto, String> cognomeCln;
+    private TableColumn<Contatto, String> nomeCln;
     private TextField barraRicerca;
     private Button aggiungiBtn, importaBtn;
     private ContextMenu menuContestuale;
-    private MenuItem eliminaBtn, esportaBtn;
+    private MenuItem esportaBtn, eliminaBtn;
 /**
  * @file MenuPrincipaleView.java
  * @class MenuPrincipaleView
@@ -88,27 +88,17 @@ public class MenuPrincipaleView extends AnchorPane {
 
     private void inizializzaMenuContestuale() {
 
-        eliminaBtn = new MenuItem("Elimina contatto");
         esportaBtn = new MenuItem("Esporta contatto");
+        eliminaBtn = new MenuItem("Elimina contatto");
 
-        menuContestuale = new ContextMenu(eliminaBtn, esportaBtn);
+        menuContestuale = new ContextMenu(esportaBtn, eliminaBtn);
 
         tabellaContatti.setContextMenu(menuContestuale);
     }
 
-    public TableView<ContattoV3> getTabellaContatti() {
+    public TableView<Contatto> getTabellaContatti() {
 
         return tabellaContatti;
-    }
-
-    public TableColumn<ContattoV3, String> getCognomeCln() {
-
-        return cognomeCln;
-    }
-
-    public TableColumn<ContattoV3, String> getNomeCln() {
-
-        return nomeCln;
     }
 
     public TextField getBarraRicerca() {
@@ -124,11 +114,6 @@ public class MenuPrincipaleView extends AnchorPane {
     public Button getImportaBtn() {
 
         return importaBtn;
-    }
-
-    public ContextMenu getMenuContestuale() {
-
-        return menuContestuale;
     }
 
     public MenuItem getEliminaBtn() {

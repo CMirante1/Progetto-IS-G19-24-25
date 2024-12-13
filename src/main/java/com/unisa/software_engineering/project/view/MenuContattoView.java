@@ -1,6 +1,6 @@
 package com.unisa.software_engineering.project.view;
 
-import com.unisa.software_engineering.project.model.ContattoV3;
+import com.unisa.software_engineering.project.model.Contatto;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -53,8 +53,8 @@ public class MenuContattoView extends AnchorPane {
         cognomeTF.setLayoutX(285);
         cognomeTF.setLayoutY(385);
 
-        numeriTF = new TextField[ContattoV3.MAX_NUMERI];
-        emailsTF = new TextField[ContattoV3.MAX_EMAILS];
+        numeriTF = new TextField[Contatto.MAX_NUMERI];
+        emailsTF = new TextField[Contatto.MAX_EMAILS];
         for(int i = 0; i < numeriTF.length; i++) {
 
             numeriTF[i] = new TextField();
@@ -93,7 +93,7 @@ public class MenuContattoView extends AnchorPane {
 
         for(int i = 0; i < numeriLB.length; i++) {
 
-            numeriLB[i] = new Label("Numero " + i + ":");
+            numeriLB[i] = new Label("Numero " + (i + 1)+ ":");
             numeriLB[i].setPrefWidth(70);
             numeriLB[i].setPrefHeight(20);
             numeriLB[i].setLayoutX(35 + 250 * i);
@@ -102,7 +102,7 @@ public class MenuContattoView extends AnchorPane {
 
         for(int i = 0; i < emailsLB.length; i++) {
 
-            emailsLB[i] = new Label("Email " + i + ":");
+            emailsLB[i] = new Label("Email " + (i + 1) + ":");
             emailsLB[i].setPrefWidth(70);
             emailsLB[i].setPrefHeight(20);
             emailsLB[i].setLayoutX(35 + 250 * i);

@@ -27,7 +27,7 @@ import java.util.Optional;
 
 public class RubricaApp extends Application {
 
-    private Rubrica rubrica; 
+    private Rubrica rubrica;
      /**
      * @brief Metodo principale di avvio dell'applicazione.
      * @param primaryStage Lo stage principale dell'applicazione.
@@ -61,7 +61,7 @@ public class RubricaApp extends Application {
     private void chiudiApp(WindowEvent event, Stage primaryStage) {
 
         Alert conferma = new Alert(Alert.AlertType.CONFIRMATION);
-
+        conferma.setTitle("Conferma chiusura.");
         conferma.setContentText("Sicuro di voler chiudere l'applicazione?");
 
         Optional<ButtonType> scelta = conferma.showAndWait();

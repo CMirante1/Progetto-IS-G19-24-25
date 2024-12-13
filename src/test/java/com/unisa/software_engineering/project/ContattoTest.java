@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import com.unisa.software_engineering.project.model.Contatto;
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 
 class ContattoTest {
@@ -16,7 +15,7 @@ class ContattoTest {
         String[] emails = {"test@example.com", "test2@example.com", "test3@example.com"};
         BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         Contatto contatto = new Contatto("John", "Doe", numeri, emails, image);
-        
+
         assertNotNull(contatto);
         assertEquals("John Doe", contatto.getNomeCompleto());
         assertArrayEquals(numeri, contatto.getNumeriDiTelefono());
@@ -33,7 +32,7 @@ class ContattoTest {
         String[] nuoviNumeri = {"2223334444"};
         String[] nuoveEmails = {"new@example.com"};
         BufferedImage nuovaImmagine = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
-        
+
         contatto.modificaContatto("Jane", "Smith", nuoviNumeri, nuoveEmails, nuovaImmagine);
 
         assertEquals("Jane Smith", contatto.getNomeCompleto());
@@ -47,7 +46,7 @@ class ContattoTest {
         String[] emails = {"test@example.com"};
         BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         Contatto contatto = new Contatto("John", "Doe", numeri, emails, image);
-        
+
         BufferedImage immagine = contatto.getImmagineProfilo();
         assertNotNull(immagine);
         assertEquals(100, immagine.getWidth());

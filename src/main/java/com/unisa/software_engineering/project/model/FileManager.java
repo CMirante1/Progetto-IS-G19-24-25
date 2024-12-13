@@ -40,8 +40,10 @@ public abstract class FileManager {
      */
     public static void salvaRubrica(Rubrica rubrica) throws IOException {
 
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/res/" + FILE_BACKUP));
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("res/" + FILE_BACKUP))) {
+
             oos.writeObject(rubrica);
+        }
        }
 
     /**
@@ -54,14 +56,19 @@ public abstract class FileManager {
      */
     public static Rubrica caricaRubrica() throws IOException, ClassNotFoundException {
 
-        File file = new File(System.getProperty("user.dir") + "/res/" + FILE_BACKUP);
+        File file = new File("res/" + FILE_BACKUP);
 
         if(file.exists()) {
 
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()));
-                Rubrica rubrica = (Rubrica) ois.readObject();
+                try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
 
-                return rubrica;
+                    Rubrica rubrica = (Rubrica) ois.readObject();
+
+                    return rubrica;
+                } catch(IOException e) {
+
+                    throw e;
+                }
         }
 
         return  new Rubrica();
@@ -76,33 +83,38 @@ public abstract class FileManager {
      * @param contatti La lista di contatti da esportare.
      * @param file Il file di destinazione per l'esportazione.
      */
-    public static void esportaContatti(List<ContattoV3> contatti, File file) throws IOException {
+    public static void esportaContatti(List<Contatto> contatti, File file) throws IOException {
 
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file.getName())));
-        String[] numeriDiTelefono;
-        String[] emails;
+        try(PrintWriter pw = new PrintWriter(new FileWriter(file.getAbsolutePath()))) {
 
-        for(ContattoV3 contatto : contatti) {
+            String[] numeriDiTelefono;
+            String[] emails;
 
-            numeriDiTelefono = contatto.getNumeri();
-            emails = contatto.getEmails();
+        for(Contatto contatto : contatti) {
 
-            pw.println("BEGIN:VCARD");
-            pw.println("VERSION:4.0");
-            pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";");
-            for(int i = 0; i < numeriDiTelefono.length; i++) {
+                numeriDiTelefono = contatto.getNumeri();
+                emails = contatto.getEmails();
 
-                if(numeriDiTelefono[i] == null) break;
+                pw.println("BEGIN:VCARD");
+                pw.println("VERSION:4.0");
+                pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";;;");
+                for(int i = 0; i < numeriDiTelefono.length; i++) {
 
-                pw.println("TEL:" + numeriDiTelefono[i]);
+                    if(numeriDiTelefono[i] == null) break;
+
+                    pw.println("TEL:" + numeriDiTelefono[i]);
+                }
+                for(int i = 0; i < emails.length; i++) {
+
+                    if(emails[i] == null) break;
+
+                    pw.println("EMAIL:" + emails[i]);
+                }
+                pw.println("END:VCARD");
             }
-            for(int i = 0; i < emails.length; i++) {
+        } catch(IOException e) {
 
-                if(emails[i] == null) break;
-
-                pw.println("EMAIL:" + emails[i]);
-            }
-            pw.println("END:VCARD");
+            throw e;
         }
     }
 
@@ -115,7 +127,7 @@ public abstract class FileManager {
      * @param file Il file `.vcf` da importare.
      * @param rubrica La rubrica in cui aggiungere i contatti importati.
      */
-    public static int importaContatti(File file, Rubrica rubrica) throws IOException, InfoContattoException {
+    public static int importaContatti(File file, Rubrica rubrica) throws IOException {
 
         String riga;
         String nome;
@@ -123,12 +135,12 @@ public abstract class FileManager {
         String[] numeri = new String[3];
         String[] emails = new String[3];
 
-        int index;
+        int numIndex = 0;
+        int emailIndex = 0;
         int contattiImportati = 0;
 
         nome = null;
         cognome = null;
-        index = 0;
 
         for(int i = 0; i<3; i++){
 
@@ -136,23 +148,31 @@ public abstract class FileManager {
             emails[i] = null;
         }
 
-        BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()));
-        while((riga = br.readLine()) != null) {
+        try(BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
 
-            if (riga.startsWith("N:")) {
-                // Dividi il nome usando gli spazi, ma prendi il primo come nome e il resto come cognome
-                String[] partiNome = riga.substring(2).split(";");
-                cognome = partiNome[0];
-                nome = partiNome[1];
-            } else if (riga.startsWith("TEL:")) {
+            while((riga = br.readLine()) != null) {
 
-                numeri[index++] = riga.substring(4);
-            } else if (riga.startsWith("EMAIL:")) {
-                emails[index++] = riga.substring(6);
-            } else if (riga.startsWith("END")) {
-                if (nome != null || cognome != null) {
-                    ContattoV3 contatto = new ContattoV3(nome, cognome, numeri, emails, null);
-                    rubrica.aggiungiContatto(contatto);
+                if (riga.startsWith("N:")) {
+                    // Dividi il nome usando gli spazi, ma prendi il primo come nome e il resto come cognome
+                    String[] partiNome = riga.substring(2).split(";");
+                    cognome = partiNome[0];
+                    nome = partiNome[1];
+                } else if (riga.startsWith("TEL:")) {
+                    numeri[numIndex++] = riga.substring(4);
+                } else if (riga.startsWith("EMAIL:")) {
+                    emails[emailIndex++] = riga.substring(6);
+                } else if (riga.startsWith("END")) {
+                    if (nome != null || cognome != null) {
+
+                        try {
+
+                            Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
+                            rubrica.aggiungiContatto(contatto);
+                            contattiImportati++;
+                        } catch(InfoContattoException e) {
+
+                        }
+                    }
                 }
             }
         }

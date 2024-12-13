@@ -3,7 +3,7 @@ package com.unisa.software_engineering.project;
 import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import com.unisa.software_engineering.project.model.ContattoV2;;
+;
 
 public class ContattoV2Test {
 
@@ -74,7 +74,7 @@ public class ContattoV2Test {
         String[] emails1 = {"email1@example.com", "email2@example.com", "email3@example.com"};
         String[] numeri2 = {"2234567890", "1987654321", "2122334455"};
         String[] emails2 = {"email4@example.com", "email5@example.com", "email6@example.com"};
-        
+
         try {
             ContattoV2 contatto1 = new ContattoV2("Giovanni", "Rossi", numeri1, emails1);
             ContattoV2 contatto2 = new ContattoV2("Giovanni", "Rossi", numeri2, emails2);
@@ -90,7 +90,7 @@ public class ContattoV2Test {
         String[] emails1 = {"email1@example.com", "email2@example.com", "email3@example.com"};
         String[] numeri2 = {"2234567890", "1987654321", "2122334455"};
         String[] emails2 = {"email4@example.com", "email5@example.com", "email6@example.com"};
-        
+
         try {
             ContattoV2 contatto1 = new ContattoV2("Giovanni", "Rossi", numeri1, emails1);
             ContattoV2 contatto2 = new ContattoV2("Giovanni", "Bianchi", numeri2, emails2);

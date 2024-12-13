@@ -7,7 +7,6 @@ import com.unisa.software_engineering.project.view.MenuPrincipaleView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,7 +26,7 @@ public class MenuPrincipaleController {
 
     private MenuPrincipaleView mpView;
     private Rubrica rubrica;
-    private ObservableList<ContattoV3> listaContatti;
+    private ObservableList<Contatto> listaContatti;
 
     private Stage stage;
     private MenuContattoView mcView;
@@ -62,9 +61,9 @@ public class MenuPrincipaleController {
 
         mpView.getBarraRicerca().textProperty().addListener((observable, vecchiaStringa, nuovaStringa) -> {
 
-            ObservableList<ContattoV3> listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
+            ObservableList<Contatto> listaContattiFiltrati = FXCollections.observableArrayList(listaContatti);
 
-            for(ContattoV3 contatto : listaContatti) {
+            for(Contatto contatto : listaContatti) {
 
                 if(contatto.getNome().toLowerCase().contains(nuovaStringa.toLowerCase()) ||
                     contatto.getCognome().toLowerCase().contains(nuovaStringa.toLowerCase()))
@@ -89,7 +88,7 @@ public class MenuPrincipaleController {
 
     private void aggiungiContatto(ActionEvent event) {
 
-        ContattoV3 contatto = null;
+        Contatto contatto = null;
         mcController.setContatto(contatto);
 
         stage.setScene(menuContatto);
@@ -97,28 +96,30 @@ public class MenuPrincipaleController {
 
     private void eliminaContatto() {
 
-        List<ContattoV3> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
+        List<Contatto> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
 
         if(contattiSelezionati.isEmpty()) return;
 
-        for(ContattoV3 contattoV3 : contattiSelezionati) {
+        for(Contatto contatto : contattiSelezionati) {
 
-            rubrica.rimuoviContatto(contattoV3);
+            rubrica.rimuoviContatto(contatto);
+            listaContatti.remove(contatto);
         }
 
-        listaContatti.removeAll(contattiSelezionati);
+       // mpView.getTabellaContatti().getItems().removeAll(mpView.getTabellaContatti().getSelectionModel().getSelectedItems());
     }
 
     private void visualizzaContatto(MouseEvent event) {
 
         if(event.getClickCount() == 2) {
 
-            ContattoV3 contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
+            Contatto contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
             mcController.setContatto(contatto);
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(menuContatto);
 
+            rubrica.getContatti().sort(null);
             listaContatti.sort(null);
             mpView.getTabellaContatti().refresh();
         }
@@ -141,21 +142,20 @@ public class MenuPrincipaleController {
         } catch (IOException e) {
 
             System.out.println("Errore nella lettura del file!");
-        } catch (InfoContattoException e) {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText(contattiImportati + "non stati importati!");
-            alert.showAndWait();
         }
 
         rubrica.getContatti().sort(null);
         listaContatti.clear();
         listaContatti.addAll(rubrica.getContatti());
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Sono stati importati " + contattiImportati + " contatti.");
+        alert.showAndWait();
     }
 
     private void esportaContatto(ActionEvent event) {
 
-        List<ContattoV3> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
+        List<Contatto> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
 
         if(contattiSelezionati.isEmpty()) return;
 
@@ -181,7 +181,7 @@ public class MenuPrincipaleController {
      * @brief Aggiunge un contatto alla rubrica e aggiorna la vista.
      * @param contatto Il nuovo contatto da aggiungere.
      */
-    public void passaNuovoContatto(ContattoV3 contatto) {
+    public void passaNuovoContatto(Contatto contatto) {
 
         rubrica.aggiungiContatto(contatto);
 
