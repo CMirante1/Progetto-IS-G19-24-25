@@ -48,9 +48,13 @@ public class Contatto implements Serializable, Comparable<Contatto> {
         if (!cognome.isEmpty() && !cognome.matches("[a-zA-z0-9 ]+"))
             throw new InfoContattoException("Il cognome non può contenere caratteri speciali!");
 
-        for (String numero : numeri)
-            if (!numero.isEmpty() && !numero.matches("[0-9]+"))
+        for (String numero : numeri) {
+
+            if (numero.isEmpty()) continue;
+
+            if (!numero.matches("[0-9]+"))
                 throw new InfoContattoException("Il numero deve contenere soltanto cifre!");
+        }
 
         for(String email : emails) {
 
@@ -129,8 +133,9 @@ public class Contatto implements Serializable, Comparable<Contatto> {
        return this.cognome.compareTo(contatto.cognome);
     }
 
+    @Override
     public String toString(){
-        return 
+        return
             nome + " " + cognome + ":\n" +
             "Tel:\n" +
             (numeri[0] != null ? numeri[0] : "") + "\n" +

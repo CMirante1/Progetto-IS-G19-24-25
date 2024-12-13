@@ -104,8 +104,6 @@ public class MenuPrincipaleController {
             rubrica.rimuoviContatto(contatto);
             listaContatti.remove(contatto);
         }
-
-       // mpView.getTabellaContatti().getItems().removeAll(mpView.getTabellaContatti().getSelectionModel().getSelectedItems());
     }
 
     private void visualizzaContatto(MouseEvent event) {
