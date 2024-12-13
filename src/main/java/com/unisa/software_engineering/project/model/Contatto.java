@@ -121,14 +121,14 @@ public class Contatto implements Serializable, Comparable<Contatto> {
     }
 
     @Override
-<<<<<<< Updated upstream
     public int compareTo(Contatto contatto) {
 
        if(this.cognome.compareTo(contatto.cognome) == 0)
            return this.nome.compareTo(contatto.nome);
 
        return this.cognome.compareTo(contatto.cognome);
-=======
+    }
+    
     public String toString(){
         return 
             nome + " " + cognome + ":\n" +
@@ -141,6 +141,5 @@ public class Contatto implements Serializable, Comparable<Contatto> {
             (emails[1] != null ? emails[1] : "") + "\n" +
             (emails[2] != null ? emails[2] : "") + "\n" +
             "Image size: " + immagineProfilo.length;
->>>>>>> Stashed changes
     }
 }
