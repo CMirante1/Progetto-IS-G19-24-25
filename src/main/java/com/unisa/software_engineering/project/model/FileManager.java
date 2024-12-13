@@ -151,6 +151,14 @@ public abstract class FileManager {
             while((riga = br.readLine()) != null) {
                 
                 if(riga.equals("BEGIN:VCARD")){
+                    numIndex = 0;
+                    emailIndex = 0;
+                    nome = "";
+                    cognome = "";
+                    for(int i = 0; i < 3; i++){
+                        numeri[i] = "";
+                        emails[i] = "";
+                    }
                     creazioneContatto = !creazioneContatto;
                     continue;
                 }
