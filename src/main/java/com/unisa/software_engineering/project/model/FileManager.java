@@ -176,7 +176,8 @@ public abstract class FileManager {
                             emails[i] = "";
                         }
                     }
-                    numeri[numIndex++] = riga.substring(4);
+                    else
+                        numeri[numIndex++] = riga.substring(4);
                 } else if (riga.startsWith("EMAIL:")) {
                     if(emailIndex == 3){
                         numIndex = 0;
@@ -190,7 +191,8 @@ public abstract class FileManager {
                             emails[i] = "";
                         }
                     }
-                    emails[emailIndex++] = riga.substring(6);
+                    else
+                        emails[emailIndex++] = riga.substring(6);
                 } else if (riga.equals("END:VCARD")) {
                     numIndex = 0;
                     emailIndex = 0;
@@ -202,7 +204,7 @@ public abstract class FileManager {
                         numeri[i] = "";
                         emails[i] = "";
                     }
-                    
+
                     try {
                         Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
                         rubrica.aggiungiContatto(contatto);
