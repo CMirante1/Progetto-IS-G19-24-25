@@ -1,11 +1,11 @@
 package com.unisa.software_engineering.project.controller;
 
+import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import com.unisa.software_engineering.project.model.*;
 import com.unisa.software_engineering.project.view.MenuContattoView;
 import com.unisa.software_engineering.project.view.MenuPrincipaleView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -76,16 +76,16 @@ public class MenuPrincipaleController {
                 mpView.getTabellaContatti().setItems(listaContatti);
         });
 
-        mpView.getAggiungiBtn().setOnAction(event -> aggiungiContatto(event));
+        mpView.getAggiungiBtn().setOnAction(event -> aggiungiContatto());
 
-        mpView.getImportaBtn().setOnAction((event) -> importaContatto(event));
+        mpView.getImportaBtn().setOnAction((event) -> importaContatto());
 
         mpView.getEliminaBtn().setOnAction(event -> eliminaContatto());
 
-        mpView.getEsportaBtn().setOnAction(event -> esportaContatto(event));
+        mpView.getEsportaBtn().setOnAction(event -> esportaContatto());
     }
 
-    private void aggiungiContatto(ActionEvent event) {
+    private void aggiungiContatto() {
 
         Contatto contatto = null;
         mcController.setContatto(contatto);
@@ -109,21 +109,22 @@ public class MenuPrincipaleController {
 
     private void visualizzaContatto(MouseEvent event) {
 
-        if(event.getClickCount() == 2) {
+        if(event.getClickCount() != 2) return;
 
-            Contatto contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
-            mcController.setContatto(contatto);
+        if (event.getTarget() instanceof TableColumnHeader) return;
 
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(menuContatto);
+        Contatto contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
+        mcController.setContatto(contatto);
 
-            rubrica.getContatti().sort(null);
-            listaContatti.sort(null);
-            mpView.getTabellaContatti().refresh();
-        }
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(menuContatto);
+
+        rubrica.getContatti().sort(null);
+        listaContatti.sort(null);
+        mpView.getTabellaContatti().refresh();
     }
 
-    private void importaContatto(ActionEvent event) {
+    private void importaContatto() {
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("vCard Files (*.vcf)", "*.vcf");
@@ -151,7 +152,7 @@ public class MenuPrincipaleController {
         alert.showAndWait();
     }
 
-    private void esportaContatto(ActionEvent event) {
+    private void esportaContatto() {
 
         List<Contatto> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
 
