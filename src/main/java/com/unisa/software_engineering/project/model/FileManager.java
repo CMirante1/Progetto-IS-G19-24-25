@@ -163,36 +163,13 @@ public abstract class FileManager {
                     cognome = partiNome[0];
                     nome = partiNome[1];
                 } else if (riga.startsWith("TEL:")) {
-                    if(numIndex == 3){
-                        numIndex = 0;
-                        emailIndex = 0;
-                        creazioneContatto = false;
-
-                        nome = "";
-                        cognome = "";
-
-                        for(int i = 0; i < 3; i++){
-                            numeri[i] = "";
-                            emails[i] = "";
-                        }
-                    }
-                    else
-                        numeri[numIndex++] = riga.substring(4);
+                    if(numIndex == 3)
+                        continue;
+                    numeri[numIndex++] = riga.substring(4);
                 } else if (riga.startsWith("EMAIL:")) {
-                    if(emailIndex == 3){
-                        numIndex = 0;
-                        emailIndex = 0;
-                        creazioneContatto = false;
-                        nome = "";
-                        cognome = "";
-
-                        for(int i = 0; i < 3; i++){
-                            numeri[i] = "";
-                            emails[i] = "";
-                        }
-                    }
-                    else
-                        emails[emailIndex++] = riga.substring(6);
+                    if(emailIndex == 3)
+                        continue;
+                    emails[emailIndex++] = riga.substring(6);
                 } else if (riga.equals("END:VCARD")) {
                     numIndex = 0;
                     emailIndex = 0;
