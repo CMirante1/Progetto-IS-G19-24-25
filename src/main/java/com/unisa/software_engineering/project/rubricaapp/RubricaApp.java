@@ -82,10 +82,8 @@ public class RubricaApp extends Application {
             }
             primaryStage.close();
             System.exit(0);
-        } else {
-
-            event.consume();
         }
+        else event.consume();
     }
 
      /**

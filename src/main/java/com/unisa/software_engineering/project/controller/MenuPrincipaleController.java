@@ -1,6 +1,5 @@
 package com.unisa.software_engineering.project.controller;
 
-import com.unisa.software_engineering.project.exceptions.InfoContattoException;
 import com.unisa.software_engineering.project.model.*;
 import com.unisa.software_engineering.project.view.MenuContattoView;
 import com.unisa.software_engineering.project.view.MenuPrincipaleView;
@@ -24,14 +23,14 @@ import java.util.List;
  */
 public class MenuPrincipaleController {
 
-    private MenuPrincipaleView mpView;
-    private Rubrica rubrica;
+    private final MenuPrincipaleView mpView;
+    private final Rubrica rubrica;
     private ObservableList<Contatto> listaContatti;
 
-    private Stage stage;
-    private MenuContattoView mcView;
-    private MenuContattoController mcController;
-    private Scene menuContatto;
+    private final Stage stage;
+    private final MenuContattoView mcView;
+    private final MenuContattoController mcController;
+    private final Scene menuContatto;
     /**
      * @brief Costruttore della del controller del menu principale.
      * @param rubrica La rubrica su cui operare.

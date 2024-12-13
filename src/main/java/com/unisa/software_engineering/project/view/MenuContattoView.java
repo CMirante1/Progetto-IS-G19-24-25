@@ -118,10 +118,10 @@ public class MenuContattoView extends AnchorPane {
         immagineProfilo.setLayoutX(220);
         immagineProfilo.setLayoutY(10);
 
-        escImmagine = new ImageView(new Image("frecciaIndietro.png"));
-        escImmagine.setFitWidth(85);
-        escImmagine.setFitHeight(30);
-        escImmagine.setPreserveRatio(true);
+//        escImmagine = new ImageView(new Image("frecciaIndietro.png"));
+//        escImmagine.setFitWidth(85);
+//        escImmagine.setFitHeight(30);
+//        escImmagine.setPreserveRatio(true);
     }
 
     private void inizializzaPulsanti() {

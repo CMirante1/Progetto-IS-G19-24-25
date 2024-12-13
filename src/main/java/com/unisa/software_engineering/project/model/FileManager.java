@@ -40,7 +40,7 @@ public abstract class FileManager {
      */
     public static void salvaRubrica(Rubrica rubrica) throws IOException {
 
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("resources/" + FILE_BACKUP))) {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/main/resources/" + FILE_BACKUP))) {
 
             oos.writeObject(rubrica);
         }
@@ -56,7 +56,7 @@ public abstract class FileManager {
      */
     public static Rubrica caricaRubrica() throws IOException, ClassNotFoundException {
 
-        File file = new File("resources/" + FILE_BACKUP);
+        File file = new File("src/main/resources/" + FILE_BACKUP);
 
         if(file.exists()) {
 
@@ -97,7 +97,7 @@ public abstract class FileManager {
 
                 pw.println("BEGIN:VCARD");
                 pw.println("VERSION:4.0");
-                pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome() + ";;;");
+                pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome());
                 for(int i = 0; i < numeriDiTelefono.length; i++) {
 
                     if(numeriDiTelefono[i] == null) break;

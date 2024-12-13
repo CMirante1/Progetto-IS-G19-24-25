@@ -19,10 +19,10 @@ import java.io.IOException;
 
 public class MenuContattoController {
 
-    private MenuPrincipaleController mpController;
-    private MenuContattoView mcView;
-    private Scene menuPrincipale;
-    private Contatto contattoRicevuto;
+    private final MenuPrincipaleController mpController;
+    private final MenuContattoView mcView;
+    private final Scene menuPrincipale;
+    private  Contatto contattoRicevuto;
     private boolean contattoAggiunto;
 
     public MenuContattoController(MenuPrincipaleController mpController, MenuContattoView mcView, Scene menuPrincipale) {
@@ -90,13 +90,13 @@ public class MenuContattoController {
         String[] emails = new String[Contatto.MAX_EMAILS];
         for(int i = 0; i < numeri.length; i++) numeri[i] = mcView.getNumeriTF()[i].getText();
         for(int i = 0; i < emails.length; i++) emails[i] = mcView.getEmailsTF()[i].getText();
-        BufferedImage immagineprofilo = immagineABufferedImage(mcView.getImmagineProfilo().getImage());
+      //  BufferedImage immagineprofilo = immagineABufferedImage(mcView.getImmagineProfilo().getImage());
 
         try {
 
             if(contattoRicevuto == null) {
 
-                contattoRicevuto = new Contatto(nome, cognome, numeri, emails, immagineprofilo);
+                contattoRicevuto = new Contatto(nome, cognome, numeri, emails, null);
 
                 disabilitaCampi();
                 mcView.getModificaBtn().setDisable(false);
@@ -108,7 +108,7 @@ public class MenuContattoController {
             }
             else {
 
-                contattoRicevuto.modificaContatto(nome, cognome, numeri, emails, immagineprofilo);
+                contattoRicevuto.modificaContatto(nome, cognome, numeri, emails, null);
 
                 disabilitaCampi();
                 mcView.getModificaBtn().setDisable(false);
@@ -162,7 +162,7 @@ public class MenuContattoController {
         mcView.getCognomeTF().setText("");
         for(TextField numeroTF : mcView.getNumeriTF()) numeroTF.setText("");
         for(TextField emailTF : mcView.getEmailsTF()) emailTF.setText("");
-        mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
+       // mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
     }
 
     private void riempiCampi() {
