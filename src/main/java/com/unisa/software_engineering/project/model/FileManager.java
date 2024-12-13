@@ -44,7 +44,7 @@ public abstract class FileManager {
 
             oos.writeObject(rubrica);
         }
-       }
+    }
 
     /**
      * @brief Carica la rubrica salvata su file.
@@ -60,18 +60,15 @@ public abstract class FileManager {
 
         if(file.exists()) {
 
-                try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
-
-                    Rubrica rubrica = (Rubrica) ois.readObject();
-
-                    return rubrica;
-                } catch(IOException e) {
-
-                    throw e;
-                }
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
+                Rubrica rubrica = (Rubrica) ois.readObject();
+                return rubrica;
+            } catch(IOException e) {
+                throw e;
+            }
         }
 
-        return  new Rubrica();
+        return new Rubrica();
     }
 
     /**
