@@ -164,4 +164,38 @@ public class ContattoTest {
                 null);
         });
     }
+
+    @Test
+    void testCreazioneContattoEmailDominioInvalida(){
+
+        assertThrows(InfoContattoException.class, () -> {
+            contatto = new Contatto(
+                "Ciao","Belo",
+                new String[]{""},
+                new String[]{"BellaQuestaEmail@.com"},
+                null);
+            contatto = new Contatto(
+                "Ciao","Belo",
+                new String[]{""},
+                new String[]{"BruttaQuestaAltra@kebab"},
+                null);
+        });
+    }
+
+    @Test
+    void testCreazioneContattoEmailLocalPartInvalid(){
+
+        assertThrows(InfoContattoException.class, () -> {
+            contatto = new Contatto(
+                "Ciao","Belo",
+                new String[]{""},
+                new String[]{"BellaQu||estaEmail@hotmail.com"},
+                null);
+            contatto = new Contatto(
+                "Ciao","Belo",
+                new String[]{""},
+                new String[]{"BruttaQu..estaAltra@gmail.it"},
+                null);
+        });
+    }
 }
