@@ -11,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class Contatto implements Serializable, Comparable<Contatto> {
+public class Contatto implements Serializable {
 
     private String nome;
     private String cognome;
@@ -27,8 +27,13 @@ public class Contatto implements Serializable, Comparable<Contatto> {
        verificaDati(nome, cognome, numeri, emails);
        this.nome = nome;
        this.cognome = cognome;
-       this.numeri = numeri;
-       this.emails = emails;
+
+       this.numeri = new String[MAX_NUMERI];
+       for(int i = 0; i < this.numeri.length && i < numeri.length; i++) this.numeri[i] = numeri[i];
+
+       this.emails = new String[MAX_EMAILS];
+       for(int i = 0; i < this.emails.length && i < emails.length; i++) this.emails[i] = emails[i];
+       
        this.immagineProfilo = immagineAByte(immagineProfilo);
    }
 
@@ -49,17 +54,19 @@ public class Contatto implements Serializable, Comparable<Contatto> {
 
         for(String email : emails) {
 
-            if(!email.isEmpty() && !email.contains("@"))
+            if(email.isEmpty()) continue;
+
+            if(!email.contains("@"))
                 throw new InfoContattoException("L'indirizzo email deve contenere '@'!");
 
-            if(!email.isEmpty() && (email.split("@").length != 2))
+            if((email.split("@").length != 2))
                 throw new InfoContattoException("Formato email non valido!");
 
-            if (!email.isEmpty() && !email.split("@")[0]
+            if (!email.split("@")[0]
                 .matches("^[a-zA-Z0-9._+&*-]+([a-zA-Z0-9._+&*-]*[a-zA-Z0-9])?$"))
                     throw new InfoContattoException("Local part dell'email non valida!");
 
-            if (!email.isEmpty() && !email.split("@")[1]
+            if (!email.split("@")[1]
                 .matches("^[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$"))
                     throw new InfoContattoException("Dominio dell'email non valido");
         }
@@ -70,8 +77,8 @@ public class Contatto implements Serializable, Comparable<Contatto> {
        verificaDati(nome, cognome, numeri, emails);
        this.nome = nome;
        this.cognome = cognome;
-       this.numeri = numeri;
-       this.emails = emails;
+       for(int i = 0; i < this.numeri.length && i < numeri.length; i++) this.numeri[i] = numeri[i];
+       for(int i = 0; i < this.emails.length && i < emails.length; i++) this.emails[i] = emails[i];
        this.immagineProfilo = immagineAByte(immagineProfilo);
    }
 
@@ -107,26 +114,5 @@ public class Contatto implements Serializable, Comparable<Contatto> {
 
         ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
         return new Image(bais);
-    }
-
-    @Override
-    public int compareTo(Contatto c) {
-
-       if(this.cognome.compareTo(c.cognome) == 0) return this.nome.compareTo(c.nome);
-
-       return this.cognome.compareTo(c.cognome);
-    }
-
-    @Override
-    public String toString() {
-
-       StringBuffer sb = new StringBuffer();
-
-       sb.append("Nome: " + nome);
-       sb.append(" - Cognome: " + cognome);
-       for(int i = 0; i < numeri.length; i++) sb.append(" - Numero " + (i + 1) + ": " + numeri[i]);
-       for(int i = 0; i < emails.length; i++) sb.append((" - Email " + (i + 1) + ": " + emails[i]));
-
-       return sb.toString();
     }
 }
