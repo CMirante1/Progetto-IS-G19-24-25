@@ -33,25 +33,25 @@ public class MenuContattoView extends AnchorPane {
         inizializzaImmagini();
         inizializzaPulsanti();
 
-        this.getChildren().addAll(escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, nomeLB, cognomeLB, nomeTF, cognomeTF);
+        this.getChildren().addAll(escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, cognomeLB, nomeLB, cognomeTF, nomeTF);
         this.getChildren().addAll(numeriLB[0], numeriLB[1], numeriLB[2], emailsLB[0], emailsLB[1], emailsLB[2],immagineProfilo);
         this.getChildren().addAll(numeriTF[0], numeriTF[1], numeriTF[2], emailsTF[0], emailsTF[1], emailsTF[2]);
     }
 
     private void inizializzaCampi() {
 
+        cognomeTF = new TextField();
+        cognomeTF.setPrefWidth(190);
+        cognomeTF.setPrefHeight(30);
+        cognomeTF.setLayoutX(35);
+        cognomeTF.setLayoutY(385);
+
         nomeTF = new TextField();
         nomeTF.setFocusTraversable(true);
         nomeTF.setPrefWidth(190);
         nomeTF.setPrefHeight(30);
-        nomeTF.setLayoutX(35);
+        nomeTF.setLayoutX(285);
         nomeTF.setLayoutY(385);
-
-        cognomeTF = new TextField();
-        cognomeTF.setPrefWidth(190);
-        cognomeTF.setPrefHeight(30);
-        cognomeTF.setLayoutX(285);
-        cognomeTF.setLayoutY(385);
 
         numeriTF = new TextField[Contatto.MAX_NUMERI];
         emailsTF = new TextField[Contatto.MAX_EMAILS];
@@ -76,17 +76,17 @@ public class MenuContattoView extends AnchorPane {
 
     private void inizializzaEtichette() {
 
-        nomeLB = new Label("Nome:");
-        nomeLB.setPrefWidth(45);
-        nomeLB.setPrefHeight(20);
-        nomeLB.setLayoutX(35);
-        nomeLB.setLayoutY(345);
-
         cognomeLB = new Label("Cognome:");
         cognomeLB.setPrefWidth(70);
         cognomeLB.setPrefHeight(20);
-        cognomeLB.setLayoutX(285);
+        cognomeLB.setLayoutX(35);
         cognomeLB.setLayoutY(345);
+
+        nomeLB = new Label("Nome:");
+        nomeLB.setPrefWidth(45);
+        nomeLB.setPrefHeight(20);
+        nomeLB.setLayoutX(285);
+        nomeLB.setLayoutY(345);
 
         numeriLB = new Label[numeriTF.length];
         emailsLB = new Label[emailsTF.length];

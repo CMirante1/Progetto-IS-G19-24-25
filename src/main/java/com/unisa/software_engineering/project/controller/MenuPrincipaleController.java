@@ -102,8 +102,9 @@ public class MenuPrincipaleController {
         for(Contatto contatto : contattiSelezionati) {
 
             rubrica.rimuoviContatto(contatto);
-            listaContatti.remove(contatto);
         }
+
+        mpView.getTabellaContatti().getItems().removeAll(mpView.getTabellaContatti().getSelectionModel().getSelectedItems());
     }
 
     private void visualizzaContatto(MouseEvent event) {
