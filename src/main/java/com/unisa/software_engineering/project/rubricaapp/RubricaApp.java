@@ -43,6 +43,9 @@ public class RubricaApp extends Application {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Errore nella lettura della rubrica!");
             alert.showAndWait();
+
+            primaryStage.close();
+            System.exit(1);
         }
 
         MenuPrincipaleView mpView = new MenuPrincipaleView();

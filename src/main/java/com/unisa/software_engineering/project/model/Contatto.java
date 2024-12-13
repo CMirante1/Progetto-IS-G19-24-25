@@ -11,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class Contatto implements Serializable {
+public class Contatto implements Serializable, Comparable<Contatto> {
 
     private String nome;
     private String cognome;
@@ -33,7 +33,7 @@ public class Contatto implements Serializable {
 
        this.emails = new String[MAX_EMAILS];
        for(int i = 0; i < this.emails.length && i < emails.length; i++) this.emails[i] = emails[i];
-       
+
        this.immagineProfilo = immagineAByte(immagineProfilo);
    }
 
@@ -84,7 +84,7 @@ public class Contatto implements Serializable {
 
     private byte[] immagineAByte(BufferedImage immagineProfilo) throws IOException {
 
-        if(immagineProfilo == null) return new byte[0];
+        if(immagineProfilo == null) return null;
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(immagineProfilo, "PNG", baos);
@@ -114,7 +114,18 @@ public class Contatto implements Serializable {
 
     public Image getImmagineProfilo() throws IOException{
 
+       if(immagineProfilo == null) return null;
+
         ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
         return new Image(bais);
+    }
+
+    @Override
+    public int compareTo(Contatto contatto) {
+
+       if(this.cognome.compareTo(contatto.cognome) == 0)
+           return this.nome.compareTo(contatto.nome);
+
+       return this.cognome.compareTo(contatto.cognome);
     }
 }

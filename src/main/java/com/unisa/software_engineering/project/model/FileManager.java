@@ -40,7 +40,7 @@ public abstract class FileManager {
      */
     public static void salvaRubrica(Rubrica rubrica) throws IOException {
 
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("res/" + FILE_BACKUP))) {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("resources/" + FILE_BACKUP))) {
 
             oos.writeObject(rubrica);
         }
@@ -56,7 +56,7 @@ public abstract class FileManager {
      */
     public static Rubrica caricaRubrica() throws IOException, ClassNotFoundException {
 
-        File file = new File("res/" + FILE_BACKUP);
+        File file = new File("resources/" + FILE_BACKUP);
 
         if(file.exists()) {
 

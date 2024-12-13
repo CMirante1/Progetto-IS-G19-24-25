@@ -175,6 +175,9 @@ public class MenuContattoController {
             mcView.getEmailsTF()[i].setText(contattoRicevuto.getEmails()[i]);
         try {
 
+            if(contattoRicevuto.getImmagineProfilo() == null)
+                mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
+
             mcView.getImmagineProfilo().setImage(contattoRicevuto.getImmagineProfilo());
         } catch (IOException e) {
 
