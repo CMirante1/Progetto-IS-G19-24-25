@@ -1,5 +1,6 @@
 package com.unisa.software_engineering.project.view;
 
+import com.unisa.software_engineering.project.model.Contatto;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
