@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale">
+   <children>
+      <TableView layoutY="149.0" prefHeight="352.0" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="cognomeCln" minWidth="300.0" prefWidth="350.0" text="Cognome" />
+            <TableColumn fx:id="nomeCln" minWidth="300.0" prefWidth="350.0" text="Nome" />
+         </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="esportaBtn" mnemonicParsing="false" onAction="#esportaContatti" text="EsportaContatto" />
+                  <MenuItem fx:id="eliminaBtn" mnemonicParsing="false" onAction="#eliminaContatti" text="EliminaContatto" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+      <TextField fx:id="barraRicerca" alignment="CENTER" layoutX="118.0" layoutY="14.0" prefHeight="39.0" prefWidth="464.0" promptText="Cerca contatti">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Button fx:id="aggiungiBtn" layoutX="129.0" layoutY="81.0" mnemonicParsing="false" onAction="#aggiungiContatto" text="Aggiungi contatto">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="importaBtn" layoutX="391.0" layoutY="85.0" mnemonicParsing="false" onAction="#importaContatti" text="Importa contatti">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

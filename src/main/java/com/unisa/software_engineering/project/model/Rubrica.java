@@ -8,14 +8,11 @@ import java.util.List;
  * @class Rubrica
  * @brief La struttura dati Rubrica
  *
- * Questa è la struttura dati della rubrica che contiene i contatti dell'utente.
+ * Definisce la struttura dati della rubrica che contiene i contatti dell'utente.
  *
  * @ingroup Models
  * @see Contatto
  * @see FileManager
- * @author paolo
- * @date 02/12/24
- * @todo Tutto, manca tutto
  */
 public class Rubrica implements Serializable {
 

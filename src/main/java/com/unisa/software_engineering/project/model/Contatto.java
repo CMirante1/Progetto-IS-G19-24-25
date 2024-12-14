@@ -10,7 +10,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-
+/**
+ * @file Contatto.java
+ * @class Contatto
+ * @brief Classe che definisce un contatto all'interno della rubrica.
+ * 
+ * Contiene informazioni come nome, cognome, numeri di telefono, email e immagine del profilo.
+ */
 public class Contatto implements Serializable, Comparable<Contatto> {
 
     private String nome;
@@ -21,7 +27,18 @@ public class Contatto implements Serializable, Comparable<Contatto> {
 
     public static final int MAX_NUMERI = 3;
     public static final int MAX_EMAILS = 3;
-
+    /**
+     * @brief Costruttore della classe Contatto.
+     * Costruttore del un contatto che riceve in input tutti gli attributi.
+     * 
+     * @param nome Il nome del contatto.
+     * @param cognome Il cognome del contatto.
+     * @param numeri Un array di numeri di telefono.
+     * @param emails Un array di indirizzi email.
+     * @param immagineProfilo L'immagine del profilo del contatto come BufferedImage.
+     * @throws InfoContattoException Se i dati forniti non sono validi.
+     * @throws IOException Se si verifica un errore durante la conversione dell'immagine.
+     */
    public Contatto(String nome, String cognome, String[] numeri, String[] emails, BufferedImage immagineProfilo) throws InfoContattoException, IOException {
 
        verificaDati(nome, cognome, numeri, emails);
@@ -36,6 +53,18 @@ public class Contatto implements Serializable, Comparable<Contatto> {
 
        this.immagineProfilo = immagineAByte(immagineProfilo);
    }
+   /**
+    * @brief Verifica la validità dei dati forniti per il contatto.
+    *   
+    * Questo metodo controlla che i campi nome, cognome, numeri di telefono e email rispettino
+    * i requisiti di formato e lancia un'eccezione in caso contrario.
+    *
+    * @param nome Il nome del contatto (può essere vuoto ma non contenere caratteri speciali).
+    * @param cognome Il cognome del contatto (può essere vuoto ma non contenere caratteri speciali).
+    * @param numeri Un array di numeri di telefono (deve contenere solo cifre).
+    * @param emails Un array di indirizzi email (deve rispettare il formato email standard).
+    * @throws InfoContattoException Se i dati non rispettano i requisiti di validità.
+    */
 
     private void verificaDati(String nome, String cognome, String[] numeri, String[] emails) throws InfoContattoException {
 
@@ -75,7 +104,18 @@ public class Contatto implements Serializable, Comparable<Contatto> {
                     throw new InfoContattoException("Dominio dell'email non valido");
         }
     }
-
+    
+    /**
+     * Modifica gli attributi del contatto.
+     *
+     * @param nome Il nuovo nome del contatto.
+     * @param cognome Il nuovo cognome del contatto.
+     * @param numeri I nuovi numeri di telefono.
+     * @param emails I nuovi indirizzi email.
+     * @param immagineProfilo La nuova immagine del profilo come BufferedImage.
+     * @throws InfoContattoException Se i dati forniti non sono validi.
+     * @throws IOException Se si verifica un errore durante la conversione dell'immagine.
+     */
    public void modificaContatto(String nome, String cognome, String[] numeri, String[] emails, BufferedImage immagineProfilo) throws InfoContattoException, IOException {
 
        verificaDati(nome, cognome, numeri, emails);
@@ -123,7 +163,12 @@ public class Contatto implements Serializable, Comparable<Contatto> {
         ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
         return new Image(bais);
     }
-
+    /**
+     * Confronta il contatto corrente con un altro contatto in base al cognome, se questo dovesse risultare uguale i contatti vengono confrontati in base al nome.
+     *
+     * @param contatto Il contatto con cui confrontare.
+     * @return Un valore negativo, zero o positivo in base all'ordine lessicografico.
+     */
     @Override
     public int compareTo(Contatto contatto) {
 

@@ -1,24 +1,27 @@
 var indexSectionsWithContent =
 {
-  0: "cefgilmnrst",
-  1: "cefnr",
-  2: "cegims",
-  3: "lrt"
+  0: "acefgimprs",
+  1: "cfimr",
+  2: "cimr",
+  3: "acegimprs",
+  4: "r"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "functions",
-  3: "pages"
+  2: "files",
+  3: "functions",
+  4: "pages"
 };
 
 var indexSectionLabels =
 {
   0: "All",
   1: "Data Structures",
-  2: "Functions",
-  3: "Pages"
+  2: "Files",
+  3: "Functions",
+  4: "Pages"
 };
 

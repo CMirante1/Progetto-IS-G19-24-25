@@ -6,15 +6,12 @@
 package com.unisa.software_engineering.project.exceptions;
 
 /**
+ * @file InfoContattoException.java
  * @class RubricaExceptions
  * @brief L'eccezione lanciata dai componenti della rubrica
  *
  * Questa è l'eccezione generica, superclasse di tutte le eccezioni legate alla gestione della rubrica
  *
- * @ingroup Exceptions
- * @todo Creare le sottoclassi exception
- * @author paolo
- * @date 06/12/24
  */
 public class InfoContattoException extends Exception {
 
