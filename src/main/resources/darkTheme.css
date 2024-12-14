@@ -1,10 +1,11 @@
 Pane {
 	-fx-background-color: rgb(0, 0, 0);
-	-fx-color: rgb(0.1, 0.1, 0.1);
+	-fx-color: rgb(0.3, 0.3, 0.3);
 }
 
 TextField {
 	-fx-background-color: gray;
+	-fx-text-fill: white;
 }
 
 Text {
@@ -16,10 +17,10 @@ Label {
 }
 
 Button {
-	-fx-background-color: rgb(0.3, 0.3, 0.3);
+	-fx-background-color: rgb(0.5, 0.5, 0.5);
 	-fx-text-fill: white;
 }
 
 Button:hover {
-	-fx-background-color: rgb(0.5, 0.5, 0.5);
+	-fx-background-color: rgb(0.7, 0.7, 0.7);
 }
