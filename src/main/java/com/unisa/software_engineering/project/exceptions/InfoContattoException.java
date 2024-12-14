@@ -10,7 +10,7 @@ package com.unisa.software_engineering.project.exceptions;
  * @class RubricaExceptions
  * @brief L'eccezione lanciata dai componenti della rubrica
  *
- * Questa è l'eccezione generica, superclasse di tutte le eccezioni legate alla gestione della rubrica
+ * Questa eccezione viene lanciata se le informazioni del contatto non sono valide
  *
  */
 public class InfoContattoException extends Exception {

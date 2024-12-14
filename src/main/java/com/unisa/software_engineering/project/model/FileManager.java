@@ -129,8 +129,8 @@ public abstract class FileManager {
 
         int numIndex = 0;
         int emailIndex = 0;
-        //int contattiImportati = 0;
-        int contattiNonImportati = 0;
+        int contattiImportati = 0;
+        //int contattiNonImportati = 0;
 
         boolean creazioneContatto = false;
 
@@ -178,14 +178,14 @@ public abstract class FileManager {
                     try {
                         Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
                         rubrica.aggiungiContatto(contatto);
-                        //contattiImportati++;
+                        contattiImportati++;
                     } catch(InfoContattoException e) {
-                        contattiNonImportati++;
+                        //contattiNonImportati++;
                     }
                 }
             }
         }
-        return contattiNonImportati;
-        //return contattiImportati;
+        //return contattiNonImportati;
+        return contattiImportati;
     }
 }
