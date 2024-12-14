@@ -45,8 +45,12 @@ public class MenuPrincipaleController {
         this.stage = stage;
 
         mcView = new MenuContattoView();
-        mcController = new MenuContattoController(this, mcView, menuPrincipale);
+        menuPrincipale.getStylesheets().add("darkTheme.css");
+
         menuContatto = new Scene(mcView, 750, 600);
+        menuContatto.getStylesheets().add("darkTheme.css");
+
+        mcController = new MenuContattoController(this, mcView, menuPrincipale);
 
         inizializzaComponenti();
     }

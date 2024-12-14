@@ -52,6 +52,7 @@ public class RubricaApp extends Application {
 
         Scene menuPrincipale = new Scene(mpView, 750, 600);
 
+
         MenuPrincipaleController mpController = new MenuPrincipaleController(rubrica, primaryStage, mpView, menuPrincipale);
 
         primaryStage.setTitle("Rubrica");

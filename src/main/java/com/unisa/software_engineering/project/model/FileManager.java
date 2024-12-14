@@ -137,7 +137,7 @@ public abstract class FileManager {
         try(BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
 
             while((riga = br.readLine()) != null) {
-                
+
                 if(riga.equals("BEGIN:VCARD")){
                     numIndex = 0;
                     emailIndex = 0;
@@ -154,8 +154,13 @@ public abstract class FileManager {
                 if (riga.startsWith("N:")) {
 
                     String[] partiNome = riga.substring(2).split(";");
-                    cognome = partiNome[0];
-                    nome = partiNome[1];
+
+                    if(partiNome.length >= 2) {
+
+                        cognome = partiNome[0];
+                        nome = partiNome[1];
+                    }
+                    else cognome = partiNome[0];
 
                 } else if (riga.startsWith("TEL:")) {
 
@@ -176,7 +181,7 @@ public abstract class FileManager {
                         //contattiImportati++;
                     } catch(InfoContattoException e) {
                         contattiNonImportati++;
-                    } 
+                    }
                 }
             }
         }
