@@ -45,10 +45,10 @@ public class MenuPrincipaleController {
         this.stage = stage;
 
         mcView = new MenuContattoView();
-        menuPrincipale.getStylesheets().add("darkTheme.css");
+        //menuPrincipale.getStylesheets().add("darkTheme.css");
 
-        menuContatto = new Scene(mcView, 750, 600);
-        menuContatto.getStylesheets().add("darkTheme.css");
+        menuContatto = new Scene(mcView, 750, 550);
+       // menuContatto.getStylesheets().add("darkTheme.css");
 
         mcController = new MenuContattoController(this, mcView, menuPrincipale);
 
@@ -59,9 +59,11 @@ public class MenuPrincipaleController {
 
         listaContatti = FXCollections.observableArrayList(rubrica.getContatti());
 
+        //riempimento tabella contatti e definizione logica visualizzazione contatto
         mpView.getTabellaContatti().setItems(listaContatti);
         mpView.getTabellaContatti().setOnMouseClicked(event -> visualizzaContatto(event));
 
+        //definizione logica barra di ricerca
         mpView.getBarraRicerca().textProperty().addListener((observable, vecchiaStringa, nuovaStringa) -> {
 
             ObservableList<Contatto> listaContattiFiltrati = FXCollections.observableArrayList();
@@ -70,9 +72,8 @@ public class MenuPrincipaleController {
 
                 if(contatto.getNome().toLowerCase().contains(nuovaStringa.toLowerCase()) ||
                     contatto.getCognome().toLowerCase().contains(nuovaStringa.toLowerCase()))
-                {
+
                     listaContattiFiltrati.add(contatto);
-                }
             }
 
             if(mpView.getBarraRicerca().getText().isEmpty())
@@ -80,12 +81,16 @@ public class MenuPrincipaleController {
             else mpView.getTabellaContatti().setItems(listaContattiFiltrati);
         });
 
+        //definizione logica pulsante nuovo contatto
         mpView.getAggiungiBtn().setOnAction(event -> aggiungiContatto());
 
-        mpView.getImportaBtn().setOnAction((event) -> importaContatto());
-
+        //definizione logica pulsante eliminazione contatti
         mpView.getEliminaBtn().setOnAction(event -> eliminaContatto());
 
+        //definizione logica pulsante importazione contatti
+        mpView.getImportaBtn().setOnAction((event) -> importaContatto());
+
+        //definizione logica pulsante esportazione contatti
         mpView.getEsportaBtn().setOnAction(event -> esportaContatto());
     }
 

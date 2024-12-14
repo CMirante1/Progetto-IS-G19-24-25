@@ -45,7 +45,7 @@ public class ContattoTest {
 
         try{
             contatto = new Contatto(
-                "Kekko","Ione",
+                "Paolo","Bianchi",
                 new String[]{},
                 new String[]{"nonunemailgiuro@dominio.it", "anchequestaemail@ebrutta.it"},
                 null);
@@ -198,7 +198,7 @@ public class ContattoTest {
 
     @Test
     void testModificaContatto() throws InfoContattoException, IOException{
-        
+
         Rubrica rubrica = new Rubrica();
         String[] numeri = {"123456789"};
         String[] emails = {"email@example.com"};

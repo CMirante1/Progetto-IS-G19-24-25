@@ -50,8 +50,7 @@ public class RubricaApp extends Application {
 
         MenuPrincipaleView mpView = new MenuPrincipaleView();
 
-        Scene menuPrincipale = new Scene(mpView, 750, 600);
-
+        Scene menuPrincipale = new Scene(mpView, 750, 550);
 
         MenuPrincipaleController mpController = new MenuPrincipaleController(rubrica, primaryStage, mpView, menuPrincipale);
 

@@ -34,19 +34,22 @@ public class MenuPrincipaleView extends AnchorPane {
 
     private void inizializzaTabella() {
 
+        //inizializzazione tabella contatti
         tabellaContatti = new TableView<>();
         tabellaContatti.setPrefWidth(750);
-        tabellaContatti.setPrefHeight(400);
+        tabellaContatti.setPrefHeight(350);
         tabellaContatti.setLayoutX(0);
         tabellaContatti.setLayoutY(200);
         tabellaContatti.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tabellaContatti.setFocusTraversable(true);
 
+        //inizializzazione colonna cognomi
         cognomeCln = new TableColumn<>("Cognome");
         cognomeCln.setMinWidth(375);
         cognomeCln.setPrefWidth(75);
         cognomeCln.setCellValueFactory(new PropertyValueFactory<>("cognome"));
 
+        //inizializzazione colonna nomi
         nomeCln = new TableColumn<>("Nome");
         nomeCln.setMinWidth(375);
         nomeCln.setPrefWidth(75);
@@ -57,6 +60,7 @@ public class MenuPrincipaleView extends AnchorPane {
 
     private void inizializzaPulsanti() {
 
+        //inizializzazione pulsante nuovo contatto
         aggiungiBtn = new Button("Aggiungi contatto");
         aggiungiBtn.setPrefWidth(170);
         aggiungiBtn.setPrefHeight(40);
@@ -65,6 +69,7 @@ public class MenuPrincipaleView extends AnchorPane {
         aggiungiBtn.setFont(new javafx.scene.text.Font(18));
         aggiungiBtn.setFocusTraversable(false);
 
+        //inizializzazione pulsante importazione contatti
         importaBtn = new Button("Importa contatti");
         importaBtn.setPrefWidth(155);
         importaBtn.setPrefHeight(40);
@@ -76,6 +81,7 @@ public class MenuPrincipaleView extends AnchorPane {
 
     private void inizializzaBarraRicerca() {
 
+        //inizializzazione text field barra di ricerca
         barraRicerca = new TextField();
         barraRicerca.setPrefWidth(460);
         barraRicerca.setPrefHeight(40);
@@ -88,6 +94,7 @@ public class MenuPrincipaleView extends AnchorPane {
 
     private void inizializzaMenuContestuale() {
 
+        //inizializzazione menu contestuale (esportazione ed eliminazione contatti)
         esportaBtn = new MenuItem("Esporta contatto");
         eliminaBtn = new MenuItem("Elimina contatto");
 

@@ -34,6 +34,7 @@ public class Rubrica implements Serializable {
     public void aggiungiContatto(Contatto contatto){
 
         contatti.add(contatto);
+        contatti.sort(null);
     }
 
     /**
@@ -43,8 +44,7 @@ public class Rubrica implements Serializable {
      */
     public void rimuoviContatto(Contatto contatto){
 
-        if(contatti.contains(contatto)) contatti.remove(contatto);
-
+        contatti.remove(contatto);
     }
     /**
      *

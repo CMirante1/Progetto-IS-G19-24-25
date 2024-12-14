@@ -24,7 +24,7 @@ import java.io.IOException;
  * @file MenuPrincipaleController.java
  * @class MenuContattoController
  * @brief Controller per gestire il menu dei contatti.
- * 
+ *
  * Questa classe gestisce la logica e i metodi per visualizzare, modificare e salvare i dettagli di un contatto
 */
 import java.net.URI;
@@ -57,17 +57,26 @@ public class MenuContattoController {
 
     private void inizializzaComponenti() {
 
+        //bordo text field nome e cognome rosso
         mcView.getNomeTF().textProperty().addListener((observable, oldValue, newValue) -> checkNomeCognome());
         mcView.getCognomeTF().textProperty().addListener((observable, oldValue, newValue) -> checkNomeCognome());
 
+        //definizione logica pulsante cambio schermata
         mcView.getEscBtn().setOnAction(event -> tornaIndietro(event));
 
+        //definizione logica pulsante modifica contatto
         mcView.getModificaBtn().setOnAction(event -> abilitaModifica());
 
+        //definizione logica pulsante salvataggio contatto
         mcView.getSalvaBtn().setOnAction(event -> salvaContatto());
 
+        //definizione logica pulsante aggiunta immagine profilo personalizzata
         mcView.getAggiungiImmagineBtn().setOnAction(event -> aggiungiImmagine(event));
 
+        //definizione logica pulsante rimozione immagine profilo personalizzata
+        mcView.getRimuoviImmagineBtn().setOnAction(event -> rimuoviImmagine());
+
+        //definizione logica apertura client di posta
         for(TextField emailTF : mcView.getEmailsTF())
             emailTF.setOnMouseClicked(event -> apriClientEmail(event, emailTF));
     }
@@ -99,7 +108,7 @@ public class MenuContattoController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(menuPrincipale);
     }
-    
+
     /**
      * Imposta il contatto corrente da visualizzare o modificare.
      *
@@ -184,6 +193,11 @@ public class MenuContattoController {
         if(immagineScelta == null) return;
 
        mcView.getImmagineProfilo().setImage(new Image(immagineScelta.toURI().toString()));
+    }
+
+    private void rimuoviImmagine() {
+
+        mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
     }
 
     private void abilitaModifica() {

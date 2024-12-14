@@ -5,9 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.software_engineering.project.controller.ControllerMenuPrincipale">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.software_engineering.project.controller.ControllerMenuPrincipale">
    <children>
-      <TableView fx:id="tabellaContatti" layoutY="200.0" prefHeight="400.0" prefWidth="750.0">
+      <TableView fx:id="tabellaContatti" layoutY="200.0" prefHeight="350.0" prefWidth="750.0">
          <columns>
             <TableColumn fx:id="cognomeCln" minWidth="375.0" prefWidth="75.0" text="Cognome" />
             <TableColumn fx:id="nomeCln" minWidth="375.0" prefWidth="75.0" text="Nome" />
