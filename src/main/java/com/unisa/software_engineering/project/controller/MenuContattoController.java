@@ -16,7 +16,13 @@ import javafx.stage.Stage;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * @file MenuPrincipaleController.java
+ * @class MenuContattoController
+ * @brief Controller per gestire il menu dei contatti.
+ * 
+ * Questa classe gestisce la logica e i metodi per visualizzare, modificare e salvare i dettagli di un contatto
+ */
 public class MenuContattoController {
 
     private final MenuPrincipaleController mpController;
@@ -25,6 +31,13 @@ public class MenuContattoController {
     private  Contatto contattoRicevuto;
     private boolean contattoAggiunto;
 
+    /**
+     * @brief Costruttore per MenuContattoController.
+     *
+     * @param mpController il controller del menu principale.
+     * @param mcView la view del menu contatto.
+     * @param menuPrincipale la scena del menu principale.
+     */
     public MenuContattoController(MenuPrincipaleController mpController, MenuContattoView mcView, Scene menuPrincipale) {
 
         this.mpController = mpController;
@@ -53,7 +66,12 @@ public class MenuContattoController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(menuPrincipale);
     }
-
+    
+    /**
+     * Imposta il contatto corrente da visualizzare o modificare.
+     *
+     * @param contatto riceve in input il contatto da visualizzare.
+     */
     public void setContatto(Contatto contatto) {
 
         this.contattoRicevuto = contatto;
@@ -169,10 +187,13 @@ public class MenuContattoController {
 
         mcView.getNomeTF().setText(contattoRicevuto.getNome());
         mcView.getCognomeTF().setText(contattoRicevuto.getCognome());
+
         for(int i = 0; i < mcView.getNumeriTF().length; i++)
             mcView.getNumeriTF()[i].setText(contattoRicevuto.getNumeri()[i]);
-        for(int i = 0; i < mcView.getEmailsTF().length; i++)
+        for(int i = 0; i < mcView.getEmailsTF().length; i++) {
             mcView.getEmailsTF()[i].setText(contattoRicevuto.getEmails()[i]);
+            mcView.getEmailsTF()[i].setStyle("-fx-text-inner-color: #0000FF;");
+        }
         try {
 
             if(contattoRicevuto.getImmagineProfilo() == null)
@@ -185,6 +206,7 @@ public class MenuContattoController {
             alert.setContentText("Errore durante il caricamento dell'immagine profilo!");
             alert.showAndWait();
         }
+
     }
 
     private void abilitaCampi() {

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['salvarubrica_0',['salvaRubrica',['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1_model_1_1_file_manager.html#acbe700d83abc975929ad25b9caf63197',1,'com::unisa::software_engineering::project::Model::FileManager']]],
-  ['setcontatto_1',['setContatto',['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1_menu_contatto_1_1_controller_menu_contatto.html#ab8467891d79d8aad4ebbe8c4973b3fca',1,'com::unisa::software_engineering::project::MenuContatto::ControllerMenuContatto']]],
-  ['setrubrica_2',['setRubrica',['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1_menu_contatto_1_1_controller_menu_contatto.html#ae5b1d9f4f3b2d337dc67d289b4320430',1,'com.unisa.software_engineering.project.MenuContatto.ControllerMenuContatto.setRubrica()'],['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1_menu_principale_1_1_controller_menu_principale.html#a8ae2250813aff6abc426c8930aa3a6a3',1,'com.unisa.software_engineering.project.MenuPrincipale.ControllerMenuPrincipale.setRubrica()']]]
+  ['main_0',['main',['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1rubricaapp_1_1_rubrica_app.html#aa68b702287044aa8790afb43f21ee4b5',1,'com::unisa::software_engineering::project::rubricaapp::RubricaApp']]],
+  ['menucontattocontroller_1',['MenuContattoController',['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1controller_1_1_menu_contatto_controller.html#ab9fe2b5ca033ca283a58bedf9f7161f2',1,'com::unisa::software_engineering::project::controller::MenuContattoController']]],
+  ['menuprincipalecontroller_2',['MenuPrincipaleController',['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1controller_1_1_menu_principale_controller.html#a262756c811c216e72738f64261e6f024',1,'com::unisa::software_engineering::project::controller::MenuPrincipaleController']]],
+  ['modificacontatto_3',['modificaContatto',['../classcom_1_1unisa_1_1software__engineering_1_1project_1_1model_1_1_contatto.html#a66479f67ab0736a7be0d2801ea4966ba',1,'com::unisa::software_engineering::project::model::Contatto']]]
 ];

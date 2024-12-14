@@ -22,8 +22,6 @@ import java.util.List;
  *
  * @ingroup Models
  * @see Rubrica
- * @todo Scegliere se l'importazione supporta anche i singoli contatti
- * @todo Scegliere se la rubrica va passata da parametro o è unica e statica
  * @author andre
  * @date 05/12/24
  */
