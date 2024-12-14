@@ -56,17 +56,11 @@ public abstract class FileManager {
 
         File file = new File("src/main/resources/" + FILE_BACKUP);
 
-        if(file.exists()) {
-
-            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
-                Rubrica rubrica = (Rubrica) ois.readObject();
-                return rubrica;
-            } catch(IOException e) {
-                throw e;
-            }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))){
+            return (Rubrica)ois.readObject();
+        } catch (IOException ex){
+            return new Rubrica();
         }
-
-        return new Rubrica();
     }
 
     /**
@@ -85,7 +79,7 @@ public abstract class FileManager {
             String[] numeriDiTelefono;
             String[] emails;
 
-        for(Contatto contatto : contatti) {
+            for(Contatto contatto : contatti) {
 
                 numeriDiTelefono = contatto.getNumeri();
                 emails = contatto.getEmails();
@@ -95,18 +89,19 @@ public abstract class FileManager {
                 pw.println("N:" + contatto.getCognome() + ";" + contatto.getNome());
                 for(int i = 0; i < numeriDiTelefono.length; i++) {
 
-                    if(numeriDiTelefono[i] == null) break;
+                    if(numeriDiTelefono[i] == null) continue;
 
                     pw.println("TEL:" + numeriDiTelefono[i]);
                 }
                 for(int i = 0; i < emails.length; i++) {
 
-                    if(emails[i] == null) break;
+                    if(emails[i] == null) continue;
 
                     pw.println("EMAIL:" + emails[i]);
                 }
                 pw.println("END:VCARD");
             }
+
         } catch(IOException e) {
 
             throw e;
@@ -127,12 +122,15 @@ public abstract class FileManager {
         String riga;
         String nome = "";
         String cognome = "";
-        String[] numeri = new String[] { "", "", "" };
-        String[] emails = new String[] { "", "", "" };
+        String[] numeri = new String[Contatto.MAX_NUMERI];
+        for(int i = 0; i < numeri.length; i++) numeri[i] = "";
+        String[] emails = new String[Contatto.MAX_EMAILS];
+        for(int i = 0; i < emails.length; i++) emails[i] = "";
 
         int numIndex = 0;
         int emailIndex = 0;
-        int contattiImportati = 0;
+        //int contattiImportati = 0;
+        int contattiNonImportati = 0;
 
         boolean creazioneContatto = false;
 
@@ -145,40 +143,44 @@ public abstract class FileManager {
                     emailIndex = 0;
                     nome = "";
                     cognome = "";
-                    for(int i = 0; i < 3; i++){
-                        numeri[i] = "";
-                        emails[i] = "";
-                    }
-                    creazioneContatto = !creazioneContatto;
+                    for(int i = 0; i < numeri.length; i++) numeri[i] = "";
+                    for(int i = 0; i < emails.length; i++) emails[i] = "";
+                    creazioneContatto = true;
                     continue;
                 }
 
-                if(creazioneContatto == false)
-                    continue;
+                if(!creazioneContatto) continue;
 
                 if (riga.startsWith("N:")) {
+
                     String[] partiNome = riga.substring(2).split(";");
                     cognome = partiNome[0];
                     nome = partiNome[1];
+
                 } else if (riga.startsWith("TEL:")) {
-                    if(numIndex == 3)
-                        continue;
-                    numeri[numIndex++] = riga.substring(4);
+
+                    if(numIndex >= Contatto.MAX_NUMERI) continue;
+                    numeri[numIndex++] = riga.substring(4).replace("\n", "");
+
                 } else if (riga.startsWith("EMAIL:")) {
-                    if(emailIndex == 3)
-                        continue;
-                    emails[emailIndex++] = riga.substring(6);
+
+                    if(emailIndex >= Contatto.MAX_EMAILS) continue;
+                    emails[emailIndex++] = riga.substring(6).replace("\n", "");
+
                 } else if (riga.equals("END:VCARD")) {
+
                     creazioneContatto = false;
                     try {
-                            Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
-                            rubrica.aggiungiContatto(contatto);
-                            contattiImportati++;
-                        } catch(InfoContattoException e) {
+                        Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
+                        rubrica.aggiungiContatto(contatto);
+                        //contattiImportati++;
+                    } catch(InfoContattoException e) {
+                        contattiNonImportati++;
                     } 
                 }
             }
         }
-        return contattiImportati;
+        return contattiNonImportati;
+        //return contattiImportati;
     }
 }
