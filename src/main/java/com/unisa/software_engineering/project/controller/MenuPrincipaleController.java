@@ -70,8 +70,9 @@ public class MenuPrincipaleController {
 
                 if(contatto.getNome().toLowerCase().contains(nuovaStringa.toLowerCase()) ||
                     contatto.getCognome().toLowerCase().contains(nuovaStringa.toLowerCase()))
-
+                {
                     listaContattiFiltrati.add(contatto);
+                }
             }
 
             if(mpView.getBarraRicerca().getText().isEmpty())

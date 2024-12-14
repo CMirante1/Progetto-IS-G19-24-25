@@ -94,8 +94,7 @@ public class MenuContattoController {
 
     private void tornaIndietro(ActionEvent event) {
 
-        if(contattoAggiunto == true)
-            mpController.passaNuovoContatto(contattoRicevuto);
+        if(contattoAggiunto) mpController.passaNuovoContatto(contattoRicevuto);
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(menuPrincipale);
