@@ -125,24 +125,16 @@ public abstract class FileManager {
     public static int importaContatti(File file, Rubrica rubrica) throws IOException {
 
         String riga;
-        String nome;
-        String cognome;
-        String[] numeri = new String[3];
-        String[] emails = new String[3];
+        String nome = "";
+        String cognome = "";
+        String[] numeri = new String[] { "", "", "" };
+        String[] emails = new String[] { "", "", "" };
 
         int numIndex = 0;
         int emailIndex = 0;
         int contattiImportati = 0;
 
         boolean creazioneContatto = false;
-
-        nome = "";
-        cognome = "";
-
-        for(int i = 0; i < 3; i++){
-            numeri[i] = "";
-            emails[i] = "";
-        }
 
         try(BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
 
@@ -179,10 +171,10 @@ public abstract class FileManager {
                 } else if (riga.equals("END:VCARD")) {
                     creazioneContatto = false;
                     try {
-                        Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
-                        rubrica.aggiungiContatto(contatto);
-                        contattiImportati++;
-                    } catch(InfoContattoException e) {
+                            Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
+                            rubrica.aggiungiContatto(contatto);
+                            contattiImportati++;
+                        } catch(InfoContattoException e) {
                     } 
                 }
             }
