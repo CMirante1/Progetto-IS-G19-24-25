@@ -10,19 +10,27 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 /**
  * @file MenuPrincipaleController.java
  * @class MenuContattoController
  * @brief Controller per gestire il menu dei contatti.
  * 
  * Questa classe gestisce la logica e i metodi per visualizzare, modificare e salvare i dettagli di un contatto
- */
+*/
+import java.net.URI;
+import java.net.URISyntaxException;
+
+
 public class MenuContattoController {
 
     private final MenuPrincipaleController mpController;
@@ -49,6 +57,9 @@ public class MenuContattoController {
 
     private void inizializzaComponenti() {
 
+        mcView.getNomeTF().textProperty().addListener((observable, oldValue, newValue) -> checkNomeCognome());
+        mcView.getCognomeTF().textProperty().addListener((observable, oldValue, newValue) -> checkNomeCognome());
+
         mcView.getEscBtn().setOnAction(event -> tornaIndietro(event));
 
         mcView.getModificaBtn().setOnAction(event -> abilitaModifica());
@@ -56,6 +67,29 @@ public class MenuContattoController {
         mcView.getSalvaBtn().setOnAction(event -> salvaContatto());
 
         mcView.getAggiungiImmagineBtn().setOnAction(event -> aggiungiImmagine(event));
+
+        for(TextField emailTF : mcView.getEmailsTF())
+            emailTF.setOnMouseClicked(event -> apriClientEmail(event, emailTF));
+    }
+
+    private void apriClientEmail(MouseEvent event, TextField emailTF) {
+
+        if(emailTF.isEditable() || emailTF.getText().trim().isEmpty()) return;
+
+        if(!(event.getButton() == MouseButton.PRIMARY)) return;
+
+        if (Desktop.isDesktopSupported()) {
+            try {
+
+                URI mailto = new URI("mailto:" + emailTF.getText());
+                Desktop.getDesktop().mail(mailto);
+            } catch (URISyntaxException | IOException e) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Impossibile aprire il client email!");
+                alert.showAndWait();
+            }
+        }
     }
 
     private void tornaIndietro(ActionEvent event) {
@@ -81,19 +115,16 @@ public class MenuContattoController {
 
             pulisciCampi();
             abilitaCampi();
-            mcView.getModificaBtn().setDisable(true);
-            mcView.getModificaBtn().setVisible(false);
-            mcView.getSalvaBtn().setDisable(false);
-            mcView.getSalvaBtn().setVisible(true);
+            aggiornaBottoni(false, false, true, true);
+
+            mcView.getNomeTF().setStyle("-fx-border-color: red;");
+            mcView.getCognomeTF().setStyle("-fx-border-color: red;");
         }
         else {
 
             riempiCampi();
             disabilitaCampi();
-            mcView.getModificaBtn().setDisable(false);
-            mcView.getModificaBtn().setVisible(true);
-            mcView.getSalvaBtn().setDisable(true);
-            mcView.getSalvaBtn().setVisible(false);
+            aggiornaBottoni(true, true, false, false);
         }
 
     }
@@ -108,33 +139,25 @@ public class MenuContattoController {
         String[] emails = new String[Contatto.MAX_EMAILS];
         for(int i = 0; i < numeri.length; i++) numeri[i] = mcView.getNumeriTF()[i].getText();
         for(int i = 0; i < emails.length; i++) emails[i] = mcView.getEmailsTF()[i].getText();
-      //  BufferedImage immagineprofilo = immagineABufferedImage(mcView.getImmagineProfilo().getImage());
+        BufferedImage immagineprofilo = immagineABufferedImage(mcView.getImmagineProfilo().getImage());
 
         try {
 
             if(contattoRicevuto == null) {
 
-                contattoRicevuto = new Contatto(nome, cognome, numeri, emails, null);
+                contattoRicevuto = new Contatto(nome, cognome, numeri, emails, immagineprofilo);
 
                 disabilitaCampi();
-                mcView.getModificaBtn().setDisable(false);
-                mcView.getModificaBtn().setVisible(true);
-                mcView.getSalvaBtn().setDisable(true);
-                mcView.getSalvaBtn().setVisible(false);
+                aggiornaBottoni(true, true, false, false);
 
                 contattoAggiunto = true;
             }
             else {
 
-                contattoRicevuto.modificaContatto(nome, cognome, numeri, emails, null);
+                contattoRicevuto.modificaContatto(nome, cognome, numeri, emails, immagineprofilo);
 
                 disabilitaCampi();
-                mcView.getModificaBtn().setDisable(false);
-                mcView.getModificaBtn().setVisible(true);
-                mcView.getSalvaBtn().setDisable(true);
-                mcView.getSalvaBtn().setVisible(false);
-
-                contattoAggiunto = false;
+                aggiornaBottoni(true, true, false, false);
             }
         } catch(IOException e) {
 
@@ -153,25 +176,21 @@ public class MenuContattoController {
 
         FileChooser fileChooser = new FileChooser();
 
-        FileChooser.ExtensionFilter filtroPNG = new FileChooser.ExtensionFilter("PNG Files", "*.png");
-        FileChooser.ExtensionFilter filtroJPEG = new FileChooser.ExtensionFilter("JPEG Files", "*.jpg", "*.jpeg");
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("File supportati", "*.png", "*.jpg", "*.jpeg");
 
-        fileChooser.getExtensionFilters().addAll(filtroPNG, filtroJPEG);
+        fileChooser.getExtensionFilters().add(filtro);
 
         File immagineScelta = fileChooser.showOpenDialog(stage);
 
         if(immagineScelta == null) return;
 
-        mcView.getImmagineProfilo().setImage(new Image(immagineScelta.getAbsolutePath()));
+       mcView.getImmagineProfilo().setImage(new Image(immagineScelta.toURI().toString()));
     }
 
     private void abilitaModifica() {
 
         abilitaCampi();
-        mcView.getModificaBtn().setDisable(true);
-        mcView.getModificaBtn().setVisible(false);
-        mcView.getSalvaBtn().setDisable(false);
-        mcView.getSalvaBtn().setVisible(true);
+        aggiornaBottoni(false, false, true, true);
     }
 
     private void pulisciCampi() {
@@ -180,7 +199,7 @@ public class MenuContattoController {
         mcView.getCognomeTF().setText("");
         for(TextField numeroTF : mcView.getNumeriTF()) numeroTF.setText("");
         for(TextField emailTF : mcView.getEmailsTF()) emailTF.setText("");
-       // mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
+        mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
     }
 
     private void riempiCampi() {
@@ -198,8 +217,8 @@ public class MenuContattoController {
 
             if(contattoRicevuto.getImmagineProfilo() == null)
                 mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
-
-            mcView.getImmagineProfilo().setImage(contattoRicevuto.getImmagineProfilo());
+            else
+                mcView.getImmagineProfilo().setImage(contattoRicevuto.getImmagineProfilo());
         } catch (IOException e) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -232,5 +251,27 @@ public class MenuContattoController {
     private BufferedImage immagineABufferedImage(Image immagineProfilo) {
 
         return  SwingFXUtils.fromFXImage(immagineProfilo, null);
+    }
+
+    private void aggiornaBottoni(boolean modificaAttivo, boolean modificaVisibile, boolean salvaAttivo, boolean salvaVisibile) {
+
+        mcView.getModificaBtn().setDisable(!modificaAttivo);
+        mcView.getModificaBtn().setVisible(modificaVisibile);
+
+        mcView.getSalvaBtn().setDisable(!salvaAttivo);
+        mcView.getSalvaBtn().setVisible(salvaVisibile);
+    }
+
+    private void checkNomeCognome() {
+        String nome = mcView.getNomeTF().getText().trim();
+        String cognome = mcView.getCognomeTF().getText().trim();
+
+        if (nome.isEmpty() && cognome.isEmpty()) {
+            mcView.getNomeTF().setStyle("-fx-border-color: red;");
+            mcView.getCognomeTF().setStyle("-fx-border-color: red;");
+        } else {
+            mcView.getNomeTF().setStyle("");
+            mcView.getCognomeTF().setStyle("");
+        }
     }
 }

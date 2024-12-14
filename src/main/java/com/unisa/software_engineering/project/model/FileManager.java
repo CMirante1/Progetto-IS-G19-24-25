@@ -42,7 +42,7 @@ public abstract class FileManager {
 
             oos.writeObject(rubrica);
         }
-       }
+    }
 
     /**
      * @brief Carica la rubrica salvata su file.
@@ -58,18 +58,15 @@ public abstract class FileManager {
 
         if(file.exists()) {
 
-                try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
-
-                    Rubrica rubrica = (Rubrica) ois.readObject();
-
-                    return rubrica;
-                } catch(IOException e) {
-
-                    throw e;
-                }
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))) {
+                Rubrica rubrica = (Rubrica) ois.readObject();
+                return rubrica;
+            } catch(IOException e) {
+                throw e;
+            }
         }
 
-        return  new Rubrica();
+        return new Rubrica();
     }
 
     /**
@@ -137,44 +134,59 @@ public abstract class FileManager {
         int emailIndex = 0;
         int contattiImportati = 0;
 
-        nome = null;
-        cognome = null;
+        boolean creazioneContatto = false;
 
-        for(int i = 0; i<3; i++){
+        nome = "";
+        cognome = "";
 
-            numeri[i] = null;
-            emails[i] = null;
+        for(int i = 0; i < 3; i++){
+            numeri[i] = "";
+            emails[i] = "";
         }
 
         try(BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
 
             while((riga = br.readLine()) != null) {
+                
+                if(riga.equals("BEGIN:VCARD")){
+                    numIndex = 0;
+                    emailIndex = 0;
+                    nome = "";
+                    cognome = "";
+                    for(int i = 0; i < 3; i++){
+                        numeri[i] = "";
+                        emails[i] = "";
+                    }
+                    creazioneContatto = !creazioneContatto;
+                    continue;
+                }
+
+                if(creazioneContatto == false)
+                    continue;
 
                 if (riga.startsWith("N:")) {
-                    // Dividi il nome usando gli spazi, ma prendi il primo come nome e il resto come cognome
                     String[] partiNome = riga.substring(2).split(";");
                     cognome = partiNome[0];
                     nome = partiNome[1];
                 } else if (riga.startsWith("TEL:")) {
+                    if(numIndex == 3)
+                        continue;
                     numeri[numIndex++] = riga.substring(4);
                 } else if (riga.startsWith("EMAIL:")) {
+                    if(emailIndex == 3)
+                        continue;
                     emails[emailIndex++] = riga.substring(6);
-                } else if (riga.startsWith("END")) {
-                    if (nome != null || cognome != null) {
-
-                        try {
-
-                            Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
-                            rubrica.aggiungiContatto(contatto);
-                            contattiImportati++;
-                        } catch(InfoContattoException e) {
-
-                        }
-                    }
+                } else if (riga.equals("END:VCARD")) {
+                    creazioneContatto = false;
+                    try {
+                        Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
+                        rubrica.aggiungiContatto(contatto);
+                        contattiImportati++;
+                    } catch(InfoContattoException e) {
+                    } 
                 }
             }
         }
-
         return contattiImportati;
     }
 }
