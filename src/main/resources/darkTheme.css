@@ -17,10 +17,23 @@ Label {
 }
 
 Button {
-	-fx-background-color: rg(30, 30, 30);
+	-fx-background-color: rgb(30, 30, 30);
 	-fx-text-fill: white;
 }
 
 Button:hover {
 	-fx-background-color: rgb(70, 70, 70);
+}
+
+.root {
+	-fx-background-color: #333333;
+}
+
+.table-view {
+	-fx-background-color: #252525;
+	-fx-color: white;
+}
+
+.table-view .table-column-header {
+	-fx-background-color: #303030;
 }
