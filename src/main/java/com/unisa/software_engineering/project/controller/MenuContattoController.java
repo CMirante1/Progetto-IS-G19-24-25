@@ -103,7 +103,7 @@ public class MenuContattoController {
             } catch (URISyntaxException | IOException e) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Apertura client email");
+                alert.setTitle("Apertura client email.");
                 alert.setContentText("Impossibile aprire il client email!");
                 alert.showAndWait();
             }

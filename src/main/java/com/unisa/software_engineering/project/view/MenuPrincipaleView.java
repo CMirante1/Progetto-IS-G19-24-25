@@ -31,7 +31,7 @@ public class MenuPrincipaleView extends AnchorPane {
         inizializzaBarraRicerca();
         inizializzaMenuContestuale();
 
-        this.getChildren().addAll(barraRicerca, aggiungiBtn, importaBtn, tabellaContatti);
+        this.getChildren().addAll(temaBtn, barraRicerca, aggiungiBtn, importaBtn, tabellaContatti);
     }
 
     private void inizializzaTabella() {
@@ -80,9 +80,12 @@ public class MenuPrincipaleView extends AnchorPane {
         importaBtn.setFont(new javafx.scene.text.Font(18));
         importaBtn.setFocusTraversable(false);
 
+        //inizializzaziobe pulsante cambio tema
         temaBtn = new Button();
-        temaBtn.setPrefWidth(25);
-        temaBtn.setPrefHeight(25);
+        temaBtn.setPrefWidth(50);
+        temaBtn.setPrefHeight(50);
+        temaBtn.setLayoutX(25);
+        temaBtn.setLayoutY(25);
     }
 
     private void inizializzaBarraRicerca() {

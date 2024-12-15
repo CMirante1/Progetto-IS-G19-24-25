@@ -81,7 +81,7 @@ public class RubricaApp extends Application {
             } catch (IOException e) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Salvataggio rubrica");
+                alert.setTitle("Salvataggio rubrica.");
                 alert.setContentText("Errore nel salvataggio della rubrica");
                 alert.showAndWait();
             }
