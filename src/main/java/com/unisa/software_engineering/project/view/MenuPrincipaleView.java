@@ -4,6 +4,7 @@ import com.unisa.software_engineering.project.model.Contatto;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 
 public class MenuPrincipaleView extends AnchorPane {
@@ -97,8 +98,21 @@ public class MenuPrincipaleView extends AnchorPane {
         //inizializzazione menu contestuale (esportazione ed eliminazione contatti)
         esportaBtn = new MenuItem("Esporta contatto");
         eliminaBtn = new MenuItem("Elimina contatto");
+        eliminaBtn.getStyleClass().add("Elimina");
 
         menuContestuale = new ContextMenu(esportaBtn, eliminaBtn);
+
+        tabellaContatti.setRowFactory(tv -> {
+
+            TableRow<Contatto> riga = new TableRow<>();
+            riga.setOnMouseClicked(event -> {
+
+                if (event.getButton() != MouseButton.PRIMARY) return;
+
+                if (!riga.isSelected()) tabellaContatti.getSelectionModel().select(riga.getItem());
+            });
+            return riga;
+        });
 
         tabellaContatti.setContextMenu(menuContestuale);
     }

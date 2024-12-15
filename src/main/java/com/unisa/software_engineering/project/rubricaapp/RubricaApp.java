@@ -14,6 +14,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -41,6 +42,7 @@ public class RubricaApp extends Application {
         } catch (IOException | ClassNotFoundException e) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Apertura rubrica");
             alert.setContentText("Errore nella lettura della rubrica!");
             alert.showAndWait();
 
@@ -57,6 +59,8 @@ public class RubricaApp extends Application {
         primaryStage.setTitle("Rubrica");
         primaryStage.setScene(menuPrincipale);
         primaryStage.setOnCloseRequest(event -> chiudiApp(event, primaryStage));
+        primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("IconaRubrica.png"));
         primaryStage.show();
 
     }
@@ -69,7 +73,7 @@ public class RubricaApp extends Application {
 
         Optional<ButtonType> scelta = conferma.showAndWait();
 
-        if (scelta.isPresent() && scelta.get() == ButtonType.OK) {
+        if(scelta.isPresent() && scelta.get() == ButtonType.OK) {
 
             try {
 
@@ -77,6 +81,7 @@ public class RubricaApp extends Application {
             } catch (IOException e) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Salvataggio rubrica");
                 alert.setContentText("Errore nel salvataggio della rubrica");
                 alert.showAndWait();
             }

@@ -23,6 +23,7 @@ public class MenuContattoView extends AnchorPane {
     private Label[] numeriLB, emailsLB;
     private Button escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, rimuoviImmagineBtn;
     private ImageView immagineProfilo, escImmagine;
+    private Image immagineProfiloDefault;
 
     public MenuContattoView() {
 
@@ -118,8 +119,11 @@ public class MenuContattoView extends AnchorPane {
 
     private void inizializzaImmagini() {
 
+        //inizializzazione immagine profilo default
+        immagineProfiloDefault = new Image("immagineProfiloDefault.png");
+
         //inizializzazione image view per immagine profilo
-        immagineProfilo = new ImageView();
+        immagineProfilo = new ImageView(immagineProfiloDefault);
         immagineProfilo.setFitWidth(255);
         immagineProfilo.setFitHeight(255);
         immagineProfilo.setLayoutX(180);
@@ -164,7 +168,7 @@ public class MenuContattoView extends AnchorPane {
         aggiungiImmagineBtn = new Button("Aggiungi immagine profilo");
         aggiungiImmagineBtn.setPrefWidth(240);
         aggiungiImmagineBtn.setPrefHeight(40);
-        aggiungiImmagineBtn.setLayoutX(460);
+        aggiungiImmagineBtn.setLayoutX(480);
         aggiungiImmagineBtn.setLayoutY(115);
         aggiungiImmagineBtn.setFocusTraversable(false);
 
@@ -172,7 +176,7 @@ public class MenuContattoView extends AnchorPane {
         rimuoviImmagineBtn = new Button("Rimuovi immagine profilo");
         rimuoviImmagineBtn.setPrefHeight(40);
         rimuoviImmagineBtn.setPrefWidth(240);
-        rimuoviImmagineBtn.setLayoutX(460);
+        rimuoviImmagineBtn.setLayoutX(480);
         rimuoviImmagineBtn.setLayoutY(185);
         rimuoviImmagineBtn.setFocusTraversable(false);
 
@@ -226,6 +230,11 @@ public class MenuContattoView extends AnchorPane {
     public ImageView getImmagineProfilo() {
 
         return immagineProfilo;
+    }
+
+    public Image getImmagineProfiloDefault() {
+
+        return immagineProfiloDefault;
     }
 }
 

@@ -9,6 +9,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableRow;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -16,6 +19,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+
 /**
  * @file MenuPrincipaleController.java
  * @class MenuPrincipaleController
@@ -45,10 +50,11 @@ public class MenuPrincipaleController {
         this.stage = stage;
 
         mcView = new MenuContattoView();
-        menuPrincipale.getStylesheets().add("highContrastTheme.css");
+        menuPrincipale.getStylesheets().add("darkTheme.css");
 
         menuContatto = new Scene(mcView, 750, 550);
-        menuContatto.getStylesheets().add("highContrastTheme.css");
+        menuContatto.getStylesheets().add("darkTheme.css");
+        //cambiaTema();
 
         mcController = new MenuContattoController(this, mcView, menuPrincipale);
 
@@ -108,6 +114,13 @@ public class MenuPrincipaleController {
 
         if(contattiSelezionati.isEmpty()) return;
 
+        Alert conferma = new Alert(Alert.AlertType.CONFIRMATION);
+        conferma.setTitle("Conferma eliminazione contatti.");
+        conferma.setContentText("Sicuro di voler eliminare i contatti selezionati?");
+
+        Optional<ButtonType> scelta = conferma.showAndWait();
+        if(!scelta.isPresent() || scelta.get() != ButtonType.OK) return;
+
         for(Contatto contatto : contattiSelezionati) {
 
             rubrica.rimuoviContatto(contatto);
@@ -127,6 +140,14 @@ public class MenuPrincipaleController {
         if (event.getTarget() instanceof TableColumnHeader) return;
 
         Contatto contatto = mpView.getTabellaContatti().getSelectionModel().getSelectedItem();
+
+        if(contatto == null) return;
+
+        TableCell<Contatto, String> cell = (TableCell<Contatto, String>) event.getTarget();
+        TableRow<Contatto> riga = cell.getTableRow();
+
+        if (riga == null || riga.getIndex() != mpView.getTabellaContatti().getSelectionModel().getSelectedIndex()) return;
+
         mcController.setContatto(contatto);
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -147,13 +168,13 @@ public class MenuPrincipaleController {
         fileChooser.getExtensionFilters().add(filtro);
 
         File file = fileChooser.showOpenDialog(stage);
-        int contattiImportati = 0;
+        int contattiNonImportati = 0;
 
         if(file == null) return;
 
         try {
 
-            contattiImportati = FileManager.importaContatti(file, rubrica);
+            contattiNonImportati = FileManager.importaContatti(file, rubrica);
         } catch (IOException e) {
 
             System.out.println("Errore nella lettura del file!");
@@ -163,8 +184,15 @@ public class MenuPrincipaleController {
         listaContatti.clear();
         listaContatti.addAll(rubrica.getContatti());
 
+        String msg = "";
+
+        if(contattiNonImportati == 0) msg = "Tutti i contatti sono stati importati";
+        else if(contattiNonImportati == 1) msg = "1 contatto non è stato importato";
+        else if(contattiNonImportati > 1) msg = contattiNonImportati + " contatti non sono stati importati";
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Sono stati importati " + contattiImportati + " contatti.");
+        alert.setTitle("Importazione contatti");
+        alert.setContentText(msg);
         alert.showAndWait();
     }
     /**
@@ -192,9 +220,15 @@ public class MenuPrincipaleController {
         } catch (IOException e) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Esportazione contatti");
             alert.setContentText("Errore nell'esportazione dei contatti!");
             alert.showAndWait();
         }
+    }
+
+    private void cambiaTema() {
+
+        menuContatto.getStylesheets().add("lightTheme.css");
     }
      /**
      * @brief Aggiunge un contatto alla rubrica e aggiorna la vista.

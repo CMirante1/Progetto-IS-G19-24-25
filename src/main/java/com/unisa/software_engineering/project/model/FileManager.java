@@ -156,12 +156,8 @@ public abstract class FileManager {
 
                     String[] partiNome = riga.substring(2).split(";");
 
-                    if(partiNome.length >= 2) {
-
-                        cognome = partiNome[0];
-                        nome = partiNome[1];
-                    }
-                    else cognome = partiNome[0];
+                    if(partiNome.length > 0) cognome = partiNome[0];
+                    if(partiNome.length > 1) nome = partiNome[1];
 
                 } else if (riga.startsWith("TEL:")) {
 
@@ -179,7 +175,6 @@ public abstract class FileManager {
                     try {
                         Contatto contatto = new Contatto(nome, cognome, numeri, emails, null);
                         rubrica.aggiungiContatto(contatto);
-                        //contattiImportati++;
                     } catch(InfoContattoException e) {
                         contattiNonImportati++;
                     }
@@ -187,6 +182,5 @@ public abstract class FileManager {
             }
         }
         return contattiNonImportati;
-        //return contattiImportati;
     }
 }

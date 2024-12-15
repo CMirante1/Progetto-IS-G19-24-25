@@ -103,6 +103,7 @@ public class MenuContattoController {
             } catch (URISyntaxException | IOException e) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Apertura client email");
                 alert.setContentText("Impossibile aprire il client email!");
                 alert.showAndWait();
             }
@@ -131,6 +132,7 @@ public class MenuContattoController {
     public void setContatto(Contatto contatto) {
 
         this.contattoRicevuto = contatto;
+
         this.contattoAggiunto = false;
 
         if(contattoRicevuto == null) {
@@ -190,6 +192,7 @@ public class MenuContattoController {
         } catch(IOException e) {
 
             alert.setContentText("Errore durante l'inserimento dell'immagine profilo!");
+            alert.setTitle("Info contatto non valide.");
             alert.showAndWait();
         } catch(InfoContattoException e) {
 
@@ -213,11 +216,17 @@ public class MenuContattoController {
         if(immagineScelta == null) return;
 
        mcView.getImmagineProfilo().setImage(new Image(immagineScelta.toURI().toString()));
+
+       mcView.getRimuoviImmagineBtn().setDisable(false);
+       mcView.getRimuoviImmagineBtn().setVisible(true);
     }
 
     private void rimuoviImmagine() {
 
-        mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
+        mcView.getImmagineProfilo().setImage(mcView.getImmagineProfiloDefault());
+
+        mcView.getRimuoviImmagineBtn().setDisable(true);
+        mcView.getRimuoviImmagineBtn().setVisible(false);
     }
 
     private void abilitaModifica() {
@@ -232,7 +241,7 @@ public class MenuContattoController {
         mcView.getCognomeTF().setText("");
         for(TextField numeroTF : mcView.getNumeriTF()) numeroTF.setText("");
         for(TextField emailTF : mcView.getEmailsTF()) emailTF.setText("");
-        mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
+        mcView.getImmagineProfilo().setImage(mcView.getImmagineProfiloDefault());
     }
 
     private void riempiCampi() {
@@ -249,12 +258,13 @@ public class MenuContattoController {
         try {
 
             if(contattoRicevuto.getImmagineProfilo() == null)
-                mcView.getImmagineProfilo().setImage(new Image("immagineProfiloDefault.png"));
+                mcView.getImmagineProfilo().setImage(mcView.getImmagineProfiloDefault());
             else
                 mcView.getImmagineProfilo().setImage(contattoRicevuto.getImmagineProfilo());
         } catch (IOException e) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Caricamento immagine profilo.");
             alert.setContentText("Errore durante il caricamento dell'immagine profilo!");
             alert.showAndWait();
         }
@@ -269,10 +279,15 @@ public class MenuContattoController {
 
         mcView.getNomeTF().setEditable(true);
         mcView.getCognomeTF().setEditable(true);
+
         for(TextField numeroTF : mcView.getNumeriTF()) numeroTF.setEditable(true);
         for(TextField emailTF : mcView.getEmailsTF()) emailTF.setEditable(true);
+
         mcView.getAggiungiImmagineBtn().setDisable(false);
         mcView.getAggiungiImmagineBtn().setVisible(true);
+
+        mcView.getRimuoviImmagineBtn().setDisable(false);
+        mcView.getRimuoviImmagineBtn().setVisible(true);
     }
     /**
      * @brief disattiva i campi del menu contatto
@@ -284,10 +299,16 @@ public class MenuContattoController {
 
         mcView.getNomeTF().setEditable(false);
         mcView.getCognomeTF().setEditable(false);
+
         for(TextField numeroTF : mcView.getNumeriTF()) numeroTF.setEditable(false);
         for(TextField emailTF : mcView.getEmailsTF()) emailTF.setEditable(false);
+
         mcView.getAggiungiImmagineBtn().setDisable(true);
         mcView.getAggiungiImmagineBtn().setVisible(false);
+
+        mcView.getRimuoviImmagineBtn().setDisable(true);
+        mcView.getRimuoviImmagineBtn().setVisible(false);
+
     }
 
     private BufferedImage immagineABufferedImage(Image immagineProfilo) {
