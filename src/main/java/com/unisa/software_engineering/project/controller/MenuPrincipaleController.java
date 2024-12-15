@@ -45,10 +45,10 @@ public class MenuPrincipaleController {
         this.stage = stage;
 
         mcView = new MenuContattoView();
-        menuPrincipale.getStylesheets().add("darkTheme.css");
+        menuPrincipale.getStylesheets().add("highContrastTheme.css");
 
         menuContatto = new Scene(mcView, 750, 550);
-        menuContatto.getStylesheets().add("darkTheme.css");
+        menuContatto.getStylesheets().add("highContrastTheme.css");
 
         mcController = new MenuContattoController(this, mcView, menuPrincipale);
 
