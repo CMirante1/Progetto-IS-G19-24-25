@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @file Rubrica.java
  * @class Rubrica
  * @brief La struttura dati Rubrica
  *

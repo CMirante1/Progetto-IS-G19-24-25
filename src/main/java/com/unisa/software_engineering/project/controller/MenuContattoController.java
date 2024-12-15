@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @file MenuPrincipaleController.java
+ * @file MenuContattoController.java
  * @class MenuContattoController
  * @brief Controller per gestire il menu dei contatti.
  *
