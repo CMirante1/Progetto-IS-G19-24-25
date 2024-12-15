@@ -259,8 +259,10 @@ public class MenuPrincipaleController {
     private void cambiaTema(Button btn){
 
         if ("light".equals(tema)) {
+
             tema = "dark";
         } else {
+
             tema = "light";
         }
 
