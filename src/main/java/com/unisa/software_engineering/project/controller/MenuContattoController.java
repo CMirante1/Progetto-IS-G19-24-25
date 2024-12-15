@@ -169,7 +169,7 @@ public class MenuContattoController {
         String[] emails = new String[Contatto.MAX_EMAILS];
         for(int i = 0; i < numeri.length; i++) numeri[i] = mcView.getNumeriTF()[i].getText();
         for(int i = 0; i < emails.length; i++) emails[i] = mcView.getEmailsTF()[i].getText();
-        BufferedImage immagineprofilo = immagineABufferedImage(mcView.getImmagineProfilo().getImage());
+        BufferedImage immagineprofilo = immagineABufferedImage(mcView.getImmagineProfiloView().getImage());
 
         try {
 
@@ -215,7 +215,7 @@ public class MenuContattoController {
 
         if(immagineScelta == null) return;
 
-       mcView.getImmagineProfilo().setImage(new Image(immagineScelta.toURI().toString()));
+       mcView.getImmagineProfiloView().setImage(new Image(immagineScelta.toURI().toString()));
 
        mcView.getRimuoviImmagineBtn().setDisable(false);
        mcView.getRimuoviImmagineBtn().setVisible(true);
@@ -223,7 +223,7 @@ public class MenuContattoController {
 
     private void rimuoviImmagine() {
 
-        mcView.getImmagineProfilo().setImage(mcView.getImmagineProfiloDefault());
+        mcView.getImmagineProfiloView().setImage(mcView.getImmagineProfiloDefault());
 
         mcView.getRimuoviImmagineBtn().setDisable(true);
         mcView.getRimuoviImmagineBtn().setVisible(false);
@@ -241,7 +241,7 @@ public class MenuContattoController {
         mcView.getCognomeTF().setText("");
         for(TextField numeroTF : mcView.getNumeriTF()) numeroTF.setText("");
         for(TextField emailTF : mcView.getEmailsTF()) emailTF.setText("");
-        mcView.getImmagineProfilo().setImage(mcView.getImmagineProfiloDefault());
+        mcView.getImmagineProfiloView().setImage(mcView.getImmagineProfiloDefault());
     }
 
     private void riempiCampi() {
@@ -258,9 +258,9 @@ public class MenuContattoController {
         try {
 
             if(contattoRicevuto.getImmagineProfilo() == null)
-                mcView.getImmagineProfilo().setImage(mcView.getImmagineProfiloDefault());
+                mcView.getImmagineProfiloView().setImage(mcView.getImmagineProfiloDefault());
             else
-                mcView.getImmagineProfilo().setImage(contattoRicevuto.getImmagineProfilo());
+                mcView.getImmagineProfiloView().setImage(contattoRicevuto.getImmagineProfilo());
         } catch (IOException e) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);

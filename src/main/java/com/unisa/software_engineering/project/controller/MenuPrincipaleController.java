@@ -13,8 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableRow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -37,19 +35,19 @@ public class MenuPrincipaleController {
     private final Scene mpScene;
     private final Rubrica rubrica;
     private ObservableList<Contatto> listaContatti;
-    private ImageView immagineTemaScuro;
-    private ImageView immagineTemaChiaro;
 
     private final Stage stage;
     private final MenuContattoView mcView;
     private final MenuContattoController mcController;
     private final Scene menuContatto;
+
+    private String tema;
     /**
      * @brief Costruttore della del controller del menu principale.
      * @param rubrica La rubrica su cui operare.
      * @param stage La finestra principale dell'applicazione.
      * @param mpView La view del menu principale.
-     * @param menuPrincipale La scena principale per tornare indietro.
+     * @param mpScene La scena principale per tornare indietro.
      */
     public MenuPrincipaleController(Rubrica rubrica, Stage stage,  MenuPrincipaleView mpView, Scene mpScene) {
 
@@ -61,11 +59,13 @@ public class MenuPrincipaleController {
         mcView = new MenuContattoView();
 
         menuContatto = new Scene(mcView, 750, 550);
-        //cambiaTema();
 
         mcController = new MenuContattoController(this, mcView, mpScene);
 
         inizializzaComponenti();
+
+        tema = caricaTema();
+        applicaTema(tema);
     }
 
     private void inizializzaComponenti() {
@@ -235,16 +235,54 @@ public class MenuPrincipaleController {
         }
     }
 
-    private void cambiaTema(Button btn){
+    private void salvaTema(String tema) {
+
         Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
-        Boolean newVal = !prefs.getBoolean("TemaScuro", false);
-        prefs.putBoolean("TemaScuro", newVal);
-        if (newVal.booleanValue()){
-            btn.setGraphic(immagineTemaScuro);
+        prefs.put("Tema", tema);
+    }
+
+    private String caricaTema() {
+
+        Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
+        String temaCaricato = prefs.get("Tema", tema);
+
+        if(temaCaricato.equals("dark"))
+            mpView.getImmagineTemaView().setImage(mpView.getImmagineTemaChiaro());
+        else
+            mpView.getImmagineTemaView().setImage(mpView.getImmagineTemaScuro());
+
+        mpView.getTemaBtn().setGraphic(mpView.getImmagineTemaView());
+
+        return temaCaricato;
+    }
+
+    private void cambiaTema(Button btn){
+
+        if ("light".equals(tema)) {
+            tema = "dark";
+        } else {
+            tema = "light";
+        }
+
+        applicaTema(tema);
+
+        btn.setGraphic(mpView.getImmagineTemaView());
+        salvaTema(tema);
+    }
+
+    private void applicaTema(String tema) {
+
+        mpScene.getStylesheets().clear();
+        menuContatto.getStylesheets().clear();
+
+        if ("dark".equals(tema)) {
+
+            mpView.getImmagineTemaView().setImage(mpView.getImmagineTemaScuro());
             mpScene.getStylesheets().add("darkTheme.css");
             menuContatto.getStylesheets().add("darkTheme.css");
         } else {
-            btn.setGraphic(immagineTemaChiaro);
+
+            mpView.getImmagineTemaView().setImage(mpView.getImmagineTemaChiaro());
             mpScene.getStylesheets().add("lightTheme.css");
             menuContatto.getStylesheets().add("lightTheme.css");
         }

@@ -4,6 +4,8 @@ import com.unisa.software_engineering.project.model.Contatto;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 
@@ -13,10 +15,11 @@ public class MenuPrincipaleView extends AnchorPane {
     private TableColumn<Contatto, String> cognomeCln;
     private TableColumn<Contatto, String> nomeCln;
     private TextField barraRicerca;
-    private Button aggiungiBtn, importaBtn;
+    private Button aggiungiBtn, importaBtn, temaBtn;
     private ContextMenu menuContestuale;
     private MenuItem esportaBtn, eliminaBtn;
-    private Button temaBtn;
+    private ImageView immagineTemaView;
+    private Image immagineTemaChiaro, immagineTemaScuro;
 /**
  * @file MenuPrincipaleView.java
  * @class MenuPrincipaleView
@@ -30,6 +33,7 @@ public class MenuPrincipaleView extends AnchorPane {
         inizializzaPulsanti();
         inizializzaBarraRicerca();
         inizializzaMenuContestuale();
+        inizializzaImmagini();
 
         this.getChildren().addAll(temaBtn, barraRicerca, aggiungiBtn, importaBtn, tabellaContatti);
     }
@@ -125,6 +129,21 @@ public class MenuPrincipaleView extends AnchorPane {
         tabellaContatti.setContextMenu(menuContestuale);
     }
 
+    private void inizializzaImmagini() {
+
+        //inizializzazione image view
+        immagineTemaView = new ImageView();
+        immagineTemaView.setFitWidth(50);
+        immagineTemaView.setFitHeight(50);
+        immagineTemaView.setPreserveRatio(true);
+
+        //inizializzazone immagine tema chiaro
+        immagineTemaChiaro = new Image("sunny.png");
+
+        //inizializzazione immagine tema scuro
+        immagineTemaScuro = new Image("night.png");
+    }
+
     public TableView<Contatto> getTabellaContatti() {
 
         return tabellaContatti;
@@ -158,5 +177,20 @@ public class MenuPrincipaleView extends AnchorPane {
     public Button getTemaBtn(){
 
         return temaBtn;
+    }
+
+    public Image getImmagineTemaChiaro() {
+
+        return immagineTemaChiaro;
+    }
+
+    public Image getImmagineTemaScuro() {
+
+        return immagineTemaScuro;
+    }
+
+    public ImageView getImmagineTemaView() {
+
+        return immagineTemaView;
     }
 }
