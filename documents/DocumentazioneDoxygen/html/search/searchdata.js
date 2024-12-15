@@ -2,7 +2,7 @@ var indexSectionsWithContent =
 {
   0: "acefgimprs",
   1: "cfimr",
-  2: "cimr",
+  2: "cfimr",
   3: "acegimprs",
   4: "r"
 };
