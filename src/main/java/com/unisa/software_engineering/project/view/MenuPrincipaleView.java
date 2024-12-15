@@ -20,11 +20,11 @@ public class MenuPrincipaleView extends AnchorPane {
     private MenuItem esportaBtn, eliminaBtn;
     private ImageView immagineTemaView;
     private Image immagineTemaChiaro, immagineTemaScuro;
-/**
- * @file MenuPrincipaleView.java
- * @class MenuPrincipaleView
- * @brief Gestisce l'interfaccia grafica principale dell'applicazione per la visualizzazione e gestione dei contatti.
- */
+    /**
+     * @file MenuPrincipaleView.java
+     * @class MenuPrincipaleView
+     * @brief Gestisce l'interfaccia grafica principale dell'applicazione per la visualizzazione e gestione dei contatti.
+     */
     public MenuPrincipaleView() {
 
         super();

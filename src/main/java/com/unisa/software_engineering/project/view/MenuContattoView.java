@@ -22,7 +22,7 @@ public class MenuContattoView extends AnchorPane {
     private Label nomeLB, cognomeLB;
     private Label[] numeriLB, emailsLB;
     private Button escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, rimuoviImmagineBtn;
-    private ImageView immagineProfiloView, escImmagine;
+    private ImageView immagineProfilo, escImmagine;
     private Image immagineProfiloDefault;
 
     public MenuContattoView() {
@@ -35,7 +35,7 @@ public class MenuContattoView extends AnchorPane {
         inizializzaPulsanti();
 
         this.getChildren().addAll(escBtn, modificaBtn, salvaBtn, aggiungiImmagineBtn, rimuoviImmagineBtn, cognomeLB, nomeLB, cognomeTF, nomeTF);
-        this.getChildren().addAll(numeriLB[0], numeriLB[1], numeriLB[2], emailsLB[0], emailsLB[1], emailsLB[2], immagineProfiloView);
+        this.getChildren().addAll(numeriLB[0], numeriLB[1], numeriLB[2], emailsLB[0], emailsLB[1], emailsLB[2],immagineProfilo);
         this.getChildren().addAll(numeriTF[0], numeriTF[1], numeriTF[2], emailsTF[0], emailsTF[1], emailsTF[2]);
     }
 
@@ -123,11 +123,11 @@ public class MenuContattoView extends AnchorPane {
         immagineProfiloDefault = new Image("immagineProfiloDefault.png");
 
         //inizializzazione image view per immagine profilo
-        immagineProfiloView = new ImageView(immagineProfiloDefault);
-        immagineProfiloView.setFitWidth(255);
-        immagineProfiloView.setFitHeight(255);
-        immagineProfiloView.setLayoutX(180);
-        immagineProfiloView.setLayoutY(10);
+        immagineProfilo = new ImageView(immagineProfiloDefault);
+        immagineProfilo.setFitWidth(255);
+        immagineProfilo.setFitHeight(255);
+        immagineProfilo.setLayoutX(180);
+        immagineProfilo.setLayoutY(10);
 
         //inizializzazione immagine pulsante per tornare al menu principale
         escImmagine = new ImageView(new Image("frecciaIndietro.png"));
@@ -227,9 +227,9 @@ public class MenuContattoView extends AnchorPane {
         return rimuoviImmagineBtn;
     }
 
-    public ImageView getImmagineProfiloView() {
+    public ImageView getImmagineProfilo() {
 
-        return immagineProfiloView;
+        return immagineProfilo;
     }
 
     public Image getImmagineProfiloDefault() {
