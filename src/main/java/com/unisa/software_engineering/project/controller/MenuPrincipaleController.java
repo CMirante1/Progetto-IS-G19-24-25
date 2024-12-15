@@ -242,7 +242,7 @@ public class MenuPrincipaleController {
     private void salvaTema(String tema) {
 
         Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
-        prefs.put("Tema", "light");
+        prefs.put("Tema", tema);
     }
     /**
      * @brief carica tema
@@ -269,7 +269,7 @@ public class MenuPrincipaleController {
      */
     private void cambiaTema(Button btn){
 
-        if ("light".equals(tema)) {
+        if (tema.equals("light")) {
 
             tema = "dark";
         } else {
