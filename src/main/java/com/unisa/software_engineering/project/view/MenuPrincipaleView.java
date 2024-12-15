@@ -154,4 +154,9 @@ public class MenuPrincipaleView extends AnchorPane {
 
         return esportaBtn;
     }
+
+    public Button getTemaBtn(){
+
+        return temaBtn;
+    }
 }

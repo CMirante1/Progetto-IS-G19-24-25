@@ -9,9 +9,12 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableRow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -21,6 +24,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.prefs.*;
+
 /**
  * @file MenuPrincipaleController.java
  * @class MenuPrincipaleController
@@ -29,8 +34,11 @@ import java.util.Optional;
 public class MenuPrincipaleController {
 
     private final MenuPrincipaleView mpView;
+    private final Scene mpScene;
     private final Rubrica rubrica;
     private ObservableList<Contatto> listaContatti;
+    private ImageView immagineTemaScuro;
+    private ImageView immagineTemaChiaro;
 
     private final Stage stage;
     private final MenuContattoView mcView;
@@ -43,20 +51,19 @@ public class MenuPrincipaleController {
      * @param mpView La view del menu principale.
      * @param menuPrincipale La scena principale per tornare indietro.
      */
-    public MenuPrincipaleController(Rubrica rubrica, Stage stage,  MenuPrincipaleView mpView, Scene menuPrincipale) {
+    public MenuPrincipaleController(Rubrica rubrica, Stage stage,  MenuPrincipaleView mpView, Scene mpScene) {
 
         this.rubrica = rubrica;
         this.mpView = mpView;
         this.stage = stage;
+        this.mpScene = mpScene;
 
         mcView = new MenuContattoView();
-        menuPrincipale.getStylesheets().add("darkTheme.css");
 
         menuContatto = new Scene(mcView, 750, 550);
-        menuContatto.getStylesheets().add("darkTheme.css");
         //cambiaTema();
 
-        mcController = new MenuContattoController(this, mcView, menuPrincipale);
+        mcController = new MenuContattoController(this, mcView, mpScene);
 
         inizializzaComponenti();
     }
@@ -94,10 +101,12 @@ public class MenuPrincipaleController {
         mpView.getEliminaBtn().setOnAction(event -> eliminaContatto());
 
         //definizione logica pulsante importazione contatti
-        mpView.getImportaBtn().setOnAction((event) -> importaContatto());
+        mpView.getImportaBtn().setOnAction(event -> importaContatto());
 
         //definizione logica pulsante esportazione contatti
         mpView.getEsportaBtn().setOnAction(event -> esportaContatto());
+
+        mpView.getTemaBtn().setOnAction(event -> cambiaTema(mpView.getTemaBtn()));
     }
 
     private void aggiungiContatto() {
@@ -226,10 +235,21 @@ public class MenuPrincipaleController {
         }
     }
 
-    private void cambiaTema() {
-
-        menuContatto.getStylesheets().add("lightTheme.css");
+    private void cambiaTema(Button btn){
+        Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
+        Boolean newVal = !prefs.getBoolean("TemaScuro", false);
+        prefs.putBoolean("TemaScuro", newVal);
+        if (newVal.booleanValue()){
+            btn.setGraphic(immagineTemaScuro);
+            mpScene.getStylesheets().add("darkTheme.css");
+            menuContatto.getStylesheets().add("darkTheme.css");
+        } else {
+            btn.setGraphic(immagineTemaChiaro);
+            mpScene.getStylesheets().add("lightTheme.css");
+            menuContatto.getStylesheets().add("lightTheme.css");
+        }
     }
+
      /**
      * @brief Aggiunge un contatto alla rubrica e aggiorna la vista.
      * @param contatto Il nuovo contatto da aggiungere.
