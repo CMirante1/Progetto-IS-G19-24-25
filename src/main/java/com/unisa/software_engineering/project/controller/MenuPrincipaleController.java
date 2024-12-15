@@ -253,7 +253,8 @@ public class MenuPrincipaleController {
 
         Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
         String temaCaricato = prefs.get("Tema", tema);
-
+        if(temaCaricato == null)
+            temaCaricato = "dark";
         if(temaCaricato.equals("dark"))
             mpView.getImmagineTemaView().setImage(mpView.getImmagineTemaChiaro());
         else
