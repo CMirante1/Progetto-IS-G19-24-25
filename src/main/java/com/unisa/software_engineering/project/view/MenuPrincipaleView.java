@@ -16,6 +16,7 @@ public class MenuPrincipaleView extends AnchorPane {
     private Button aggiungiBtn, importaBtn;
     private ContextMenu menuContestuale;
     private MenuItem esportaBtn, eliminaBtn;
+    private Button temaBtn;
 /**
  * @file MenuPrincipaleView.java
  * @class MenuPrincipaleView
@@ -78,6 +79,10 @@ public class MenuPrincipaleView extends AnchorPane {
         importaBtn.setLayoutY(110);
         importaBtn.setFont(new javafx.scene.text.Font(18));
         importaBtn.setFocusTraversable(false);
+
+        temaBtn = new Button();
+        temaBtn.setPrefWidth(25);
+        temaBtn.setPrefHeight(25);
     }
 
     private void inizializzaBarraRicerca() {
