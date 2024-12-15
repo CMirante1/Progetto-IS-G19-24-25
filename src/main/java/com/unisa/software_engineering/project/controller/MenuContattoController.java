@@ -80,7 +80,15 @@ public class MenuContattoController {
         for(TextField emailTF : mcView.getEmailsTF())
             emailTF.setOnMouseClicked(event -> apriClientEmail(event, emailTF));
     }
-
+    /**
+     * @brief collegamento con app di email
+     *
+     * Reindirizza l'utente al proprio client di posta elettronica quando seleziona un indirizzo email di un contatto.
+     * Se il campo email non contiene alcun indirizzo o se il click avviene con un tasto diverso da quello sinistro del mouse allora il click viene ignorato
+     *
+     * @param event il click dell'utente
+     * @param emailTF l'indirizzo email
+     */
     private void apriClientEmail(MouseEvent event, TextField emailTF) {
 
         if(emailTF.isEditable() || emailTF.getText().trim().isEmpty()) return;
@@ -100,7 +108,13 @@ public class MenuContattoController {
             }
         }
     }
-
+    /**
+     * @brief Permette di ritornare al menu principale dal menu contatto.
+     *
+     * Quando l'utente clicka il tasto "indietro", in alto a sinistra della schermata del menu contatto, verrà reindirizzato alla schermata del menu principale
+     *
+     * @param event la scena del menu principale.
+     */
     private void tornaIndietro(ActionEvent event) {
 
         if(contattoAggiunto) mpController.passaNuovoContatto(contattoRicevuto);
@@ -136,7 +150,13 @@ public class MenuContattoController {
         }
 
     }
-
+    /**
+     * @brief Salva in rubrica i dati inseriti
+     *
+     * Il metodo salva un nuovo contatto in rubrica oppure salva le modifiche di un contatto già esistente attraverso il valroe di contattoRicevuto.
+     * In particolare se contattoRicevuto==null allora l'utente sta cercando di salvare un nuovo contatto, se invece contattoRicevuto!=null allora sta cercando di modificare un contatto già esistente.
+     *
+     */
     private void salvaContatto() {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -240,7 +260,11 @@ public class MenuContattoController {
         }
 
     }
-
+    /**
+     * @brief attiva i campi del menu contatto
+     * Abilita i textfield contenenti i dati del contatto quando l'utente vuole modificarne il contenuto o inserire un nuovo contatto
+     *
+     */
     private void abilitaCampi() {
 
         mcView.getNomeTF().setEditable(true);
@@ -250,7 +274,11 @@ public class MenuContattoController {
         mcView.getAggiungiImmagineBtn().setDisable(false);
         mcView.getAggiungiImmagineBtn().setVisible(true);
     }
-
+    /**
+     * @brief disattiva i campi del menu contatto
+     * Disabilita i textfield contenenti i dati del contatto quando l'utente termina la modifica o l'inserimento di un nuovo contatto
+     *
+     */
     private void disabilitaCampi() {
 
         mcView.getNomeTF().setEditable(false);

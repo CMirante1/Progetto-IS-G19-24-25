@@ -115,7 +115,11 @@ public class MenuPrincipaleController {
 
         mpView.getTabellaContatti().getItems().removeAll(mpView.getTabellaContatti().getSelectionModel().getSelectedItems());
     }
-
+    /**
+     * @brief Permette di visualizzare un contatto visualizzato
+     * Quando l'utente seleziona un contatto il menuPrincipale passa al menuContatto il contatto da visualizzare e chiama la nuova finestra
+     *
+     */
     private void visualizzaContatto(MouseEvent event) {
 
         if(event.getClickCount() != 2) return;
@@ -132,7 +136,10 @@ public class MenuPrincipaleController {
         listaContatti.sort(null);
         mpView.getTabellaContatti().refresh();
     }
-
+    /**
+     * @brief invia i file selezionati al metodo importaContatti della classe fileManager.
+     * @see FileManager
+     */
     private void importaContatto() {
 
         FileChooser fileChooser = new FileChooser();
@@ -160,7 +167,10 @@ public class MenuPrincipaleController {
         alert.setContentText("Sono stati importati " + contattiImportati + " contatti.");
         alert.showAndWait();
     }
-
+    /**
+     * @brief invia i contatti selezionati al metodo esportaContatti della classe fileManager.
+     * @see FileManager
+     */
     private void esportaContatto() {
 
         List<Contatto> contattiSelezionati = mpView.getTabellaContatti().getSelectionModel().getSelectedItems();
