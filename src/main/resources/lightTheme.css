@@ -83,3 +83,8 @@
 .button:hover, .text-field:hover, .table-row-cell:hover {
     -fx-cursor: hand;
 }
+
+.context-menu .Elimina {
+    -fx-background-color: #FF0000;
+    -fx-text-fill: white;
+}

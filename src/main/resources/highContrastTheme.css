@@ -2,6 +2,8 @@
     -fx-base: #000000;
     -fx-background: #1a1a1a;
     -fx-text-fill: #ffffff;
+	-fx-selection-bar-color: #ff6600;
+    -fx-selection-text-color: #000000;
 }
 
 .label {
@@ -93,4 +95,9 @@
 
 .table-row-cell .text {
     -fx-fill: #ffffff;
+}
+
+.context-menu .Elimina {
+    -fx-background-color: #FF0000;
+    -fx-text-fill: white;
 }
