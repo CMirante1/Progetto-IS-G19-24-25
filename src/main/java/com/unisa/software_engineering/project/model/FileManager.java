@@ -66,6 +66,7 @@ public abstract class FileManager {
     /**
      * @brief Esporta una lista di contatti in formato `.vcf`.
      *
+     *
      * Scrive i contatti selezionati in un file in formato  VFC, includendo nome, cognome,
      * numeri di telefono ed email mostrando eventuali messaggi di errore
      *

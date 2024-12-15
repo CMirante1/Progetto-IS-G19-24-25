@@ -276,6 +276,7 @@ public class MenuContattoController {
     }
     /**
      * @brief disattiva i campi del menu contatto
+     *
      * Disabilita i textfield contenenti i dati del contatto quando l'utente termina la modifica o l'inserimento di un nuovo contatto
      *
      */

@@ -170,6 +170,7 @@ public class MenuPrincipaleController {
     /**
      * @brief invia i contatti selezionati al metodo esportaContatti della classe fileManager.
      * @see FileManager
+     *
      */
     private void esportaContatto() {
 
