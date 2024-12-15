@@ -234,13 +234,21 @@ public class MenuPrincipaleController {
             alert.showAndWait();
         }
     }
-
+    /**
+     * @brief salvataggio tema selezionato
+     *
+     *  Salva l'ultimo tema selezionato dall'utente come preferito
+     */
     private void salvaTema(String tema) {
 
         Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
         prefs.put("Tema", tema);
     }
-
+    /**
+     * @brief carica tema
+     * Al lancio del software controlla il tema salvato come preferito e cambia di conseguenza le icone del pulsante per il cambio tema
+     * return temaCaricato il tema impostato come preferito
+     */
     private String caricaTema() {
 
         Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
@@ -255,7 +263,10 @@ public class MenuPrincipaleController {
 
         return temaCaricato;
     }
-
+    /**
+     * @brief cambia il tema
+     * Riceve in input il click dell'utente sul pulsante per il cambio tema ed passa a applicaTema la stringa corrispondente al tema scelto
+     */
     private void cambiaTema(Button btn){
 
         if ("light".equals(tema)) {
@@ -271,7 +282,10 @@ public class MenuPrincipaleController {
         btn.setGraphic(mpView.getImmagineTemaView());
         salvaTema(tema);
     }
-
+    /**
+     * @brief applica il tema
+     * Riceve una stringa corrispondente al tema selezionato e lo applica ai menu.
+     */
     private void applicaTema(String tema) {
 
         mpScene.getStylesheets().clear();
