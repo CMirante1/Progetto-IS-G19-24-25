@@ -286,6 +286,7 @@ public class MenuPrincipaleController {
      * @brief applica il tema
      * Riceve una stringa corrispondente al tema selezionato e lo applica ai menu.
      */
+
     private void applicaTema(String tema) {
 
         mpScene.getStylesheets().clear();
