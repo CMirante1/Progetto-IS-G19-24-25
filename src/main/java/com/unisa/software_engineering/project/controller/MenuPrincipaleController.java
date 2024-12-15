@@ -242,7 +242,7 @@ public class MenuPrincipaleController {
     private void salvaTema(String tema) {
 
         Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
-        prefs.put("Tema", tema);
+        prefs.put("Tema", "light");
     }
     /**
      * @brief carica tema
@@ -252,9 +252,8 @@ public class MenuPrincipaleController {
     private String caricaTema() {
 
         Preferences prefs = Preferences.userNodeForPackage(MenuPrincipaleController.class);
-        String temaCaricato = prefs.get("Tema", tema);
-        if(temaCaricato == null)
-            temaCaricato = "dark";
+        String temaCaricato = prefs.get("Tema", "light");
+
         if(temaCaricato.equals("dark"))
             mpView.getImmagineTemaView().setImage(mpView.getImmagineTemaChiaro());
         else
@@ -287,13 +286,12 @@ public class MenuPrincipaleController {
      * @brief applica il tema
      * Riceve una stringa corrispondente al tema selezionato e lo applica ai menu.
      */
-
     private void applicaTema(String tema) {
 
         mpScene.getStylesheets().clear();
         menuContatto.getStylesheets().clear();
 
-        if ("dark".equals(tema)) {
+        if (tema.equals("dark")) {
 
             mpView.getImmagineTemaView().setImage(mpView.getImmagineTemaScuro());
             mpScene.getStylesheets().add("darkTheme.css");
