@@ -1,39 +1,85 @@
-Pane {
-	-fx-background-color: rgb(0, 0, 0);
-	-fx-color: rgb(15, 15, 15);
-}
-
-TextField {
-	-fx-background-color: gray;
-	-fx-text-fill: white;
-}
-
-Text {
-	-fx-color: white;
-}
-
-Label {
-	-fx-color: white;
-}
-
-Button {
-	-fx-background-color: rgb(30, 30, 30);
-	-fx-text-fill: white;
-}
-
-Button:hover {
-	-fx-background-color: rgb(70, 70, 70);
-}
-
 .root {
-	-fx-background-color: #333333;
+    -fx-base: #2b2b2b;
+    -fx-background: #2b2b2b;
+    -fx-text-fill: #e0e0e0;
+}
+
+.label {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 14px;
+}
+
+.button {
+    -fx-background-color: linear-gradient(#3a3a3a, #2b2b2b);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#4a4a4a, #3a3a3a);
+    -fx-border-color: #808080;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(#1a1a1a, #2b2b2b);
+    -fx-border-color: #606060;
+}
+
+.text-field {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #555555;
+    -fx-border-width: 1px;
+    -fx-padding: 4px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+.text-field:hover {
+    -fx-border-color: #808080;
+}
+
+.text-field:focused {
+    -fx-border-color: #0099ff;
 }
 
 .table-view {
-	-fx-background-color: #252525;
-	-fx-color: white;
+    -fx-background-color: #2b2b2b;
+    -fx-table-cell-border-color: #444444;
+    -fx-border-color: #555555;
+    -fx-padding: 5px;
 }
 
-.table-view .table-column-header {
-	-fx-background-color: #303030;
+.table-row-cell {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #4a4a4a;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #0099ff;
+    -fx-text-fill: #ffffff;
+}
+
+.table-column-header {
+    -fx-background-color: linear-gradient(#4a4a4a, #3a3a3a);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.table-column-header:hover {
+    -fx-background-color: linear-gradient(#5a5a5a, #4a4a4a);
+}
+
+.button:hover, .text-field:hover, .table-row-cell:hover {
+    -fx-cursor: hand;
 }
