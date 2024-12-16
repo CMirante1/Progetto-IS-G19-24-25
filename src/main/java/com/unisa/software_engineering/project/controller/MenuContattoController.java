@@ -39,6 +39,7 @@ public class MenuContattoController {
     private  Contatto contattoRicevuto;
     private boolean contattoAggiunto;
 
+
     /**
      * @brief Costruttore per MenuContattoController.
      *
