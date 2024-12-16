@@ -2,7 +2,7 @@
 
 ## Descrizione
 
-Progetto di una rubrica realizzato dal **Gruppo 19**.
+Progetto rubrica realizzato da **Gruppo 19**.
 
 ## Membri del gruppo:
 - Carmine Mirante
