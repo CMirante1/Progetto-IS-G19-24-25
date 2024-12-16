@@ -55,7 +55,7 @@ public abstract class FileManager {
      */
     public static Rubrica caricaRubrica() throws IOException, ClassNotFoundException {
 
-        File file = new File("src/main/respurces/" + FILE_BACKUP);
+        File file = new File("src/main/resources/" + FILE_BACKUP);
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()))){
             return (Rubrica)ois.readObject();
