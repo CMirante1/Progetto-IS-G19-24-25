@@ -17,6 +17,8 @@ Il progetto è compilabile utilizzando **Maven**. Per compilare ed eseguire il p
 ### Compilare il progetto:
 ```bash
 mvn clean compile
+```
 ### Eseguire il progetto:
 ```bash
 mvn exec:java
+```
