@@ -37,8 +37,6 @@ public class MenuContattoController {
     private final MenuContattoView mcView;
     private final Scene menuPrincipale;
     private  Contatto contattoRicevuto;
-    private boolean contattoAggiunto;
-
 
     /**
      * @brief Costruttore per MenuContattoController.
@@ -119,8 +117,6 @@ public class MenuContattoController {
      */
     private void tornaIndietro(ActionEvent event) {
 
-        if(contattoAggiunto) mpController.passaNuovoContatto(contattoRicevuto);
-
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(menuPrincipale);
     }
@@ -133,8 +129,6 @@ public class MenuContattoController {
     public void setContatto(Contatto contatto) {
 
         this.contattoRicevuto = contatto;
-
-        this.contattoAggiunto = false;
 
         if(contattoRicevuto == null) {
 
@@ -181,7 +175,7 @@ public class MenuContattoController {
                 disabilitaCampi();
                 aggiornaBottoni(true, true, false, false);
 
-                contattoAggiunto = true;
+                mpController.passaNuovoContatto(contattoRicevuto);
             }
             else {
 

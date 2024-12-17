@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @file Contatto.java
  * @class Contatto
  * @brief Classe che definisce un contatto all'interno della rubrica.
- * 
+ *
  * Contiene informazioni come nome, cognome, numeri di telefono, email e immagine del profilo.
  */
 public class Contatto implements Serializable, Comparable<Contatto> {
@@ -30,7 +30,7 @@ public class Contatto implements Serializable, Comparable<Contatto> {
     /**
      * @brief Costruttore della classe Contatto.
      * Costruttore del un contatto che riceve in input tutti gli attributi.
-     * 
+     *
      * @param nome Il nome del contatto.
      * @param cognome Il cognome del contatto.
      * @param numeri Un array di numeri di telefono.
@@ -55,7 +55,6 @@ public class Contatto implements Serializable, Comparable<Contatto> {
    }
    /**
     * @brief Verifica la validità dei dati forniti per il contatto.
-    *   
     * Questo metodo controlla che i campi nome, cognome, numeri di telefono e email rispettino
     * i requisiti di formato e lancia un'eccezione in caso contrario.
     *
@@ -71,10 +70,10 @@ public class Contatto implements Serializable, Comparable<Contatto> {
         if (nome.isEmpty() && cognome.isEmpty())
             throw new InfoContattoException("Almeno uno tra i campi nome e cognome non deve essere vuoto!");
 
-        if (!nome.isEmpty() && !nome.matches("[a-zA-z0-9 ]+"))
+        if (!nome.isEmpty() && !nome.matches("[a-zA-z0-9 'èòà]+"))
             throw new InfoContattoException("Il nome non può contenere caratteri speciali!");
 
-        if (!cognome.isEmpty() && !cognome.matches("[a-zA-z0-9 ]+"))
+        if (!cognome.isEmpty() && !cognome.matches("[a-zA-z0-9 'èòà]+"))
             throw new InfoContattoException("Il cognome non può contenere caratteri speciali!");
 
         for (String numero : numeri) {
@@ -104,7 +103,7 @@ public class Contatto implements Serializable, Comparable<Contatto> {
                     throw new InfoContattoException("Dominio dell'email non valido");
         }
     }
-    
+
     /**
      * Modifica gli attributi del contatto.
      *
@@ -158,9 +157,10 @@ public class Contatto implements Serializable, Comparable<Contatto> {
 
     public Image getImmagineProfilo() throws IOException{
 
-       if(immagineProfilo == null) return null;
+       if(immagineProfilo == null)  return null;
 
-        ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
+       ByteArrayInputStream bais = new ByteArrayInputStream(immagineProfilo);
+
         return new Image(bais);
     }
     /**
